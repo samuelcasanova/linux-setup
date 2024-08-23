@@ -1,0 +1,11 @@
+# Personal Linux Setup
+
+This repo is intended to store all the dotfiles and scripts needed to setup a new laptop with all my setup ready to be used
+
+# First step
+
+Install git in order to clone all the scripts and tools. These steps are for Fedora:
+- Copy the public and private keys to access github on ~/.ssh/
+- Install git: `sudo dnf install git`
+- Configure SSH: `eval "$(ssh-agent -s)" && ssh-add ~/.ssh/fedora_linux_github_samuel_casanova_gmail`
+- Clone the public repository: `mkdir ~/git && cd ~/git && git clone git@github.com:samuelcasanova/linux-setup.git`
