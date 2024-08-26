@@ -2,13 +2,22 @@
 
 echo -e '\nInstalling basic OS software\n'
 
+#GRUB2 Default boot
+echo -e 'Changing to default start with MS Windows'
+if [[ ! -d /tmp/grub.b ]]; then mkdir /tmp/grub.b; fi
+sudo cp -rp /etc/grub.d/* /tmp/grub.b
+sudo mv /etc/grub.d/30_os-prober /etc/grub.d/09_os-prober
+sudo sed 's/UPDATEDEFAULT=yes/UPDATEDEFAULT=no/g' /etc/sysconfig/kernel
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg 
+
 #GRUB2 Theme
 #https://k1ng.dev/distro-grub-themes/installation#manual-installation
-echo -e 'Installing GRUB2\n'
+echo -e 'Installing GRUB2 theme\n'
 sudo mkdir /boot/grub2/themes
 sudo mkdir /boot/grub2/themes/fedora
 wget -O /tmp/fedora.tar https://github.com/AdisonCavani/distro-grub-themes/raw/master/themes/fedora.tar
 sudo tar -C /boot/grub2/themes/fedora -xf /tmp/fedora.tar
+sudo cp /etc/default/grub /tmp/grub.bak 
 if sudo grep -q GRUB_GFXMODE /etc/default/grub; then
     sudo sed -i 's/GRUB_GFXMODE=[0-9]\+x[0-9]\+/GRUB_GFXMODE=1280x800/' /etc/default/grub
 else
@@ -20,24 +29,3 @@ sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 
 #Stow
 sudo dnf install stow
-
-#Google Chrome
-echo -e 'Installing Chrome\n'
-sudo dnf install fedora-workstation-repositories
-sudo dnf config-manager --set-enabled google-chrome
-sudo dnf install google-chrome-stable
-
-#KeepassXC
-echo -e 'Installing KeepassXC\n'
-sudo dnf install keepassxc
-
-#RClone (to be configured with Onedrive)
-echo -e 'Installing Rclone\n'
-sudo dnf install rclone
-
-#VS Code
-echo -e 'Installing VS Code                 \n'
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
-sudo dnf check-update
-sudo dnf install code
