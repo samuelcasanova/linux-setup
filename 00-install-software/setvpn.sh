@@ -6,7 +6,7 @@ command_exists() {
 }
 
 # Function to check if WireGuard interface is running
-is_wg_interface_running() {
+    is_wg_interface_running() {
     sudo wg show "$1" >/dev/null 2>&1
 }
 

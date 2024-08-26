@@ -1,7 +1,10 @@
 #!/bin/bash
 
-echo 'Installing Immfly mandatory software to work'
+PRIVATE_REPO=~/git/linux-setup-private
 
-INSTALLER_COMMAND='sudo dnf install'
+echo -e '\nInstalling Immfly mandatory software to work\n'
 
-${INSTALLER_COMMAND} wireguard-tools
+echo -e 'Installing wireguard\n'
+sudo dnf install wireguard-tools
+sudo cp ${PRIVATE_REPO}/wireguard/wg1.conf /etc/wireguard/
+./setvpn.sh up
