@@ -13,6 +13,6 @@ stow -v -d ~/git/linux-setup-private/dotfiles/ -t ~ rclone
 echo -e 'Installing the systemd service to initialize on each reboot\n'
 sudo mv /etc/systemd/system/rclonemount.service /tmp
 #The systemctl enable fails if the next cp is changed to a ln -s
-sudo cp ~/git/linux-setup/02-rclone/rclonemount.service /etc/systemd/system/rclonemount.service
+sudo cp ~/git/linux-setup/install-software-scripts/support-files/rclonemount.service /etc/systemd/system/rclonemount.service
 sudo systemctl start rclonemount
 sudo systemctl enable rclonemount.service
