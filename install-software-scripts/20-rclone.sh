@@ -4,7 +4,7 @@ echo -e '\nInstalling rclone with Onedrive\n'
 
 #RClone (to be configured with Onedrive)
 echo -e 'Installing Rclone\n'
-sudo dnf install rclone
+sudo dnf install -y rclone
 
 echo -e 'Stowing the config file\n'
 mv ~/.config/rclone /tmp

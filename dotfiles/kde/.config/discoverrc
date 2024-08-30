@@ -1,5 +1,5 @@
 [FlatpakSources]
-Sources=fedora-testing,fedora,flathub
+Sources=fedora-testing,flathub,fedora
 
 [Window]
 geometry=0,0,936,684

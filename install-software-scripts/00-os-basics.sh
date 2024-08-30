@@ -28,4 +28,4 @@ echo 'GRUB_THEME="/boot/grub2/themes/fedora/theme.txt"' | sudo tee -a /etc/defau
 sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 
 #Stow
-sudo dnf install stow
+sudo dnf install -y stow
