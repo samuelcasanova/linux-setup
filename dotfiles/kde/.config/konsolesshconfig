@@ -1,0 +1,12 @@
+[Global plugin config]
+manageProfile=false
+
+[SSH Config][github.com]
+hostname=github.com
+identifier=github.com
+importedFromSshConfig=true
+port=
+profileName=
+sshkey=~/.ssh/fedora_linux_github_samuel_casanova_gmail
+useSshConfig=true
+username=

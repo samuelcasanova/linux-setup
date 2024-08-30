@@ -1,0 +1,16 @@
+MenuBar=Disabled
+
+[General]
+ConfigVersion=1
+
+[KonsoleWindow]
+ShowWindowTitleOnTitleBar=true
+
+[MainWindow]
+ToolBarsMovable=Disabled
+
+[Notification Messages]
+CloseSingleTab=true
+
+[UiSettings]
+ColorScheme=
