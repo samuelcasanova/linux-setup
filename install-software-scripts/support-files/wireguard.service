@@ -1,0 +1,15 @@
+[Unit]
+Description=Setup Wireguard Immfly VPN up at startup
+After=network.target
+
+[Service]
+Type=simple
+User=samuel
+Group=samuel
+ExecStart=/home/samuel/git/linux-setup/install-software-scripts/support-files/setvpn.sh up
+ExecStop=/home/samuel/git/linux-setup/install-software-scripts/support-files/setvpn.sh down
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
