@@ -7,7 +7,5 @@ sudo dnf install -y libappindicator-gtk3 python3-psutil
 sudo dnf install -y python3-pip
 sudo pip3 install safeeyes
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
-
-
-
-
+mv ~/.config/safeeyes /tmp
+stow -v -d ~/git/linux-setup/dotfiles/ -t ~ safeeyes
