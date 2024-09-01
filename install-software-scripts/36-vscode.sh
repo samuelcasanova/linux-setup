@@ -9,6 +9,15 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 sudo dnf check-update
 sudo dnf install -y code
 
+echo -e '\nInstalling VS Code extensions\n'
+code --install-extension Orta.vscode-jest
+code --install-extension dbaeumer.vscode-eslint
+code --install-extension esbenp.prettier-vscode
+code --install-extension nicoespeon.abracadabra
+code --install-extension SonarSource.sonarlint-vscode
+code --install-extension VisualStudioExptTeam.vscodeintellicode
+code --install-extension eamodio.gitlens
 
+echo -e '\nStowing VS Code dotfiles\n'
 mv ~/.vscode /tmp
 stow  -v -d ~/git/linux-setup/dotfiles/ -t ~ vscode
