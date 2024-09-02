@@ -17,6 +17,7 @@ code --install-extension nicoespeon.abracadabra
 code --install-extension SonarSource.sonarlint-vscode
 code --install-extension VisualStudioExptTeam.vscodeintellicode
 code --install-extension eamodio.gitlens
+code --install-extension smcpeak.default-keys-windows
 
 echo -e '\nStowing VS Code dotfiles\n'
 mkdir -p /tmp/vscode
