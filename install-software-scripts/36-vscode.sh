@@ -19,5 +19,8 @@ code --install-extension VisualStudioExptTeam.vscodeintellicode
 code --install-extension eamodio.gitlens
 
 echo -e '\nStowing VS Code dotfiles\n'
-mv ~/.vscode /tmp
-stow  -v -d ~/git/linux-setup/dotfiles/ -t ~ vscode
+mkdir -p /tmp/vscode
+mv ~/.config/Code/User/keybindings.json /tmp/vscode
+mv ~/.config/Code/User/settings.json /tmp/vscode
+mv ~/.config/Code/User/snippets /tmp/vscode
+stow -v -d ~/git/linux-setup/dotfiles/ -t ~ vscode
