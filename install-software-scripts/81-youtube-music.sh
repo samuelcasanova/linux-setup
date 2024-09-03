@@ -7,4 +7,4 @@ xdg-open https://github.com/th-ch/youtube-music/releases
 read -p 'Paste the current local path to the RPM file: ' RPM_LOCAL_PATH
 wget -qO- "https://raw.githubusercontent.com/nvm-sh/nvm/v${RPM_LOCAL_PATH}/install.sh" | bash
 
-sudo dnf install -y "${RPM_LOCAL_PATH}"
+sudo apt install "${RPM_LOCAL_PATH}"

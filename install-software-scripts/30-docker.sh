@@ -2,9 +2,9 @@
 
 echo -e '\nInstalling docker\n'
 
-sudo dnf install -y dnf-plugins-core
+sudo apt install dnf-plugins-core
 sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo systemctl start docker
 
 echo -e '\nConfiguring docker for non-root user samuel (2/2)\n'
