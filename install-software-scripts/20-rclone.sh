@@ -7,11 +7,11 @@ echo -e 'Installing Rclone\n'
 sudo apt install rclone
 
 echo -e 'Stowing the config file\n'
-mv ~/.config/rclone /tmp
+if [ -d ~/.config/rclone ]; then mv ~/.config/rclone /tmp; fi
 stow -v -d ~/git/linux-setup-private/dotfiles/ -t ~ rclone
 
 echo -e 'Installing the systemd service to initialize on each reboot\n'
-sudo mv /etc/systemd/system/rclonemount.service /tmp
+if [ -f /etc/systemd/system/rclonemount.service ]; then sudo mv /etc/systemd/system/rclonemount.service /tmp; fi
 #The systemctl enable fails if the next cp is changed to a ln -s
 sudo cp ~/git/linux-setup/install-software-scripts/support-files/rclonemount.service /etc/systemd/system/rclonemount.service
 sudo systemctl start rclonemount

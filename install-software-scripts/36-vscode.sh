@@ -21,7 +21,7 @@ code --install-extension smcpeak.default-keys-windows
 
 echo -e '\nStowing VS Code dotfiles\n'
 mkdir -p /tmp/vscode
-mv ~/.config/Code/User/keybindings.json /tmp/vscode
-mv ~/.config/Code/User/settings.json /tmp/vscode
-mv ~/.config/Code/User/snippets /tmp/vscode
+if [ -f ~/.config/Code/User/keybindings.json ]; then mv ~/.config/Code/User/keybindings.json /tmp/vscode; fi
+if [ -f ~/.config/Code/User/settings.json ]; then mv ~/.config/Code/User/settings.json /tmp/vscode; fi
+if [ -d ~/.config/Code/User/snippets ]; then mv ~/.config/Code/User/snippets /tmp/vscode; fi
 stow -v -d ~/git/linux-setup/dotfiles/ -t ~ vscode

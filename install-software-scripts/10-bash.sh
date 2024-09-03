@@ -2,5 +2,5 @@
 
 echo -e '\nConfiguring bash shell\n'
 
-mv ~/.bashrc /tmp
+if [ -f ~/.bashrc ]; then mv ~/.bashrc /tmp; fi
 stow  -v -d ~/git/linux-setup/dotfiles/ -t ~ bash

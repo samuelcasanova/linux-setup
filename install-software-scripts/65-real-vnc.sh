@@ -7,5 +7,5 @@ xdg-open https://www.realvnc.com/en/connect/download/viewer/linux/
 read -p 'Paste the local file location and press ENTER: ' REALVNC_INSTALLER_PATH
 sudo apt install ${REALVNC_INSTALLER_PATH}
 
-mv ~/.vnc /tmp
+if [ -d ~/.vnc ]; then mv ~/.vnc /tmp; fi
 stow  -v -d ~/git/linux-setup-private/dotfiles/ -t ~ realvnc

@@ -2,6 +2,6 @@
 
 echo -e '\nConfiguring SSH\n'
 
-mv ~/.ssh /tmp
+if [ -d ~/.ssh ]; then mv ~/.ssh /tmp; fi
 stow -v -d ~/git/linux-setup-private/dotfiles/ -t ~ ssh
                 
