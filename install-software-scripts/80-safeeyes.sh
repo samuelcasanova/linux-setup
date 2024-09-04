@@ -2,10 +2,12 @@
 
 echo -e '\nInstalling safeeyes\n'
 
-sudo dnf config-manager --add-repo https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/repo/epel-7/alonid-xprintidle-epel-7.repo
-sudo apt install libappindicator-gtk3 python3-psutil
-sudo apt install python3-pip
-sudo pip3 install safeeyes
-sudo gtk-update-icon-cache /usr/share/icons/hicolor
+echo 'ÇCheck instructions for debian'
+exit 1
+
+sudo apt install libappindicator-gtk3 python3-psutil || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo apt install python3-pip || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo pip3 install safeeyes || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo gtk-update-icon-cache /usr/share/icons/hicolor || if [ ${?} -gt 0 ]; then exit 1; fi
 if [ -d ~/.config/safeeyes ]; then mv ~/.config/safeeyes /tmp; fi
-stow -v -d ~/git/linux-setup/dotfiles/ -t ~ safeeyes
+stow -v -d ~/git/linux-setup/dotfiles/ -t ~ safeeyes || if [ ${?} -gt 0 ]; then exit 1; fi

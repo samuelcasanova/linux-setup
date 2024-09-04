@@ -5,10 +5,10 @@ echo -e '\nInstalling basic OS software\n'
 #GRUB2 Default boot
 echo -e 'Changing to default start with MS Windows'
 if [[ ! -d /tmp/grub.d ]]; then mkdir /tmp/grub.d; fi
-sudo cp -rp /etc/grub.d/* /tmp/grub.d
-sudo mv /etc/grub.d/30_os-prober /etc/grub.d/09_os-prober
-sudo sed 's/UPDATEDEFAULT=yes/UPDATEDEFAULT=no/g' /etc/sysconfig/kernel
-sudo grub2-mkconfig -o /boot/grub2/grub.cfg 
+sudo cp -rp /etc/grub.d/* /tmp/grub.d || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo mv /etc/grub.d/30_os-prober /etc/grub.d/09_os-prober || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo sed 's/UPDATEDEFAULT=yes/UPDATEDEFAULT=no/g' /etc/sysconfig/kernel || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg || if [ ${?} -gt 0 ]; then exit 1; fi
 
 #GRUB2 Theme
 #https://k1ng.dev/distro-grub-themes/installation#manual-installation
@@ -28,4 +28,4 @@ sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 # sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 
 #Stow
-sudo apt install stow
+sudo apt install stow || if [ ${?} -gt 0 ]; then exit 1; fi

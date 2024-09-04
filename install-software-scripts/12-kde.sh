@@ -2,7 +2,7 @@
 
 echo -e '\nConfiguring KDE\n'
 
-mkdir -p /tmp/kde/.config
+mkdir -p /tmp/kde/.config || if [ ${?} -gt 0 ]; then exit 1; fi
 
 if [ -f ~/.config/discoverrc ]; then mv ~/.config/discoverrc /tmp/kde/.config; fi
 if [ -f ~/.config/dolphinrc ]; then mv ~/.config/dolphinrc /tmp/kde/.config; fi
@@ -15,4 +15,4 @@ if [ -d ~/.config/xsettingsd ]; then mv ~/.config/xsettingsd /tmp/kde/.config; f
 if [ -f ~/.config/ksmserverrc ]; then mv ~/.config/ksmserverrc /tmp/kde/.config; fi
 if [ -d ~/.local/share/konsole ]; then mv ~/.local/share/konsole /tmp/kde; fi
 
-stow  -v -d ~/git/linux-setup/dotfiles/ -t ~ kde
+stow  -v -d ~/git/linux-setup/dotfiles/ -t ~ kde || if [ ${?} -gt 0 ]; then exit 1; fi
