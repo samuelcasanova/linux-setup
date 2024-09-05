@@ -1,5 +1,5 @@
 [Appearance]
-Font=Monospace,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+Font=Monospace,9,-1,5,50,0,0,0,0,0
 
 [General]
 Name=Samuel
