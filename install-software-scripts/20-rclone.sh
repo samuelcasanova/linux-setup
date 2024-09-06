@@ -4,7 +4,7 @@ echo -e '\nInstalling rclone with Onedrive\n'
 
 #RClone (to be configured with Onedrive)
 echo -e 'Installing Rclone\n'
-sudo apt install rclone || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo apt-get -y install rclone || if [ ${?} -gt 0 ]; then exit 1; fi
 
 echo -e 'Stowing the config file\n'
 if [ -d ~/.config/rclone ]; then mv ~/.config/rclone /tmp; fi

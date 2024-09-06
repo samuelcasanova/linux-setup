@@ -28,4 +28,4 @@ sudo grub2-mkconfig -o /boot/grub2/grub.cfg || if [ ${?} -gt 0 ]; then exit 1; f
 # sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 
 #Stow
-sudo apt install stow || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo apt-get -y install stow || if [ ${?} -gt 0 ]; then exit 1; fi

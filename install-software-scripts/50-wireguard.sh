@@ -2,7 +2,7 @@
 
 echo -e '\nInstalling and configuring Wireguard for Immfly VPN\n'
 
-sudo apt install wireguard-tools || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo apt-get -y install wireguard-tools || if [ ${?} -gt 0 ]; then exit 1; fi
 sudo cp ~/git/linux-setup-private/wireguard/wg1.conf /etc/wireguard/ || if [ ${?} -gt 0 ]; then exit 1; fi
 
 echo -e 'Installing the systemd service to initialize on each reboot\n'
