@@ -5,10 +5,10 @@ echo -e '\nInstalling VS Code\n'
 #VS Code
 echo -e 'Installing VS Code\n'
 sudo apt update || if [ ${?} -gt 0 ]; then exit 1; fi
-sudo apt install software-properties-common apt-transport-https wget -y || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo apt-get -y install software-properties-common apt-transport-https wget -y || if [ ${?} -gt 0 ]; then exit 1; fi
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add - || if [ ${?} -gt 0 ]; then exit 1; fi
 sudo add-apt-repository -y "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" || if [ ${?} -gt 0 ]; then exit 1; fi
-sudo apt install code || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo apt-get -y install code || if [ ${?} -gt 0 ]; then exit 1; fi
 
 echo -e '\nInstalling VS Code extensions\n'
 code --install-extension Orta.vscode-jest || if [ ${?} -gt 0 ]; then exit 1; fi
