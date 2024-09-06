@@ -21,6 +21,7 @@ ToolBarsMovable=Disabled
 eDP-1=eDP-1
 
 [Notification Messages]
+CloseAllEmptyTabs=true
 CloseSingleTab=true
 
 [UiSettings]
