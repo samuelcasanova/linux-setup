@@ -1,0 +1,9 @@
+[Desktop Entry]
+Categories=Utility;
+Comment=Protect your eyes from eye strain
+Exec=env GDK_BACKEND=x11 safeeyes
+GenericName=RSI Prevention
+Icon=io.github.slgobinath.SafeEyes
+Name=Safe Eyes
+Terminal=false
+Type=Application
