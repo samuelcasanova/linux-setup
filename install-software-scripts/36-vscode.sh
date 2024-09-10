@@ -25,4 +25,4 @@ mkdir -p /tmp/vscode
 if [ -f ~/.config/Code/User/keybindings.json ]; then mv ~/.config/Code/User/keybindings.json /tmp/vscode; fi
 if [ -f ~/.config/Code/User/settings.json ]; then mv ~/.config/Code/User/settings.json /tmp/vscode; fi
 if [ -d ~/.config/Code/User/snippets ]; then mv ~/.config/Code/User/snippets /tmp/vscode; fi
-stow -v -d ~/git/linux-setup/dotfiles/ -t ~ vscode || if [ ${?} -gt 0 ]; then exit 1; fi
+stow -v -d ~/git/setups/linux-setup/dotfiles/ -t ~ vscode || if [ ${?} -gt 0 ]; then exit 1; fi

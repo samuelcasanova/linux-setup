@@ -6,8 +6,8 @@ After=network.target
 Type=simple
 User=samuel
 Group=samuel
-ExecStart=/home/samuel/git/linux-setup/install-software-scripts/support-files/setvpn.sh up
-ExecStop=/home/samuel/git/linux-setup/install-software-scripts/support-files/setvpn.sh down
+ExecStart=/home/samuel/git/setups/linux-setup/install-software-scripts/support-files/setvpn.sh up
+ExecStop=/home/samuel/git/setups/linux-setup/install-software-scripts/support-files/setvpn.sh down
 Restart=always
 RestartSec=10
 

@@ -8,4 +8,4 @@ read -p 'Paste the local file location and press ENTER: ' REALVNC_INSTALLER_PATH
 sudo apt-get -y install ${REALVNC_INSTALLER_PATH} || if [ ${?} -gt 0 ]; then exit 1; fi
 
 if [ -d ~/.vnc ]; then mv ~/.vnc /tmp; fi
-stow  -v -d ~/git/linux-setup-private/dotfiles/ -t ~ realvnc || if [ ${?} -gt 0 ]; then exit 1; fi
+stow  -v -d ~/git/setups/linux-setup-private/dotfiles/ -t ~ realvnc || if [ ${?} -gt 0 ]; then exit 1; fi

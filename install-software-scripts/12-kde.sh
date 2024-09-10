@@ -15,4 +15,4 @@ if [ -d ~/.config/xsettingsd ]; then mv ~/.config/xsettingsd /tmp/kde/.config; f
 if [ -f ~/.config/ksmserverrc ]; then mv ~/.config/ksmserverrc /tmp/kde/.config; fi
 if [ -d ~/.local/share/konsole ]; then mv ~/.local/share/konsole /tmp/kde; fi
 
-stow  -v -d ~/git/linux-setup/dotfiles/ -t ~ kde || if [ ${?} -gt 0 ]; then exit 1; fi
+stow  -v -d ~/git/setups/linux-setup/dotfiles/ -t ~ kde || if [ ${?} -gt 0 ]; then exit 1; fi
