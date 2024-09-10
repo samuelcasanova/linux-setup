@@ -72,7 +72,7 @@
             "enabled": true,
             "id": "smartpause",
             "settings": {
-                "idle_time": 5,
+                "idle_time": 20.0,
                 "postpone_if_active": false
             },
             "version": "0.0.3"
