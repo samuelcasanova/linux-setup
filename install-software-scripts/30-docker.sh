@@ -26,7 +26,7 @@ sudo systemctl start docker || if [ ${?} -gt 0 ]; then exit 1; fi
 echo -e '\nConfiguring docker for non-root user samuel (2/2)\n'
 
 # https://docs.docker.com/engine/install/linux-postinstall/
-if [ $(getent group docker) ]; then sudo groupadd docker; fi || if [ ${?} -gt 0 ]; then exit 1; fi
+if [ ! $(getent group docker) ]; then sudo groupadd docker; fi || if [ ${?} -gt 0 ]; then exit 1; fi
 sudo usermod -aG docker $USER || if [ ${?} -gt 0 ]; then exit 1; fi
 newgrp docker || if [ ${?} -gt 0 ]; then exit 1; fi
 
