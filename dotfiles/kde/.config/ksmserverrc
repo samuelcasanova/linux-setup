@@ -5,9 +5,9 @@ loginMode=emptySession
 count=0
 
 [Session: saved at previous logout]
-clientId1=10e0c9d8d6000172538291300000014790004
+clientId1=10e0c9d8d6000172607201800000014140004
 count=1
 program1=/usr/lib/x86_64-linux-gnu/libexec/DiscoverNotifier
-restartCommand1=/usr/lib/x86_64-linux-gnu/libexec/DiscoverNotifier,-session,10e0c9d8d6000172538291300000014790004_1725388557_865460
+restartCommand1=/usr/lib/x86_64-linux-gnu/libexec/DiscoverNotifier,-session,10e0c9d8d6000172607201800000014140004_1726077621_911720
 restartStyleHint1=0
 userId1=samuel
