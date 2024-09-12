@@ -15,5 +15,8 @@ padding=0
 [Tiling][213a9620-187e-58a6-b80b-85d8fb95dfce]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][6f5e4aa1-01ef-594c-b68e-dffb30028f5e]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.75}]}
+
 [Tiling][a65162de-674e-5855-a667-97ab205dc722]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.2445312500000001},{"width":0.7554687499999996}]}
