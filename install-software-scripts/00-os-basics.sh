@@ -7,7 +7,7 @@ echo -e 'Changing to default start with MS Windows'
 if [[ ! -d /tmp/grub.d ]]; then mkdir /tmp/grub.d; fi
 sudo cp -rp /etc/grub.d/* /tmp/grub.d || if [ ${?} -gt 0 ]; then exit 1; fi
 sudo mv /etc/grub.d/30_os-prober /etc/grub.d/09_os-prober || if [ ${?} -gt 0 ]; then exit 1; fi
-sudo sed 's/UPDATEDEFAULT=yes/UPDATEDEFAULT=no/g' /etc/sysconfig/kernel || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo sed -i 's/UPDATEDEFAULT=yes/UPDATEDEFAULT=no/g' /etc/sysconfig/kernel || if [ ${?} -gt 0 ]; then exit 1; fi
 sudo grub2-mkconfig -o /boot/grub2/grub.cfg || if [ ${?} -gt 0 ]; then exit 1; fi
 
 #GRUB2 Theme

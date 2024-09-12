@@ -15,7 +15,7 @@ git clone git@gitlab.com:iag-connect/tools/air-local.git || if [ ${?} -gt 0 ]; t
 pushd air-local
 ./air-local.sh init || if [ ${?} -gt 0 ]; then exit 1; fi
 echo -e "TAIL=0G-IFSC\nCAPTCHA_BYPASS=false" > ./.env || if [ ${?} -gt 0 ]; then exit 1; fi
-sed 's/0G-IFXX/0G-IFSC/g' ./projects/air-simulator/.env || if [ ${?} -gt 0 ]; then exit 1; fi
+sed -i 's/0G-IFXX/0G-IFSC/g' ./projects/air-simulator/.env || if [ ${?} -gt 0 ]; then exit 1; fi
 echo "TAIL_NUMBER=0G-IFSC" > ./projects/air-rabbitmq-proxy/.env || if [ ${?} -gt 0 ]; then exit 1; fi
 ./air-local.sh up -o baw -i gogo
 popd
@@ -24,8 +24,13 @@ mkdir -p ~/git/iag/qa
 pushd ~/git/iag/qa
 git clone git@gitlab.com:iag-connect/qa/iag-automated-tests.git || if [ ${?} -gt 0 ]; then exit 1; fi
 cd iag-automated-tests
+. ~/.bashrc
+nvm use
 npm install -D @playwright/test@latest
 npx playwright install --with-deps 
+cp src/configs/local.example.config.ts src/configs/local.config.ts
+cp src/configs/env/local/local.template.env src/configs/env/local/local.env
+sed -i 's/0G-IFXX/0G-IFSC/g' src/configs/env/local/local.env || if [ ${?} -gt 0 ]; then exit 1; fi
 popd
 
 popd
