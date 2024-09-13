@@ -23,7 +23,10 @@ popd
 
 mkdir -p ~/git/iag/qa
 pushd ~/git/iag/qa
+
 git clone git@gitlab.com:iag-connect/qa/iag-racks-smoke-tests.git || if [ ${?} -gt 0 ]; then exit 1; fi
+cp ~/git/setups/linux-setup-private/iag-rack-smoke-tests.env.sh ~/git/iag/qa/iag-racks-smoke-tests/SmokeScripts/env.sh
+
 git clone git@gitlab.com:iag-connect/qa/iag-automated-tests.git || if [ ${?} -gt 0 ]; then exit 1; fi
 cd iag-automated-tests
 . ~/.bashrc
@@ -33,6 +36,7 @@ npx playwright install --with-deps
 cp src/configs/local.example.config.ts src/configs/local.config.ts
 cp src/configs/env/local/local.template.env src/configs/env/local/local.env
 sed -i 's/0G-IFXX/0G-IFSC/g' src/configs/env/local/local.env || if [ ${?} -gt 0 ]; then exit 1; fi
+
 popd
 
 popd
