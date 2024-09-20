@@ -29,3 +29,8 @@ sudo grub2-mkconfig -o /boot/grub2/grub.cfg || if [ ${?} -gt 0 ]; then exit 1; f
 
 #Stow
 sudo apt-get -y install stow || if [ ${?} -gt 0 ]; then exit 1; fi
+
+#Networking tools
+sudo apt-get -y install inetutils-traceroute || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo apt-get -y install net-tools || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo apt-get -y install nmap || if [ ${?} -gt 0 ]; then exit 1; fi
