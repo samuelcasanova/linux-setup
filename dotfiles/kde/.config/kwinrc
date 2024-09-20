@@ -12,6 +12,9 @@ LayoutName=coverswitch
 [Tiling]
 padding=0
 
+[Tiling][1b2283a9-510d-5ea9-bd71-5168cb7eac93]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][213a9620-187e-58a6-b80b-85d8fb95dfce]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
@@ -20,3 +23,6 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.75}]}
 
 [Tiling][a65162de-674e-5855-a667-97ab205dc722]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.2445312500000001},{"width":0.7554687499999996}]}
+
+[Tiling][faa5f9a7-57eb-50f7-b0d8-10184b82177c]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}

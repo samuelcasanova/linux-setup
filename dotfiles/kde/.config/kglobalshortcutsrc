@@ -26,10 +26,8 @@ display=Display\tMeta+P,Display\tMeta+P,Switch Display
 
 [khotkeys]
 _k_friendly_name=Custom Shortcuts Service
-{3ccb8a04-fc3e-4ca3-b652-a18946e1ad8a}=,none,New Action
 {9394335c-2175-467b-b6a6-074ee029cee5}=Meta+S,none,Switch Audio Outputs
 {d03619b6-9b3c-48cc-9d9c-a2aadb485550}=none,none,Search
-{f658efb0-9fdd-49db-aa8f-79c50b9bcfee}=,none,Switch audio output
 
 [kmix]
 _k_friendly_name=Audio Volume
@@ -216,11 +214,11 @@ view_zoom_out=Meta+-,Meta+-,Zoom Out
 
 [mediacontrol]
 _k_friendly_name=Media Controller
-mediavolumedown=none,,Media volume down
-mediavolumeup=none,,Media volume up
+mediavolumedown=none,none,Media volume down
+mediavolumeup=none,none,Media volume up
 nextmedia=Media Next,Media Next,Media playback next
 pausemedia=Media Pause,Media Pause,Pause media playback
-playmedia=none,,Play media playback
+playmedia=none,none,Play media playback
 playpausemedia=Media Play,Media Play,Play/Pause media playback
 previousmedia=Media Previous,Media Previous,Media playback previous
 stopmedia=Media Stop,Media Stop,Stop media playback
