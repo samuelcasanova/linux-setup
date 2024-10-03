@@ -3,5 +3,8 @@
     "explorer.confirmDelete": false,
     "security.workspace.trust.untrustedFiles": "open",
     "vsintellicode.java.completionsEnabled": false,
-    "vsintellicode.python.completionsEnabled": false
+    "vsintellicode.python.completionsEnabled": false,
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
