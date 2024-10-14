@@ -25,7 +25,7 @@ mkdir -p ~/git/iag/qa
 pushd ~/git/iag/qa
 
 git clone git@gitlab.com:iag-connect/qa/iag-racks-smoke-tests.git || if [ ${?} -gt 0 ]; then exit 1; fi
-cp ~/git/setups/linux-setup-private/iag-rack-smoke-tests.env.sh ~/git/iag/qa/iag-racks-smoke-tests/SmokeScripts/env.sh
+cp ~/git/setups/linux-setup-private/dot-air/iag-rack-smoke-tests.env.sh ~/git/iag/qa/iag-racks-smoke-tests/SmokeScripts/env.sh
 
 git clone git@gitlab.com:iag-connect/qa/iag-automated-tests.git || if [ ${?} -gt 0 ]; then exit 1; fi
 cd iag-automated-tests
