@@ -41,3 +41,7 @@ popd
 
 popd
 
+
+if [ -f ~/.npmrc ]; then mv ~/.npmrc /tmp/; fi
+
+stow  -v -d ~/git/setups/linux-setup-private/dotfiles/ -t ~ npm || if [ ${?} -gt 0 ]; then exit 1; fi
