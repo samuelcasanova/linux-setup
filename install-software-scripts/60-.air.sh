@@ -39,7 +39,29 @@ sed -i 's/0G-IFXX/0G-IFSC/g' src/configs/env/local/local.env || if [ ${?} -gt 0 
 
 popd
 
+mkdir -p ~/git/iag/grd
+pushd ~/git/iag/grd
+
+git clone git@gitlab.com:iag-connect/groundside/grd-ota-data.git || if [ ${?} -gt 0 ]; then exit 1; fi
+git clone git@gitlab.com:iag-connect/groundside/grd-flight-data.git || if [ ${?} -gt 0 ]; then exit 1; fi
+git clone git@gitlab.com:iag-connect/groundside/grd-entitlements-v2.git || if [ ${?} -gt 0 ]; then exit 1; fi
+git clone git@gitlab.com:iag-connect/groundside/grd-internet-viasat.git || if [ ${?} -gt 0 ]; then exit 1; fi
+
 popd
+
+mkdir -p ~/git/iag/libs
+pushd ~/git/iag/libs
+
+git clone git@gitlab.com:iag-connect/groundside/node-config-lib.git || if [ ${?} -gt 0 ]; then exit 1; fi
+git clone git@gitlab.com:iag-connect/groundside/node-logging-lib.git || if [ ${?} -gt 0 ]; then exit 1; fi
+git clone git@gitlab.com:iag-connect/groundside/node-amqp-lib.git || if [ ${?} -gt 0 ]; then exit 1; fi
+git clone git@gitlab.com:iag-connect/groundside/node-shared-types-lib.git || if [ ${?} -gt 0 ]; then exit 1; fi
+git clone git@gitlab.com:iag-connect/groundside/node-dependency-injection-lib.git || if [ ${?} -gt 0 ]; then exit 1; fi
+
+popd
+
+popd
+
 
 
 if [ -f ~/.npmrc ]; then mv ~/.npmrc /tmp/; fi
