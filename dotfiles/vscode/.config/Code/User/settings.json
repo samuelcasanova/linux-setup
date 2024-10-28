@@ -6,5 +6,13 @@
     "vsintellicode.python.completionsEnabled": false,
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "sonarlint.connectedMode.connections.sonarcloud": [
+        {
+            "organizationKey": "aviosgroup",
+            "connectionId": "aviosgroup"
+        }
+    ],
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "javascript.updateImportsOnFileMove.enabled": "always"
 }

@@ -2,6 +2,9 @@
 2 screens: Height=529
 2 screens: Width=484
 
+[PlasmaViews][Panel 2]
+panelVisibility=1
+
 [PlasmaViews][Panel 3]
 panelOpacity=1
 panelVisibility=1
