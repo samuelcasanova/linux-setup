@@ -35,6 +35,65 @@
 			"});",
 		],
 		"description": "Creates a beforeAll block for a test"
-	}
-	
+	},
+	"beforeEach": {
+		"scope": "javascript,typescript",
+		"prefix": "beforeEach",
+		"body": [
+			"beforeEach(() => {",
+			"    $0",
+			"});",
+		],
+		"description": "Creates a beforeEach block for a test"
+	},
+	"afterAll": {
+		"scope": "javascript,typescript",
+		"prefix": "afterAll",
+		"body": [
+			"afterAll(() => {",
+			"    $0",
+			"});",
+		],
+		"description": "Creates a afterAll block for a test"
+	},
+	"afterEach": {
+		"scope": "javascript,typescript",
+		"prefix": "afterEach",
+		"body": [
+			"afterEach(() => {",
+			"    $0",
+			"});",
+		],
+		"description": "Creates a afterEach block for a test"
+	},
+	"test": {
+		"scope": "javascript,typescript",
+		"prefix": "test",
+		"body": [
+			"test('$1', async () => {",
+			"    $0",
+			"});",
+		],
+		"description": "Creates a test block for a test"
+	},
+	"it": {
+		"scope": "javascript,typescript",
+		"prefix": "it",
+		"body": [
+			"it('$1', async () => {",
+			"    $0",
+			"});",
+		],
+		"description": "Creates a it block for a test"
+	},
+	"testeach": {
+		"scope": "javascript,typescript",
+		"prefix": "testeach",
+		"body": [
+			"test.each([['a',1], ['b',2]])('$1', (argA, argN) => {",
+			"    $0",
+			"});",
+		],
+		"description": "Creates a test block for a test"
+	},
 }
