@@ -1,0 +1,10 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+      {
+          "label": "OverrideLocal",
+          "type": "shell",
+          "command": "docker cp air-shopping:/air-shopping/app ${workspaceFolder}/build"
+      }
+  ]
+}

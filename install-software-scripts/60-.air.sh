@@ -19,6 +19,8 @@ echo -e "TAIL=0G-IFSC\nCAPTCHA_BYPASS=false" > ./.env || if [ ${?} -gt 0 ]; then
 sed -i 's/0G-IFXX/0G-IFSC/g' ./projects/air-simulator/.env || if [ ${?} -gt 0 ]; then exit 1; fi
 echo "TAIL_NUMBER=0G-IFSC" > ./projects/air-rabbitmq-proxy/.env || if [ ${?} -gt 0 ]; then exit 1; fi
 ./air-local.sh up -o baw -i gogo
+mkdir -p ./projects/air-shopping/.vscode || if [ ${?} -gt 0 ]; then exit 1; fi
+cp ~/git/setups/linux-setup/install-software-scripts/support-files/air-shopping-vscode/* ./projects/air-shopping/.vscode/ || if [ ${?} -gt 0 ]; then exit 1; fi
 popd
 
 mkdir -p ~/git/iag/qa

@@ -1,0 +1,114 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to air-local air-shopping docker",
+      "type": "node",
+      "restart": true,
+      "request": "attach",
+      "preLaunchTask": "OverrideLocal",
+      "port": 9229,
+      "address": "localhost",
+      "remoteRoot": "/air-shopping",
+      "localRoot": "${workspaceFolder}/build",
+      "sourceMaps": true,
+      "trace": true
+    },
+    {
+      "name": "Debug air-shopping",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "export $(cat ./local/env/airline/${input:Opco}.env | xargs) && export $(cat ./local/env/ifc/${input:Ifc}.env | xargs) && export $(cat ./local/rabbitmq/air-rabbitmq-proxy-${input:RabbitProxy}.env | xargs) && export $(cat ./.vscode/overriden.env | xargs) && export IAG_AIRSHOPPING_SYSTEM_ICAO=${input:Opco} && npm run start:dev"
+    },
+    {
+      "name": "Debug a single unit test",
+      "type": "node",
+      "runtimeVersion": "16.16.0",
+      "program": "${workspaceFolder}/node_modules/.bin/mocha",
+      "args": [ 
+        "${input:testNamePattern}",
+        "--exit",
+        "--colors", 
+        "--timeout 100000"
+      ], 
+      "console": "integratedTerminal",
+      "request": "launch"
+    },
+    {
+      "name": "Debug all unit tests (WARNING: extremely slow, and some in RED)",
+      "type": "node",
+      "runtimeVersion": "16.16.0",
+      "program": "${workspaceFolder}/node_modules/.bin/mocha",
+      "args": [ 
+        "${workspaceFolder}/src/test/Unit/**/*.spec.ts",
+        "--exit",
+        "--colors", 
+        "--timeout 100000"
+      ], 
+      "console": "integratedTerminal",
+      "request": "launch"
+    },
+    {
+      "name": "Debug a single endpoint test (remember start the server first)",
+      "type": "node",
+      "runtimeVersion": "16.16.0",
+      "program": "${workspaceFolder}/node_modules/.bin/mocha",
+      "env": {
+        "NODE_ENV": "test"
+      },
+      "args": [ 
+        "${input:testNamePattern}",
+        "--exit",
+        "--colors", 
+        "--timeout 100000"
+      ], 
+      "console": "integratedTerminal",
+      "request": "launch"
+    },
+  ],
+  "inputs": [
+    {
+      "id": "Opco",
+      "type": "pickString",
+      "description": "Choose an opco/airline",
+      "options": [
+        { "label": "British Airways", "value": "BAW" },
+        { "label": "Iberia", "value": "IBE" },
+        { "label": "Vueling", "value": "VLG" },
+        { "label": "Level", "value": "LVL" }
+      ],
+      "default": "BAW"
+    },
+    {
+      "id": "Ifc",
+      "type": "pickString",
+      "description": "Choose an IFC",
+      "options": [
+        { "label": "Inmarsat", "value": "isat" },
+        { "label": "Gogo", "value": "gogo" },
+        { "label": "Viasat", "value": "viasat" },
+        { "label": "PAC", "value": "pac" }
+      ],
+      "default": "isat"
+    },
+    {
+      "id": "RabbitProxy",
+      "type": "pickString",
+      "description": "Choose whether you want to use the RabbitMQ proxy:",
+      "options": [
+        { "label": "Yes", "value": "true" },
+        { "label": "No", "value": "false" }
+      ],
+      "default": "false"
+    },
+    {
+      "id": "testNamePattern",
+      "description": "Insert the glob expression or path to the test that you want to debug:",
+      "type": "promptString",
+      "default": "**/*EnvironmentController.spec.ts"
+    }
+  ]
+}
