@@ -45,6 +45,7 @@ mkdir -p ~/git/iag/grd
 pushd ~/git/iag/grd
 
 git clone git@gitlab.com:iag-connect/groundside/grd-ota-data.git || if [ ${?} -gt 0 ]; then exit 1; fi
+cp grd-ota-data/.env-template grd-ota-data/.env
 git clone git@gitlab.com:iag-connect/groundside/grd-flight-data.git || if [ ${?} -gt 0 ]; then exit 1; fi
 git clone git@gitlab.com:iag-connect/groundside/grd-entitlements-v2.git || if [ ${?} -gt 0 ]; then exit 1; fi
 git clone git@gitlab.com:iag-connect/groundside/grd-internet-viasat.git || if [ ${?} -gt 0 ]; then exit 1; fi
