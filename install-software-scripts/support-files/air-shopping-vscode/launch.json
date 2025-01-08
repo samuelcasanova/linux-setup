@@ -9,7 +9,7 @@
       "type": "node",
       "restart": true,
       "request": "attach",
-      "preLaunchTask": "OverrideLocal",
+      "preLaunchTask": "overrideLocal",
       "port": 9229,
       "address": "localhost",
       "remoteRoot": "/air-shopping",
@@ -21,6 +21,7 @@
       "name": "Debug air-shopping",
       "type": "node-terminal",
       "request": "launch",
+      "preLaunchTask": "setVersion",
       "command": "export $(cat ./local/env/airline/${input:Opco}.env | xargs) && export $(cat ./local/env/ifc/${input:Ifc}.env | xargs) && export $(cat ./local/rabbitmq/air-rabbitmq-proxy-${input:RabbitProxy}.env | xargs) && export $(cat ./.vscode/overriden.env | xargs) && export IAG_AIRSHOPPING_SYSTEM_ICAO=${input:Opco} && npm run start:dev"
     },
     {

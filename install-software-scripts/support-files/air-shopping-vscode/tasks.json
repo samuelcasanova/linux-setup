@@ -1,10 +1,15 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-      {
-          "label": "OverrideLocal",
-          "type": "shell",
-          "command": "docker cp air-shopping:/air-shopping/app ${workspaceFolder}/build"
-      }
-  ]
-}
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "overrideLocal",
+            "type": "shell",
+            "command": "docker cp air-shopping:/air-shopping/app ${workspaceFolder}/build"
+        },
+        {
+            "label": "setVersion",
+            "type": "shell",
+            "command": "echo '{ \"version\": \"v3.xx.xx\", \"createdAt\": \"2020-05-08T11:00:00.000Z\" }' > version.json"
+        }
+    ]
+  }
