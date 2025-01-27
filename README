@@ -9,10 +9,11 @@ Install git in order to clone all the scripts and tools.
 - Copy the public and private keys to access github on ~/.ssh/
 - Configure SSH: `chmod 600 ~/.ssh/* && eval "$(ssh-agent -s)" && ssh-add ~/.ssh/linux_github_samuel_casanova_gmail`
 - Clone the setup repositories: `mkdir -p ~/git/setups && cd ~/git/setups && git clone git@github.com:samuelcasanova/linux-setup.git && git clone git@github.com:samuelcasanova/linux-setup-private.git`
+- Execute install.sh script
 
 # Post install
 
 Complete these steps after the install is complete:
 - Login to your Google personal account in Chrome, then Immfly, then Testing
 - Make the main display "Primary" and switch monitors order
-- Press Win+T and configure Tiling (double check the config in kwinrc, is there another id?)
+- Press Win+T and configure Tiling (not needed in the last setup)
