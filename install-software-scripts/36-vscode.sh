@@ -16,9 +16,10 @@ code --install-extension dbaeumer.vscode-eslint || if [ ${?} -gt 0 ]; then exit 
 code --install-extension esbenp.prettier-vscode || if [ ${?} -gt 0 ]; then exit 1; fi
 code --install-extension nicoespeon.abracadabra || if [ ${?} -gt 0 ]; then exit 1; fi
 code --install-extension SonarSource.sonarlint-vscode || if [ ${?} -gt 0 ]; then exit 1; fi
-code --install-extension VisualStudioExptTeam.vscodeintellicode || if [ ${?} -gt 0 ]; then exit 1; fi
 code --install-extension eamodio.gitlens || if [ ${?} -gt 0 ]; then exit 1; fi
 code --install-extension smcpeak.default-keys-windows || if [ ${?} -gt 0 ]; then exit 1; fi
+code --install-extension GitHub.copilot || if [ ${?} -gt 0 ]; then exit 1; fi
+
 
 echo -e '\nStowing VS Code dotfiles\n'
 mkdir -p /tmp/vscode

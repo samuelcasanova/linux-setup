@@ -36,3 +36,5 @@ echo -e '\nCopying .env files\n'
 #grd-internet-viasat TBD
 cp ~/git/setups/linux-setup-private/dot-air/grd-ota-data.env ~/git/iag/grd/grd-ota-data/.env || if [ ${?} -gt 0 ]; then exit 1; fi
 cp ~/git/setups/linux-setup-private/dot-air/iag-process-helper.env ~/git/iag/tools/iag-process-helper/.env || if [ ${?} -gt 0 ]; then exit 1; fi
+cp ~/git/iag/grd/grd-internet-viasat/config/_test.json-template ~/git/iag/grd/grd-internet-viasat/config/test.json || if [ ${?} -gt 0 ]; then exit 1; fi
+cp ~/git/iag/grd/grd-internet-viasat/config/_development.json-template ~/git/iag/grd/grd-internet-viasat/config/development.json || if [ ${?} -gt 0 ]; then exit 1; fi

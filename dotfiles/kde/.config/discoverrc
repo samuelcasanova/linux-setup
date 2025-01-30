@@ -2,5 +2,5 @@
 Sources=fedora-testing,flathub,fedora
 
 [Window]
-geometry=2560,28,1920,1052
+geometry=2560,28,1920,1172
 visibility=4
