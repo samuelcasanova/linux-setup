@@ -7,8 +7,8 @@ Places Icons Auto-resize=false
 Places Icons Static Size=22
 
 [KPropertiesDialog]
-2 screens: Height=464
-2 screens: Width=436
+2 screens: Height=458
+2 screens: Width=410
 
 [MainWindow]
 MenuBar=Disabled
