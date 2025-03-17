@@ -1,9 +1,8 @@
 #!/bin/bash
 
-echo -e '\nConfiguring zsh\n'
+echo -e '\nConfiguring zsh and similar tooling\n'
 
 sudo apt-get -y install zsh || if [ ${?} -gt 0 ]; then exit 1; fi
-sudo apt-get -y install fzf || if [ ${?} -gt 0 ]; then exit 1; fi
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || if [ ${?} -gt 0 ]; then exit 1; fi
 
 pushd ~/.oh-my-zsh/plugins
@@ -14,3 +13,8 @@ popd
 if [ -f ~/.zshrc ]; then mv ~/.zshrc /tmp; fi
 
 stow  -v -d ~/git/setups/linux-setup/dotfiles/ -t ~ zsh || if [ ${?} -gt 0 ]; then exit 1; fi
+
+sudo apt-get -y install fzf || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo add-apt-repository ppa:aacebedo/fasd
+sudo apt-get update || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo apt-get install fasd || if [ ${?} -gt 0 ]; then exit 1; fi
