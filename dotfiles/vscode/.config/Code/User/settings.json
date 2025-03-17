@@ -27,5 +27,16 @@
     "typescript.preferences.preferTypeOnlyAutoImports": true,
     "[jsonc]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "sonarlint.rules": {
+        "typescript:S2004": {
+            "level": "off"
+        },
+        "secrets:S6698": {
+            "level": "off"
+        },
+        "kubernetes:S6897": {
+            "level": "off"
+        }
     }
 }

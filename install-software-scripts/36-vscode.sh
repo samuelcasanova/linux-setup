@@ -19,7 +19,7 @@ code --install-extension SonarSource.sonarlint-vscode || if [ ${?} -gt 0 ]; then
 code --install-extension eamodio.gitlens || if [ ${?} -gt 0 ]; then exit 1; fi
 code --install-extension smcpeak.default-keys-windows || if [ ${?} -gt 0 ]; then exit 1; fi
 code --install-extension codeium.codeium || if [ ${?} -gt 0 ]; then exit 1; fi
-
+code --install-extension GitLab.gitlab-workflow || if [ ${?} -gt 0 ]; then exit 1; fi
 
 echo -e '\nStowing VS Code dotfiles\n'
 mkdir -p /tmp/vscode

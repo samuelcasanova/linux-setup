@@ -133,8 +133,8 @@ ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
 [DirSelect Dialog]
-DirSelectDialog Size=1300,600
-History Items[$e]=file:///tmp,file:$HOME/git/secondbrain,file:$HOME/git/secondbrain,file:$HOME/git/secondbrain,file:$HOME/git/secondbrain,file:$HOME/git/secondbrain,file:$HOME/onedrive/obsidian/migrate,file:$HOME,file:$HOME/onedrive/obsidian,file:$HOME/obsidian,file:$HOME
+DirSelectDialog Size=980,638
+History Items[$e]=file:$HOME/overrides,file:///tmp/overrides,file:///tmp,file:$HOME/git/secondbrain,file:$HOME/git/secondbrain,file:$HOME/git/secondbrain,file:$HOME/git/secondbrain,file:$HOME/git/secondbrain,file:$HOME/onedrive/obsidian/migrate,file:$HOME,file:$HOME/onedrive/obsidian,file:$HOME/obsidian,file:$HOME
 
 [General]
 BrowserApplication=brave-browser.desktop
