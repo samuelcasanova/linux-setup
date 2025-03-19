@@ -18,3 +18,4 @@ sudo apt-get -y install fzf || if [ ${?} -gt 0 ]; then exit 1; fi
 sudo add-apt-repository ppa:aacebedo/fasd
 sudo apt-get update || if [ ${?} -gt 0 ]; then exit 1; fi
 sudo apt-get install fasd || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo apt-get install eza || if [ ${?} -gt 0 ]; then exit 1; fi
