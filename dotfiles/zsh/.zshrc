@@ -106,3 +106,12 @@ source $ZSH/oh-my-zsh.sh
 eval "$(fasd --init auto)"
 
 alias o='a -e xdg-open'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+if [ -f ~/.bash_env_vars ]; then
+    . ~/.bash_env_vars
+fi
