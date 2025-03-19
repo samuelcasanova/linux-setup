@@ -117,3 +117,7 @@ export NVM_DIR="$HOME/.nvm"
 if [ -f ~/.bash_env_vars ]; then
     . ~/.bash_env_vars
 fi
+
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
