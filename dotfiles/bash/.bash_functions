@@ -24,3 +24,11 @@ vpn_start() {
 vpn_stop() {
     sudo ~/git/setups/linux-setup/install-software-scripts/support-files/setvpn.sh down
 }
+
+progress() {
+    echo -ne 'Progress: #......... 10%\r\c'
+    sleep 1
+    echo -ne 'Progress: #####..... 50%\r\c'
+    sleep 1
+    echo 'Progress: ########## 100%'
+}
