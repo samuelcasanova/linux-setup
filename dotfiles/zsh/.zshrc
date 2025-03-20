@@ -1,3 +1,4 @@
+date
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -72,9 +73,7 @@ RPROMPT="%Th"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting fasd fzf npm)
-
 source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -103,16 +102,35 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
 eval "$(fasd --init auto)"
 
 alias o='a -e xdg-open'
 alias ls='eza'
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+load_nvm () {
+    unset -f nvm
+    unset -f node
+    unset -f npm
 
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+}
+
+nvm () {
+    load_nvm
+    nvm $@
+}
+
+node () {
+    load_nvm
+    node $@
+}
+
+npm () {
+    load_nvm
+    nvm $@
+}
 
 if [ -f ~/.bash_env_vars ]; then
     . ~/.bash_env_vars
