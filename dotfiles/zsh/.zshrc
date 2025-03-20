@@ -108,29 +108,17 @@ alias o='a -e xdg-open'
 alias ls='eza'
 
 load_nvm () {
-    unset -f nvm
-    unset -f node
-    unset -f npm
+    unset -f nvm node npm npx
 
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 }
 
-nvm () {
-    load_nvm
-    nvm $@
-}
-
-node () {
-    load_nvm
-    node $@
-}
-
-npm () {
-    load_nvm
-    nvm $@
-}
+nvm () { load_nvm; nvm $@; }
+node () { load_nvm; node $@; }
+npm () { load_nvm; npm $@; }
+npx () { load_nvm; npx $@; }
 
 if [ -f ~/.bash_env_vars ]; then
     . ~/.bash_env_vars
