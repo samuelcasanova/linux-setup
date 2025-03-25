@@ -1,42 +1,43 @@
 {
-    "explorer.confirmDragAndDrop": false,
-    "explorer.confirmDelete": false,
-    "security.workspace.trust.untrustedFiles": "open",
-    "vsintellicode.java.completionsEnabled": false,
-    "vsintellicode.python.completionsEnabled": false,
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "sonarlint.connectedMode.connections.sonarcloud": [
-        {
-            "organizationKey": "aviosgroup",
-            "connectionId": "aviosgroup"
-        }
-    ],
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "extensions.ignoreRecommendations": true,
-    "vsintellicode.sql.completionsEnabled": false,
-    "javascript.inlayHints.parameterNames.enabled": "all",
-    "javascript.inlayHints.parameterTypes.enabled": true,
-    "typescript.inlayHints.parameterNames.enabled": "all",
-    "typescript.inlayHints.parameterTypes.enabled": true,
-    "editor.inlayHints.fontSize": 10,
-    "typescript.preferences.quoteStyle": "single",
-    "javascript.preferences.quoteStyle": "single",
-    "typescript.preferences.preferTypeOnlyAutoImports": true,
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "sonarlint.rules": {
-        "typescript:S2004": {
-            "level": "off"
-        },
-        "secrets:S6698": {
-            "level": "off"
-        },
-        "kubernetes:S6897": {
-            "level": "off"
-        }
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "vsintellicode.java.completionsEnabled": false,
+  "vsintellicode.python.completionsEnabled": false,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "sonarlint.connectedMode.connections.sonarcloud": [
+    {
+      "organizationKey": "aviosgroup",
+      "connectionId": "aviosgroup"
     }
+  ],
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "extensions.ignoreRecommendations": true,
+  "vsintellicode.sql.completionsEnabled": false,
+  "javascript.inlayHints.parameterNames.enabled": "all",
+  "javascript.inlayHints.parameterTypes.enabled": true,
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.parameterTypes.enabled": true,
+  "editor.inlayHints.fontSize": 10,
+  "typescript.preferences.quoteStyle": "single",
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "sonarlint.rules": {
+    "typescript:S2004": {
+      "level": "off"
+    },
+    "secrets:S6698": {
+      "level": "off"
+    },
+    "kubernetes:S6897": {
+      "level": "off"
+    }
+  },
+  "sonarlint.pathToNodeExecutable": "/home/samuel/.nvm/versions/node/v22.13.1/bin/node"
 }
