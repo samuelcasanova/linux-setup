@@ -9,7 +9,7 @@ User=samuel
 Group=samuel
 ExecStart=/usr/bin/rclone mount \
         --config=/home/samuel/.config/rclone/rclone.conf \
-        --vfs-cache-mode writes \
+        --vfs-cache-mode off \
         onedrive: /home/samuel/onedrive
 ExecStop=/bin/fusermount -u /home/samuel/onedrive
 Restart=always

@@ -7,4 +7,4 @@ Name=Samuel
 Parent=FALLBACK/
 
 [Scrolling]
-HistorySize=25000
+HistorySize=250000
