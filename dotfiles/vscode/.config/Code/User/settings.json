@@ -37,6 +37,9 @@
     },
     "kubernetes:S6897": {
       "level": "off"
+    },
+    "typescript:S2933": {
+      "level": "on"
     }
   },
   "sonarlint.pathToNodeExecutable": "/home/samuel/.nvm/versions/node/v22.13.1/bin/node",

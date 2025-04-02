@@ -22,7 +22,7 @@
       "type": "node-terminal",
       "request": "launch",
       "preLaunchTask": "setVersion",
-      "command": "export $(cat ./local/env/airline/${input:Opco}.env | xargs) && export $(cat ./local/env/ifc/${input:Ifc}.env | xargs) && export $(cat ./local/rabbitmq/air-rabbitmq-proxy-${input:RabbitProxy}.env | xargs) && if '${input:RabbitProxy}' == 'true'; then export IAG_AIRSHOPPING_MESSAGE_QUEUE_HOST=localhost:5672; fi && export $(cat ./.vscode/overriden.env | xargs) && export IAG_AIRSHOPPING_SYSTEM_ICAO=${input:Opco} && npm run start:dev"
+      "command": "export $(cat ./local/env/airline/${input:Opco}.env | xargs) && export $(cat ./local/env/ifc/${input:Ifc}.env | xargs) && export $(cat ./local/rabbitmq/air-rabbitmq-proxy-${input:RabbitProxy}.env | xargs) && if [[ '${input:RabbitProxy}' == 'true' ]]; then export IAG_AIRSHOPPING_MESSAGE_QUEUE_HOST=localhost:5672; fi && export $(cat ./.vscode/overriden.env | xargs) && export IAG_AIRSHOPPING_SYSTEM_ICAO=${input:Opco} && npm run start:dev"
     },
     {
       "name": "Debug a single unit test",
