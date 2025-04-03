@@ -47,5 +47,12 @@
   ],
   "jest.jestCommandLine": "node_modules/.bin/jest",
   "jest.runMode": "watch",
-  "gitlens.views.repositories.showStashes": true
+  "gitlens.views.repositories.showStashes": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "errorLens.codeLensTemplate": "$severity $message",
+  "errorLens.messageTemplate": "$severity $message ($source)",
+  "errorLens.gutterIconSet": "circle",
+  "editor.linkedEditing": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.guides.bracketPairs": true
 }
