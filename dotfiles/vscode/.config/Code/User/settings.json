@@ -52,7 +52,9 @@
   "errorLens.codeLensTemplate": "$severity $message",
   "errorLens.messageTemplate": "$severity $message ($source)",
   "errorLens.gutterIconSet": "circle",
+  "errorLens.delay": 2000,
   "editor.linkedEditing": true,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-  "editor.guides.bracketPairs": true
+  "editor.guides.bracketPairs": true,
+  "editor.lineHeight": 1.4
 }

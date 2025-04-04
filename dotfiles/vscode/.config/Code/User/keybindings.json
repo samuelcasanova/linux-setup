@@ -13,5 +13,25 @@
     "key": "ctrl+shift+n",
     "command": "explorer.newFolder",
     "when": "explorerViewletFocus"
+  },
+  {
+    "key": "ctrl+[Semicolon]",
+    "command": "editor.action.smartSelect.expand",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+alt+right",
+    "command": "-editor.action.smartSelect.expand",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+[Semicolon]",
+    "command": "editor.action.smartSelect.shrink",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+alt+left",
+    "command": "-editor.action.smartSelect.shrink",
+    "when": "editorTextFocus"
   }
 ]

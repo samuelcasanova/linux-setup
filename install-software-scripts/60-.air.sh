@@ -68,6 +68,8 @@ git clone git@gitlab.com:iag-connect/node-libs/node-shared-types-lib.git || if [
 git clone git@gitlab.com:iag-connect/node-libs/node-db-lib.git || if [ ${?} -gt 0 ]; then exit 1; fi
 git clone git@gitlab.com:iag-connect/node-libs/node-amqp-lib.git || if [ ${?} -gt 0 ]; then exit 1; fi
 git clone git@gitlab.com:iag-connect/node-libs/node-dependency-injection-lib.git || if [ ${?} -gt 0 ]; then exit 1; fi
+git clone git@gitlab.com:iag-connect/node-libs/node-events-lib.git || if [ ${?} -gt 0 ]; then exit 1; fi
+git clone git@gitlab.com:iag-connect/node-libs/node-http-lib.git || if [ ${?} -gt 0 ]; then exit 1; fi
 
 popd
 
