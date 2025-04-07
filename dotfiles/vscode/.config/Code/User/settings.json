@@ -73,5 +73,20 @@
   "editor.linkedEditing": true,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "editor.guides.bracketPairs": true,
-  "editor.lineHeight": 1.4
+  "editor.lineHeight": 1.4,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.hovers.enabled": false,
+  "gitlens.views.repositories.includeWorkingTree": true,
+  "gitlens.views.scm.grouped.views": {
+    "commits": false,
+    "branches": false,
+    "remotes": false,
+    "stashes": false,
+    "tags": false,
+    "worktrees": false,
+    "contributors": false,
+    "repositories": false,
+    "searchAndCompare": false,
+    "launchpad": false
+  }
 }
