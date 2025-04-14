@@ -63,6 +63,7 @@ mkdir -p ~/git/iag/libs
 pushd ~/git/iag/libs
 
 git clone git@gitlab.com:iag-connect/node-libs/node-config-lib.git || if [ ${?} -gt 0 ]; then exit 1; fi
+cp ~/git/setups/linux-setup-private/dot-air/test.json ~/git/iag/libs/node-config-lib/config/test.json || if [ ${?} -gt 0 ]; then exit 1; fi
 git clone git@gitlab.com:iag-connect/node-libs/node-logging-lib.git || if [ ${?} -gt 0 ]; then exit 1; fi
 git clone git@gitlab.com:iag-connect/node-libs/node-shared-types-lib.git || if [ ${?} -gt 0 ]; then exit 1; fi
 git clone git@gitlab.com:iag-connect/node-libs/node-db-lib.git || if [ ${?} -gt 0 ]; then exit 1; fi
