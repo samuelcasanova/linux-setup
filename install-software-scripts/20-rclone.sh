@@ -4,7 +4,7 @@ echo -e '\nInstalling rclone with Onedrive\n'
 
 #RClone (to be configured with Onedrive)
 echo -e 'Installing Rclone\n'
-sudo apt-get -y install rclone || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo -v ; curl https://rclone.org/install.sh | sudo bash || if [ ${?} -gt 0 ]; then exit 1; fi
 
 echo -e 'Stowing the config file\n'
 if [ -d ~/.config/rclone ]; then mv ~/.config/rclone /tmp; fi
@@ -17,3 +17,7 @@ if [ -f /etc/systemd/system/rclonemount.service ]; then sudo mv /etc/systemd/sys
 sudo cp ~/git/setups/linux-setup/install-software-scripts/support-files/rclonemount.service /etc/systemd/system/rclonemount.service
 sudo systemctl start rclonemount || if [ ${?} -gt 0 ]; then exit 1; fi
 sudo systemctl enable rclonemount.service || if [ ${?} -gt 0 ]; then exit 1; fi
+
+
+
+/usr/bin/rclone mount --config=/home/samuel/.config/rclone/rclone.conf --vfs-cache-mode off onedrive: /home/samuel/onedrive
