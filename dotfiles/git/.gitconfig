@@ -7,3 +7,4 @@
 	rebase = true
 [core]
 	editor = code --wait
+	excludesfile = /home/samuel/.gitignore_global
