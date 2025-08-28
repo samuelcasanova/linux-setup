@@ -142,12 +142,13 @@ ColorSchemeHash=f048f05c52a43569ba37092018fd22dc32092e83
 
 [KDE]
 LookAndFeelPackage=org.kde.breezedark.desktop
+ShowDeleteCommand=false
 SingleClick=false
 
 [KFileDialog Settings]
 Allow Expansion=false
 Automatically select filename extension=true
-Breadcrumb Navigation=true
+Breadcrumb Navigation=false
 Decoration position=2
 LocationCombo Completionmode=5
 PathCombo Completionmode=5
@@ -166,6 +167,9 @@ View Style=DetailTree
 
 [KShortcutsDialog Settings]
 Dialog Size=600,480
+
+[PreviewSettings]
+MaximumRemoteSize=0
 
 [WM]
 activeBackground=49,54,59

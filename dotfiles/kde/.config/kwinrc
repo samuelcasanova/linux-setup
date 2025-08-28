@@ -10,7 +10,10 @@ Rows=1
 LayoutName=coverswitch
 
 [Tiling]
-padding=0
+padding=4
+
+[Tiling][18128883-ada8-5c90-b3c5-9988132b1405]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][1b2283a9-510d-5ea9-bd71-5168cb7eac93]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
@@ -21,11 +24,23 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 [Tiling][2ba0050c-f227-59dd-997e-8eeaa7283013]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][5b7a5ba4-43cc-5910-8e98-f358f9d54b43]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][6f5e4aa1-01ef-594c-b68e-dffb30028f5e]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.75}]}
 
+[Tiling][98763c06-85eb-53a2-804c-4c8a33f9923d]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][9e30bbf3-e4ae-53d1-9f2d-18c47f3723aa]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][a65162de-674e-5855-a667-97ab205dc722]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.2445312500000001},{"width":0.7554687499999996}]}
+
+[Tiling][bc895cd7-a401-56f8-9af3-fe7febdd2a8b]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][faa5f9a7-57eb-50f7-b0d8-10184b82177c]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
