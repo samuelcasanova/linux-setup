@@ -35,3 +35,4 @@ sudo apt-get -y install inetutils-traceroute || if [ ${?} -gt 0 ]; then exit 1; 
 sudo apt-get -y install net-tools || if [ ${?} -gt 0 ]; then exit 1; fi
 sudo apt-get -y install nmap || if [ ${?} -gt 0 ]; then exit 1; fi
 sudo apt-get -y install curl || if [ ${?} -gt 0 ]; then exit 1; fi
+sudo apt-get -y install tree || if [ ${?} -gt 0 ]; then exit 1; fi
