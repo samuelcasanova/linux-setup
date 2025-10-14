@@ -97,5 +97,6 @@
     "scminput": false,
     "typescript": true
   },
-  "github.copilot.nextEditSuggestions.enabled": true
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "git.replaceTagsWhenPull": true
 }
