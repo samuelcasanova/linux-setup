@@ -1,6 +1,16 @@
 [Global plugin config]
 manageProfile=false
 
+[SSH Config][git.immfly.com]
+hostname=git.immfly.com
+identifier=git.immfly.com
+importedFromSshConfig=true
+port=
+profileName=
+sshkey=~/.ssh/immfly_wifec_id_ed25519
+useSshConfig=true
+username=
+
 [SSH Config][github.com]
 hostname=github.com
 identifier=github.com
