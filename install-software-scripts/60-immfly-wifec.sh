@@ -17,8 +17,17 @@ git clone git@git.immfly.com:immfly/voe-magazine.git || if [ ${?} -gt 0 ]; then 
 popd
 
 mkdir -p ~/git/immfly/backend
-pushd ~/git/immfly/backen
+pushd ~/git/immfly/backend
 git clone git@git.immfly.com:immfly/microservices/routes/service.git route-service || if [ ${?} -gt 0 ]; then exit 1; fi
+git clone git@git.immfly.com:immfly/flight-info.git flight-info-service || if [ ${?} -gt 0 ]; then exit 1; fi
+git clone git@git.immfly.com:immfly/immfly-notifier.git immfly-notifier-service || if [ ${?} -gt 0 ]; then exit 1; fi
+git clone git@git.immfly.com:immfly/microservices/routes/admin.git route-admin-service || if [ ${?} -gt 0 ]; then exit 1; fi
+git clone git@git.immfly.com:immfly/microservices/lib-python.git || if [ ${?} -gt 0 ]; then exit 1; fi
+popd
+
+mkdir -p ~/git/immfly/backoffice
+pushd ~/git/immfly/backoffice
+git clone git@git.immfly.com:immfly/aircraft.git || if [ ${?} -gt 0 ]; then exit 1; fi
 popd
 
 sudo apt-get -y install make || if [ ${?} -gt 0 ]; then exit 1; fi

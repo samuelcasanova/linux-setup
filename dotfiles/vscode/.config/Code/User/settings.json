@@ -98,5 +98,6 @@
     "typescript": true
   },
   "github.copilot.nextEditSuggestions.enabled": true,
-  "git.replaceTagsWhenPull": true
+  "git.replaceTagsWhenPull": true,
+  "diffEditor.ignoreTrimWhitespace": false
 }

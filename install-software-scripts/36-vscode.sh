@@ -22,7 +22,7 @@ code --install-extension GitLab.gitlab-workflow || if [ ${?} -gt 0 ]; then exit 
 code --install-extension pkief.material-icon-theme || if [ ${?} -gt 0 ]; then exit 1; fi
 code --install-extension usernamehw.errorlens || if [ ${?} -gt 0 ]; then exit 1; fi
 code --install-extension ms-python.python || if [ ${?} -gt 0 ]; then exit 1; fi
-
+code --install-extension ms-python.flake8 || if [ ${?} -gt 0 ]; then exit 1; fi
 
 
 echo -e '\nStowing VS Code dotfiles\n'
