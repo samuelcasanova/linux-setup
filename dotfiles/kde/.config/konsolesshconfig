@@ -1,6 +1,16 @@
 [Global plugin config]
 manageProfile=false
 
+[SSH Config][172.20.250.4]
+hostname=172.20.250.4
+identifier=172.20.250.4
+importedFromSshConfig=true
+port=32765
+profileName=Samuel
+sshkey=
+useSshConfig=true
+username=immfly
+
 [SSH Config][git.immfly.com]
 hostname=git.immfly.com
 identifier=git.immfly.com
@@ -30,3 +40,23 @@ profileName=
 sshkey=~/.ssh/linux_gitlab_samuel_casanova_avios
 useSshConfig=true
 username=
+
+[SSH Config][hangar.pre]
+hostname=hangar-pre.int.immfly.io
+identifier=hangar.pre
+importedFromSshConfig=true
+port=32765
+profileName=
+sshkey=~/.ssh/hangar
+useSshConfig=true
+username=immfly
+
+[SSH Config][hangar.pro]
+hostname=hangar.int.immfly.io
+identifier=hangar.pro
+importedFromSshConfig=true
+port=32765
+profileName=Samuel
+sshkey=~/.ssh/hangar
+useSshConfig=true
+username=immfly

@@ -2,7 +2,12 @@
 ShowCopyMoveMenu=true
 
 [DetailsMode]
-PreviewSize=112
+PreviewSize=64
+
+[ExtractDialog]
+2 screens: Height=560
+2 screens: Width=1605
+DirHistory[$e]=/tmp/
 
 [General]
 Version=202
@@ -11,6 +16,9 @@ ViewPropsTimestamp=2024,7,31,19,16,50.511
 [KFileDialog Settings]
 Places Icons Auto-resize=false
 Places Icons Static Size=22
+Recent Files[$e]=file:$HOME,file:$HOME
+Recent URLs[$e]=file:///tmp/
+detailViewIconSize=16
 
 [KPropertiesDialog]
 2 screens: Height=464
