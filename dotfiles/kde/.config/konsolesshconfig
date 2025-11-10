@@ -11,6 +11,36 @@ sshkey=
 useSshConfig=true
 username=immfly
 
+[SSH Config][database-pre.immfly.com]
+hostname=database-pre.immfly.com
+identifier=database-pre.immfly.com
+importedFromSshConfig=true
+port=32765
+profileName=
+sshkey=~/.ssh/immfly_servers_id_rsa
+useSshConfig=true
+username=immfly
+
+[SSH Config][db-pre]
+hostname=db-pre
+identifier=db-pre
+importedFromSshConfig=true
+port=32765
+profileName=
+sshkey=~/.ssh/immfly_servers_id_rsa
+useSshConfig=true
+username=immfly
+
+[SSH Config][ef001]
+hostname=ef001
+identifier=ef001
+importedFromSshConfig=true
+port=
+profileName=Samuel
+sshkey=
+useSshConfig=true
+username=
+
 [SSH Config][git.immfly.com]
 hostname=git.immfly.com
 identifier=git.immfly.com
@@ -41,6 +71,36 @@ sshkey=~/.ssh/linux_gitlab_samuel_casanova_avios
 useSshConfig=true
 username=
 
+[SSH Config][hangar]
+hostname=hangar
+identifier=hangar
+importedFromSshConfig=true
+port=32765
+profileName=Samuel
+sshkey=
+useSshConfig=true
+username=immfly
+
+[SSH Config][hangar-pre]
+hostname=hangar-pre
+identifier=hangar-pre
+importedFromSshConfig=true
+port=32765
+profileName=
+sshkey=
+useSshConfig=true
+username=immfly
+
+[SSH Config][hangar-pro]
+hostname=hangar-pro
+identifier=hangar-pro
+importedFromSshConfig=true
+port=32765
+profileName=Samuel
+sshkey=~/.ssh/immfly_servers_id_rsa
+useSshConfig=true
+username=immfly
+
 [SSH Config][hangar.pre]
 hostname=hangar-pre.int.immfly.io
 identifier=hangar.pre
@@ -60,3 +120,13 @@ profileName=Samuel
 sshkey=~/.ssh/hangar
 useSshConfig=true
 username=immfly
+
+[SSH Config][if001]
+hostname=if001
+identifier=if001
+importedFromSshConfig=true
+port=32765
+profileName=Samuel
+sshkey=~/.ssh/immfly_servers_id_rsa
+useSshConfig=true
+username=root

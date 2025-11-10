@@ -1,0 +1,13 @@
+[Unit]
+Description=Setup Wifec Immfly VPN up at startup
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=openvpn3 session-start -c /home/samuel/git/setups/linux-setup-private/immfly-wifec/vpn/wifec-open-vpn-config.ovpn
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+Alias=wifecvpn.service
