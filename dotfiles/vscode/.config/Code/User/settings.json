@@ -99,5 +99,6 @@
   },
   "github.copilot.nextEditSuggestions.enabled": true,
   "git.replaceTagsWhenPull": true,
-  "diffEditor.ignoreTrimWhitespace": false
+  "diffEditor.ignoreTrimWhitespace": false,
+  "python.analysis.typeCheckingMode": "standard"
 }
