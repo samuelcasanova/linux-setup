@@ -106,6 +106,7 @@ eval "$(fasd --init auto)"
 
 alias o='a -e xdg-open'
 alias ls='eza'
+alias python='python3'
 
 load_nvm () {
     unset -f nvm node npm npx

@@ -100,5 +100,12 @@
   "github.copilot.nextEditSuggestions.enabled": true,
   "git.replaceTagsWhenPull": true,
   "diffEditor.ignoreTrimWhitespace": false,
-  "python.analysis.typeCheckingMode": "standard"
+  "python.analysis.typeCheckingMode": "standard",
+  "gitlens.remotes": [
+    {
+      "domain": "git.immfly.com",
+      "type": "GitLab"
+    }
+  ],
+  "python.defaultInterpreterPath": "/bin/python3"
 }
