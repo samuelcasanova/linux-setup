@@ -1,3 +1,7 @@
+[FileDialogSize]
+2 screens: Height=660
+2 screens: Width=982
+
 [KFileDialog Settings]
 Recent Files[$e]=KeePassPasswords.kdbx,file:$HOME/onedrive/Apps/Keepass2Android/KeePassPasswords.kdbx
 Recent URLs[$e]=file:$HOME/onedrive/Apps/Keepass2Android/,file:$HOME/onedrive/Apps/,file:$HOME/onedrive/,file:$HOME/

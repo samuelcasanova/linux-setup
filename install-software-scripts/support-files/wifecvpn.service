@@ -1,5 +1,5 @@
 [Unit]
-Description=Setup Wifec Immfly VPN up at startup
+Description=Wifec Immfly VPN
 After=network-online.target
 Wants=network-online.target
 

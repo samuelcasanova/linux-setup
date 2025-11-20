@@ -24,6 +24,7 @@ git clone git@git.immfly.com:immfly/immfly-notifier.git immfly-notifier-service 
 git clone git@git.immfly.com:immfly/microservices/routes/admin.git route-admin-service || if [ ${?} -gt 0 ]; then exit 1; fi
 git clone git@git.immfly.com:immfly/microservices/lib-python.git || if [ ${?} -gt 0 ]; then exit 1; fi
 git clone git@git.immfly.com:immfly/flightinfo-adapter.git || if [ ${?} -gt 0 ]; then exit 1; fi
+git clone git@git.immfly.com:immfly/microservices/inventory/service.git inventory-service || if [ ${?} -gt 0 ]; then exit 1; fi
 popd
 
 mkdir -p ~/git/immfly/backoffice
