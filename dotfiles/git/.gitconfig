@@ -6,5 +6,5 @@
 [pull]
 	rebase = true
 [core]
-	editor = code --wait
+	editor = antigravity --wait
 	excludesfile = /home/samuel/.gitignore_global
