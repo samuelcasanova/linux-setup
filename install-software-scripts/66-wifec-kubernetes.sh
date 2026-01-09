@@ -12,4 +12,13 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 # Install kubectl plugins
 curl -Ls https://plugins.cloud.int.immfly.io/install.sh | sudo sh
 
+# Install k9s
+echo -e '\nInstalling k9s now to manage k8s from the CLI\n'
+read -p 'Press Enter to open the download page. You will need to copy the current version, i.e. v0.50.16. You will be prompted for this download location in the next step.'
+xdg-open https://github.com/derailed/k9s/releases
+read -p 'Paste the version (i.e. v0.50.16) and press ENTER: ' K9S_VERSION
+wget https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_linux_amd64.deb
+sudo apt-get -y install ./k9s_linux_amd64.deb || if [ ${?} -gt 0 ]; then exit 1; fi
+rm ./k9s_linux_amd64.deb
+
 popd
