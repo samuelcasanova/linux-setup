@@ -130,3 +130,63 @@ profileName=Samuel
 sshkey=~/.ssh/immfly_servers_id_rsa
 useSshConfig=true
 username=root
+
+[SSH Config][if009]
+hostname=if009
+identifier=if009
+importedFromSshConfig=true
+port=32765
+profileName=Samuel
+sshkey=~/.ssh/immfly_servers_id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][if101]
+hostname=if101
+identifier=if101
+importedFromSshConfig=true
+port=32765
+profileName=Samuel
+sshkey=~/.ssh/immfly_servers_id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][if104]
+hostname=if104
+identifier=if104
+importedFromSshConfig=true
+port=32765
+profileName=Samuel
+sshkey=~/.ssh/immfly_servers_id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][if105]
+hostname=if105
+identifier=if105
+importedFromSshConfig=true
+port=32765
+profileName=Samuel
+sshkey=~/.ssh/immfly_servers_id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][if106]
+hostname=if106
+identifier=if106
+importedFromSshConfig=true
+port=32765
+profileName=
+sshkey=~/.ssh/immfly_servers_id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][ifproduct1]
+hostname=ifproduct1
+identifier=ifproduct1
+importedFromSshConfig=true
+port=32765
+profileName=Samuel
+sshkey=~/.ssh/immfly_servers_id_rsa
+useSshConfig=true
+username=root

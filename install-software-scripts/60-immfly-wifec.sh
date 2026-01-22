@@ -33,3 +33,7 @@ git clone git@git.immfly.com:immfly/aircraft.git || if [ ${?} -gt 0 ]; then exit
 popd
 
 sudo apt-get -y install make || if [ ${?} -gt 0 ]; then exit 1; fi
+
+echo -e '\nConfiguring Immfly docker registry in local...\n'
+if [ -d ~/.docker ]; then mv ~/.docker /tmp; fi
+stow -v -d ~/git/setups/linux-setup-private/dotfiles/ -t ~ docker || if [ ${?} -gt 0 ]; then exit 1; fi

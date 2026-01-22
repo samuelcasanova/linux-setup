@@ -1,5 +1,6 @@
 [Appearance]
-Font=Monospace,9,-1,5,50,0,0,0,0,0
+ColorScheme=WhiteOnBlack
+Font=Noto Mono,11,-1,5,50,0,0,0,0,0
 
 [General]
 Command=/usr/bin/zsh

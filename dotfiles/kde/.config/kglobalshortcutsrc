@@ -7,6 +7,7 @@ switch-to-activity-b1ecc105-1086-4c9d-9653-2a405ca3b636=none,none,Switch to acti
 switch-to-activity-d310d389-1acb-48dc-aff1-7ce85ce508be=none,none,Switch to activity "Default"
 
 [KDE Keyboard Layout Switcher]
+Switch keyboard layout to Spanish (Windows)=none,none,Switch keyboard layout to Spanish (Windows)
 Switch to Last-Used Keyboard Layout=Meta+Alt+L,Meta+Alt+L,
 Switch to Next Keyboard Layout=Meta+Alt+K,none,Switch to Next Keyboard Layout
 _k_friendly_name=Keyboard Layout Switcher
