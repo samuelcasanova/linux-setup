@@ -181,6 +181,16 @@ sshkey=~/.ssh/immfly_servers_id_rsa
 useSshConfig=true
 username=root
 
+[SSH Config][ifec1]
+hostname=ifec1
+identifier=ifec1
+importedFromSshConfig=true
+port=32765
+profileName=Samuel
+sshkey=~/.ssh/immfly_servers_id_rsa
+useSshConfig=true
+username=root
+
 [SSH Config][ifproduct1]
 hostname=ifproduct1
 identifier=ifproduct1
