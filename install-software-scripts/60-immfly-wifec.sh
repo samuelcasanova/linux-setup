@@ -50,5 +50,5 @@ popd
 sudo apt-get -y install make || if [ ${?} -gt 0 ]; then exit 1; fi
 
 echo -e '\nConfiguring Immfly docker registry in local...\n'
-if [ -d ~/.docker ]; then mv ~/.docker /tmp; fi
-stow -v -d ~/git/setups/linux-setup-private/dotfiles/ -t ~ docker || if [ ${?} -gt 0 ]; then exit 1; fi
+if [ -f ~/.docker/config.json ]; then mv ~/.docker/config.json /tmp; fi
+ln -s ~/git/setups/linux-setup-private/dotfiles/docker/config.json ~/.docker/config.json || if [ ${?} -gt 0 ]; then exit 1; fi
