@@ -1,0 +1,40 @@
+---
+# Simple playbook to test Ansible setup
+# This verifies that Ansible can connect and gather basic facts
+#
+# Run with: ansible-playbook playbooks/test-connection.yml
+
+- name: Test Ansible Connection
+  hosts: localhost
+  gather_facts: yes
+  
+  tasks:
+    - name: Display connection success message
+      debug:
+        msg: "✓ Ansible is working! Connected to {{ ansible_hostname }}"
+    
+    - name: Display system information
+      debug:
+        msg: |
+          OS: {{ ansible_distribution }} {{ ansible_distribution_version }}
+          User: {{ ansible_user_id }}
+          Home: {{ ansible_env.HOME }}
+          Python: {{ ansible_python_version }}
+    
+    - name: Test privilege escalation (sudo)
+      command: whoami
+      become: yes
+      register: sudo_test
+      changed_when: false
+    
+    - name: Display sudo test result
+      debug:
+        msg: "✓ Sudo works! Running as: {{ sudo_test.stdout }}"
+    
+    - name: Display variables from group_vars
+      debug:
+        msg: |
+          Setup user: {{ setup_user }}
+          Home directory: {{ home_dir }}
+          Setup repo: {{ setup_repo }}
+          Using stow: {{ use_stow }}

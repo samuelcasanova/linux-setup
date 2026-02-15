@@ -1,0 +1,47 @@
+---
+# Global variables for all hosts
+
+# User configuration
+setup_user: samuel
+home_dir: "/home/{{ setup_user }}"
+setup_repo: "{{ home_dir }}/git/setups/linux-setup"
+setup_repo_private: "{{ home_dir }}/git/setups/linux-setup-private"
+
+# Dotfiles configuration
+dotfiles_dir: "{{ setup_repo }}/dotfiles"
+use_stow: true  # Use stow for dotfiles management
+
+# Node.js versions to install via NVM
+node_versions:
+  - v22
+  - v20
+  - v18
+  - v16.16.0
+  - v10
+  - v8.4.0
+
+# Docker configuration
+docker_users:
+  - "{{ setup_user }}"
+
+# Browsers to install
+browsers:
+  - google-chrome-stable
+  - firefox
+
+# Networking tools
+networking_tools:
+  - inetutils-traceroute
+  - net-tools
+  - nmap
+  - curl
+  - tree
+  - stow
+
+# Basic system packages
+basic_packages:
+  - git
+  - vim
+  - wget
+  - build-essential
+  - software-properties-common

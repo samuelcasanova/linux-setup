@@ -1,0 +1,13 @@
+---
+# Inventory for local machine setup
+all:
+  hosts:
+    localhost:
+      # Run Ansible locally without SSH
+      ansible_connection: local
+      
+      # Use Python 3
+      ansible_python_interpreter: /usr/bin/python3
+      
+      # Current user
+      ansible_user: samuel
