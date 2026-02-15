@@ -1,0 +1,10 @@
+---
+- name: Phase 3 - Development Tools
+  hosts: localhost
+  connection: local
+
+  roles:
+    - docker
+    - nvm
+    - vscode
+    - antigravity

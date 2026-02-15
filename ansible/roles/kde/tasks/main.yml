@@ -1,0 +1,46 @@
+# Role: kde
+# Description: KDE Desktop configuration and dotfiles
+# Migrated from: install-software-scripts/14-kde.sh
+
+- name: Create KDE backup directory
+  file:
+    path: /tmp/kde/.config
+    state: directory
+    mode: '0755'
+
+- name: Backup existing KDE configuration files
+  command: mv ~/.config/{{ item }} /tmp/kde/.config/
+  args:
+    removes: "~/.config/{{ item }}"
+  loop:
+    - discoverrc
+    - dolphinrc
+    - kdeglobals
+    - kglobalshortcutsrc
+    - konsolerc
+    - konsolesshconfig
+    - plasmarc
+    - ksmserverrc
+    - kwinrc
+    - kscreenlockerrc
+    - klipperrc
+    - plasmashellrc
+    - khotkeysrc
+    - powermanagementprofilesrc
+  failed_when: false
+
+- name: Backup existing KDE configuration directories
+  command: mv {{ item }} /tmp/kde/
+  args:
+    removes: "{{ item }}"
+  loop:
+    - ~/.config/xsettingsd
+    - ~/.local/share/konsole
+  failed_when: false
+
+- name: Deploy KDE dotfiles
+  command: stow -v -d {{ setup_repo }}/dotfiles/ -t ~ kde
+  args:
+    chdir: "{{ setup_repo }}/dotfiles"
+  register: stow_kde
+  changed_when: "'LINK' in (stow_kde.stderr | default(''))"

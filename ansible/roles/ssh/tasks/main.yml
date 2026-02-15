@@ -1,5 +1,5 @@
 ---
-# Role: ssh_config
+# Role: ssh
 # Description: Configure SSH with private dotfiles
 # Migrated from: install-software-scripts/15-ssh.sh
 

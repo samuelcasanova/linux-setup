@@ -1,5 +1,5 @@
 ---
-# Role: bash_config
+# Role: bash
 # Description: Configure bash shell with dotfiles
 # Migrated from: install-software-scripts/10-bash.sh
 

@@ -45,3 +45,24 @@ basic_packages:
   - wget
   - build-essential
   - software-properties-common
+  - apt-transport-https
+  - ca-certificates
+  - gnupg
+
+# VS Code extensions
+vscode_extensions:
+  - Orta.vscode-jest
+  - dbaeumer.vscode-eslint
+  - esbenp.prettier-vscode
+  - nicoespeon.abracadabra
+  - SonarSource.sonarlint-vscode
+  - eamodio.gitlens
+  - smcpeak.default-keys-windows
+  - GitLab.gitlab-workflow
+  - pkief.material-icon-theme
+  - usernamehw.errorlens
+  - ms-python.python
+  - ms-python.flake8
+
+# NVM configuration
+nvm_version: "0.40.1"

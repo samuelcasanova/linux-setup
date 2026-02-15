@@ -10,18 +10,9 @@
   become: no
   
   roles:
-    - role: os_basics
-      tags: ['phase1', 'os_basics', 'grub', 'networking']
-    
-    - role: bash_config
-      tags: ['phase1', 'bash', 'dotfiles']
-    
-    - role: zsh
-      tags: ['phase1', 'zsh', 'shell', 'dotfiles']
-    
-    - role: git_config
-      tags: ['phase1', 'git', 'dotfiles']
-    
-    - role: ssh_config
-      tags: ['phase1', 'ssh', 'dotfiles']
+    - os_basics
+    - bash
+    - zsh
+    - git
+    - role: ssh
       when: setup_repo_private is defined

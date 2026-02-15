@@ -1,0 +1,19 @@
+# Role: safeeyes
+# Description: SafeEyes configuration and dotfiles
+# Migrated from: install-software-scripts/80-safeeyes.sh (config part)
+
+- name: Backup existing SafeEyes configuration
+  command: mv {{ item }} /tmp/
+  args:
+    removes: "{{ item }}"
+  loop:
+    - ~/.config/safeeyes
+    - ~/.config/autostart/io.github.slgobinath.SafeEyes.desktop
+  failed_when: false
+
+- name: Deploy SafeEyes dotfiles
+  command: stow -v -d {{ setup_repo }}/dotfiles/ -t ~ safeeyes
+  args:
+    chdir: "{{ setup_repo }}/dotfiles"
+  register: stow_safeeyes
+  changed_when: "'LINK' in (stow_safeeyes.stderr | default(''))"

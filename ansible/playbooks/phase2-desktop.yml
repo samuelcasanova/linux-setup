@@ -1,0 +1,10 @@
+---
+- name: Phase 2 - Desktop Environment
+  hosts: localhost
+  connection: local
+
+  roles:
+    - kde
+    - keepass
+    - safeeyes
+    - vscode

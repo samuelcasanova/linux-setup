@@ -1,0 +1,22 @@
+# Role: nvm
+# Description: Install NVM and specified Node.js versions
+# Migrated from: install-software-scripts/35-nvm.sh
+
+- name: Check if NVM is installed
+  stat:
+    path: ~/.nvm/nvm.sh
+  register: nvm_stat
+
+- name: Download and install NVM
+  shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v{{ nvm_version }}/install.sh | bash
+  when: not nvm_stat.stat.exists
+
+- name: Install Node.js versions
+  shell: |
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    nvm install {{ item }}
+  args:
+    executable: /bin/bash
+    creates: "~/.nvm/versions/node/{{ item }}"
+  loop: "{{ node_versions }}"

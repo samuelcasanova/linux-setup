@@ -1,0 +1,30 @@
+# Role: antigravity
+# Description: Install Antigravity update manager
+# Migrated from: install-software-scripts/36-antigravity.sh
+
+- name: Create directory for apt keyrings
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Add Antigravity GPG key
+  shell: curl -fsSL https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg | gpg --dearmor --yes -o /etc/apt/keyrings/antigravity-repo-key.gpg
+  args:
+    creates: /etc/apt/keyrings/antigravity-repo-key.gpg
+  become: yes
+
+- name: Add Antigravity repository
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/antigravity-repo-key.gpg] https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main"
+    state: present
+    filename: antigravity
+  become: yes
+
+- name: Install Antigravity
+  apt:
+    name: antigravity
+    state: present
+    update_cache: yes
+  become: yes

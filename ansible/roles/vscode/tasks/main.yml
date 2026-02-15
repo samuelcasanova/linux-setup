@@ -1,0 +1,53 @@
+# Role: vscode
+# Description: Install VS Code and manage extensions and dotfiles
+# Migrated from: install-software-scripts/36-vscode.sh
+
+- name: Add VS Code GPG key
+  shell: wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/keyrings/microsoft.gpg
+  args:
+    creates: /etc/apt/keyrings/microsoft.gpg
+  become: yes
+
+- name: Add VS Code repository
+  apt_repository:
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main"
+    state: present
+    filename: vscode
+  become: yes
+
+- name: Install VS Code
+  apt:
+    name: code
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: Install VS Code extensions
+  command: code --install-extension {{ item }}
+  loop: "{{ vscode_extensions }}"
+  register: extension_install
+  changed_when: "'is already installed' not in extension_install.stdout"
+  failed_when: false # Extension install might fail in headless/Docker environments
+
+- name: Create VS Code backup directory
+  file:
+    path: /tmp/vscode
+    state: directory
+    mode: '0755'
+
+- name: Backup existing VS Code configuration
+  command: mv {{ item }} /tmp/vscode/
+  args:
+    removes: "{{ item }}"
+  loop:
+    - ~/.config/Code/User/keybindings.json
+    - ~/.config/Code/User/settings.json
+    - ~/.config/Code/User/snippets
+  failed_when: false
+
+- name: Deploy VS Code dotfiles
+  command: stow -v -d {{ setup_repo }}/dotfiles/ -t ~ vscode
+  args:
+    chdir: "{{ setup_repo }}/dotfiles"
+  register: stow_vscode
+  changed_when: "'LINK' in (stow_vscode.stderr | default(''))"

@@ -15,6 +15,9 @@ RUN apt-get update && \
         sudo \
         systemd \
         systemd-sysv \
+        curl \
+        wget \
+        stow \
     && rm -rf /var/lib/apt/lists/*
 
 # Create user 'samuel' matching the real system
