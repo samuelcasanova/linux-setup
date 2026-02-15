@@ -1,0 +1,34 @@
+---
+# Role: ssh_config
+# Description: Configure SSH with private dotfiles
+# Migrated from: install-software-scripts/15-ssh.sh
+
+- name: Backup existing SSH directory
+  command: mv ~/.ssh /tmp/
+  args:
+    removes: ~/.ssh
+  failed_when: false
+
+- name: Check if private SSH dotfiles directory exists
+  stat:
+    path: "{{ setup_repo_private }}/dotfiles/ssh"
+  register: private_ssh_dir
+
+- name: Deploy SSH dotfiles from private repo
+  command: stow -v -d {{ setup_repo_private }}/dotfiles/ -t ~ ssh
+  args:
+    chdir: "{{ setup_repo_private }}/dotfiles"
+  register: stow_ssh
+  changed_when: "'LINK' in stow_ssh.stderr"
+  when: setup_repo_private is defined and private_ssh_dir.stat.exists
+
+- name: Set correct permissions on SSH private keys
+  file:
+    path: "{{ setup_repo_private }}/dotfiles/ssh/.ssh/{{ item }}"
+    mode: '0600'
+  loop:
+    - linux*
+    - id*
+  when: setup_repo_private is defined and private_ssh_dir.stat.exists
+  become: no
+  failed_when: false

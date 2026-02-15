@@ -8,21 +8,21 @@ Este directorio contiene la configuración de Ansible para automatizar la instal
 - **Docker**: Para testing (opcional, pero recomendado)
 - **Python 3**: Viene preinstalado en Kubuntu
 
-### Instalar Ansible en Kubuntu Nuevo
+### Instalar Git y Ansible en Kubuntu Nuevo
 
-Si estás configurando un Kubuntu desde cero, primero necesitas instalar Ansible:
+Si estás configurando un Kubuntu desde cero, primero necesitas instalar Git y Ansible:
 
 ```bash
-# Opción 1: Usar el script de instalación
+# Opción 1: Usar el script de inicialización
 cd ~/git/setups/linux-setup/ansible
-./install-ansible.sh
+./init.sh
 
 # Opción 2: Instalación manual
 sudo apt-get update
-sudo apt-get install -y ansible
+sudo apt-get install -y git ansible
 ```
 
-**Nota**: Ubuntu 22.04 instala Ansible 2.10.8, que es suficiente para este proyecto.
+**Nota**: Ubuntu 22.04 instala Ansible 2.10.8 y Git, que son suficientes para este proyecto.
 
 ## 🚀 Inicio Rápido
 

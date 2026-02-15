@@ -1,0 +1,79 @@
+---
+# Role: zsh
+# Description: Install and configure zsh with oh-my-zsh and plugins
+# Migrated from: install-software-scripts/12-zsh.sh
+
+- name: Install zsh
+  apt:
+    name: zsh
+    state: present
+  become: yes
+
+- name: Check if oh-my-zsh is already installed
+  stat:
+    path: ~/.oh-my-zsh
+  register: ohmyzsh_installed
+
+- name: Install oh-my-zsh
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  when: not ohmyzsh_installed.stat.exists
+
+- name: Clone zsh-syntax-highlighting plugin
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
+    update: no
+
+- name: Clone zsh-autosuggestions plugin
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git
+    dest: ~/.oh-my-zsh/plugins/zsh-autosuggestions
+    update: no
+
+- name: Backup existing zsh configuration
+  command: mv ~/.zshrc /tmp/
+  args:
+    removes: ~/.zshrc
+  failed_when: false
+
+- name: Deploy zsh dotfiles
+  command: stow -v -d {{ setup_repo }}/dotfiles/ -t ~ zsh
+  args:
+    chdir: "{{ setup_repo }}/dotfiles"
+  register: stow_zsh
+  changed_when: "'LINK' in stow_zsh.stderr"
+
+- name: Install fzf and fasd (fuzzy finder and productivity booster)
+  apt:
+    name:
+      - fzf
+      - fasd
+    state: present
+  become: yes
+
+- name: Create directory for apt keyrings
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Add eza GPG key
+  shell: curl -fsSL https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+  args:
+    creates: /etc/apt/keyrings/gierens.gpg
+  become: yes
+
+- name: Add eza repository
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main"
+    state: present
+    filename: gierens
+  become: yes
+
+- name: Install eza
+  apt:
+    name: eza
+    state: present
+    update_cache: yes
+  become: yes

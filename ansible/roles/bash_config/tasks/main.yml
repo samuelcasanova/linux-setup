@@ -1,0 +1,33 @@
+---
+# Role: bash_config
+# Description: Configure bash shell with dotfiles
+# Migrated from: install-software-scripts/10-bash.sh
+
+- name: Backup existing bash configuration
+  command: mv {{ item }} /tmp/
+  args:
+    removes: "{{ item }}"
+  loop:
+    - ~/.bashrc
+    - ~/.bash_env_vars
+  failed_when: false
+
+- name: Deploy bash dotfiles from public repo
+  command: stow -v -d {{ setup_repo }}/dotfiles/ -t ~ bash
+  args:
+    chdir: "{{ setup_repo }}/dotfiles"
+  register: stow_bash_public
+  changed_when: "'LINK' in stow_bash_public.stderr"
+
+- name: Check if private dotfiles directory exists
+  stat:
+    path: "{{ setup_repo_private }}/dotfiles/bash"
+  register: private_bash_dir
+
+- name: Deploy bash dotfiles from private repo
+  command: stow -v -d {{ setup_repo_private }}/dotfiles/ -t ~ bash
+  args:
+    chdir: "{{ setup_repo_private }}/dotfiles"
+  register: stow_bash_private
+  changed_when: "'LINK' in stow_bash_private.stderr"
+  when: setup_repo_private is defined and private_bash_dir.stat.exists

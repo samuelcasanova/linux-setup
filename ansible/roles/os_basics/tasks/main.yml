@@ -1,0 +1,53 @@
+---
+# Role: os_basics
+# Description: Basic OS configuration and essential tools
+# Migrated from: install-software-scripts/00-os-basics.sh
+
+- name: Create GRUB backup directory
+  file:
+    path: /tmp/grub.d
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Backup current GRUB configuration
+  copy:
+    src: /etc/grub.d/
+    dest: /tmp/grub.d/
+    remote_src: yes
+    mode: preserve
+  become: yes
+  register: grub_backup
+  failed_when: false
+
+- name: Check if os-prober exists at default location
+  stat:
+    path: /etc/grub.d/30_os-prober
+  register: os_prober_default
+
+- name: Move os-prober to boot Windows first (if exists)
+  command: mv /etc/grub.d/30_os-prober /etc/grub.d/09_os-prober
+  args:
+    creates: /etc/grub.d/09_os-prober
+  become: yes
+  when: os_prober_default.stat.exists
+  notify: Update GRUB
+
+- name: Install basic system packages
+  apt:
+    name: "{{ basic_packages }}"
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: Install networking tools and dependencies
+  apt:
+    name:
+      - inetutils-traceroute
+      - net-tools
+      - nmap
+      - curl
+      - tree
+      - gnupg
+    state: present
+  become: yes

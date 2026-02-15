@@ -1,7 +1,6 @@
 #!/bin/bash
-# Script to install Ansible on a fresh Kubuntu installation
-# This should be run BEFORE executing any Ansible playbooks
-# Works both interactively and in Docker builds
+# Script to initialize a fresh Kubuntu installation
+# This installs minimal dependencies (git) and Ansible
 
 set -e
 
@@ -14,7 +13,7 @@ fi
 
 if [ "$INTERACTIVE" = true ]; then
     echo "================================================"
-    echo "Installing Ansible on Kubuntu"
+    echo "Initializing Kubuntu Setup"
     echo "================================================"
 fi
 
@@ -24,25 +23,27 @@ if [ "$INTERACTIVE" = true ]; then
 fi
 sudo apt-get update -qq
 
-# Install Ansible
+# Install Git and Ansible
 if [ "$INTERACTIVE" = true ]; then
-    echo -e "\n[2/3] Installing Ansible..."
+    echo -e "\n[2/3] Installing Git and Ansible..."
 fi
-sudo apt-get install -y -qq ansible
+sudo apt-get install -y -qq git ansible software-properties-common
 
 # Verify installation
 if [ "$INTERACTIVE" = true ]; then
     echo -e "\n[3/3] Verifying installation..."
 fi
+git --version > /dev/null
 ansible --version > /dev/null
 
 if [ "$INTERACTIVE" = true ]; then
     echo ""
     echo "================================================"
-    echo "✓ Ansible installed successfully!"
+    echo "✓ System initialized successfully!"
     echo "================================================"
     echo ""
-    echo "Ansible version:"
+    echo "Versions:"
+    git --version | head -n 1
     ansible --version | head -n 1
     echo ""
     echo "Next steps:"

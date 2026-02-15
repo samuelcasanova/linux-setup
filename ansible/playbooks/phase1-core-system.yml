@@ -1,0 +1,27 @@
+---
+# Playbook for Phase 1: Core System Setup
+# This playbook migrates the core system configuration scripts to Ansible
+#
+# Run with: ansible-playbook playbooks/phase1-core-system.yml
+# Test with: ./tests/test-playbook.sh phase1-core-system.yml
+
+- name: Phase 1 - Core System Setup
+  hosts: localhost
+  become: no
+  
+  roles:
+    - role: os_basics
+      tags: ['phase1', 'os_basics', 'grub', 'networking']
+    
+    - role: bash_config
+      tags: ['phase1', 'bash', 'dotfiles']
+    
+    - role: zsh
+      tags: ['phase1', 'zsh', 'shell', 'dotfiles']
+    
+    - role: git_config
+      tags: ['phase1', 'git', 'dotfiles']
+    
+    - role: ssh_config
+      tags: ['phase1', 'ssh', 'dotfiles']
+      when: setup_repo_private is defined
