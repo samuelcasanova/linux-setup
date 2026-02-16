@@ -14,5 +14,4 @@
     - bash
     - zsh
     - git
-    - role: ssh
-      when: setup_repo_private is defined
+    - ssh

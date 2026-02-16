@@ -3,15 +3,19 @@
 # Description: Configure git with dotfiles
 # Migrated from: install-software-scripts/13-git.sh
 
+- name: Check if .gitconfig is a real file
+  stat:
+    path: ~/.gitconfig
+  register: gitconfig_stat
+
 - name: Backup existing git configuration
   command: mv ~/.gitconfig /tmp/
   args:
     removes: ~/.gitconfig
+  when: gitconfig_stat.stat.exists and not gitconfig_stat.stat.islnk
   failed_when: false
 
 - name: Deploy git dotfiles
   command: stow -v -d {{ setup_repo }}/dotfiles/ -t ~ git
-  args:
-    chdir: "{{ setup_repo }}/dotfiles"
   register: stow_git
   changed_when: "'LINK' in stow_git.stderr"

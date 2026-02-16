@@ -2,13 +2,20 @@
 # Description: KeePassXC configuration and dotfiles
 # Migrated from: install-software-scripts/70-keepass.sh (config part)
 
-- name: Backup existing KeePassXC configuration
-  command: mv {{ item }} /tmp/
-  args:
-    removes: "{{ item }}"
+- name: Check if KeePassXC configuration files are real files
+  stat:
+    path: "{{ item }}"
   loop:
     - ~/.config/keepassxc
     - ~/.config/KeePassXCrc
+  register: keepass_stats
+
+- name: Backup existing KeePassXC configuration
+  command: mv {{ item.item }} /tmp/
+  args:
+    removes: "{{ item.item }}"
+  loop: "{{ keepass_stats.results }}"
+  when: item.stat.exists and not item.stat.islnk
   failed_when: false
 
 - name: Deploy KeePassXC dotfiles

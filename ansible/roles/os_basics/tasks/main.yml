@@ -42,12 +42,6 @@
 
 - name: Install networking tools and dependencies
   apt:
-    name:
-      - inetutils-traceroute
-      - net-tools
-      - nmap
-      - curl
-      - tree
-      - gnupg
+    name: "{{ networking_tools }}"
     state: present
   become: yes

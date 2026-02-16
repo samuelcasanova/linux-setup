@@ -8,10 +8,9 @@
     state: directory
     mode: '0755'
 
-- name: Backup existing KDE configuration files
-  command: mv ~/.config/{{ item }} /tmp/kde/.config/
-  args:
-    removes: "~/.config/{{ item }}"
+- name: Check if KDE configuration files are real files
+  stat:
+    path: "~/.config/{{ item }}"
   loop:
     - discoverrc
     - dolphinrc
@@ -27,15 +26,30 @@
     - plasmashellrc
     - khotkeysrc
     - powermanagementprofilesrc
+  register: kde_file_stats
+
+- name: Backup existing KDE configuration files
+  command: mv ~/.config/{{ item.item }} /tmp/kde/.config/
+  args:
+    removes: "~/.config/{{ item.item }}"
+  loop: "{{ kde_file_stats.results }}"
+  when: item.stat.exists and not item.stat.islnk
   failed_when: false
 
-- name: Backup existing KDE configuration directories
-  command: mv {{ item }} /tmp/kde/
-  args:
-    removes: "{{ item }}"
+- name: Check if KDE configuration directories are real directories
+  stat:
+    path: "{{ item }}"
   loop:
     - ~/.config/xsettingsd
     - ~/.local/share/konsole
+  register: kde_dir_stats
+
+- name: Backup existing KDE configuration directories
+  command: mv {{ item.item }} /tmp/kde/
+  args:
+    removes: "{{ item.item }}"
+  loop: "{{ kde_dir_stats.results }}"
+  when: item.stat.exists and not item.stat.islnk
   failed_when: false
 
 - name: Deploy KDE dotfiles

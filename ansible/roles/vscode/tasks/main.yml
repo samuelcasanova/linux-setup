@@ -35,14 +35,21 @@
     state: directory
     mode: '0755'
 
-- name: Backup existing VS Code configuration
-  command: mv {{ item }} /tmp/vscode/
-  args:
-    removes: "{{ item }}"
+- name: Check if VS Code configuration files are real files
+  stat:
+    path: "{{ item }}"
   loop:
     - ~/.config/Code/User/keybindings.json
     - ~/.config/Code/User/settings.json
     - ~/.config/Code/User/snippets
+  register: vscode_stats
+
+- name: Backup existing VS Code configuration
+  command: mv {{ item.item }} /tmp/vscode/
+  args:
+    removes: "{{ item.item }}"
+  loop: "{{ vscode_stats.results }}"
+  when: item.stat.exists and not item.stat.islnk
   failed_when: false
 
 - name: Deploy VS Code dotfiles

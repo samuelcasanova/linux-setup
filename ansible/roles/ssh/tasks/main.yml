@@ -3,10 +3,16 @@
 # Description: Configure SSH with private dotfiles
 # Migrated from: install-software-scripts/15-ssh.sh
 
+- name: Check if .ssh is a real directory
+  stat:
+    path: ~/.ssh
+  register: ssh_dir_stat
+
 - name: Backup existing SSH directory
   command: mv ~/.ssh /tmp/
   args:
     removes: ~/.ssh
+  when: ssh_dir_stat.stat.exists and not ssh_dir_stat.stat.islnk
   failed_when: false
 
 - name: Check if private SSH dotfiles directory exists
