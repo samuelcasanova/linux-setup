@@ -140,7 +140,6 @@ Las variables se definen en `inventory/group_vars/all.yml`:
 - `setup_user`: Usuario del sistema (samuel)
 - `home_dir`: Directorio home
 - `setup_repo`: Ruta al repositorio
-- `use_stow`: Usar stow para dotfiles (true)
 - `node_versions`: Versiones de Node.js a instalar
 - `docker_users`: Usuarios que pueden usar Docker
 

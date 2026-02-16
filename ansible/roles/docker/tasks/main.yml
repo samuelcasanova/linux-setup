@@ -1,6 +1,7 @@
 # Role: docker
 # Description: Install and configure Docker Engine
 # Migrated from: install-software-scripts/30-docker.sh
+# Source: https://docs.docker.com/engine/install/ubuntu/
 
 - name: Remove old Docker versions
   apt:

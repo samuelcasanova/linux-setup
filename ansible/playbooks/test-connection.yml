@@ -37,4 +37,3 @@
           Setup user: {{ setup_user }}
           Home directory: {{ home_dir }}
           Setup repo: {{ setup_repo }}
-          Using stow: {{ use_stow }}

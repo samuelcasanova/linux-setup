@@ -6,29 +6,19 @@ setup_user: samuel
 home_dir: "/home/{{ setup_user }}"
 setup_repo: "{{ home_dir }}/git/setups/linux-setup"
 setup_repo_private: "{{ home_dir }}/git/setups/linux-setup-private"
-
-# Dotfiles configuration
 dotfiles_dir: "{{ setup_repo }}/dotfiles"
-use_stow: true  # Use stow for dotfiles management
-
-# Node.js versions to install via NVM
-node_versions:
-  - v22
-  - v20
-  - v18
-  - v16.16.0
-  - v10
-
-# Docker configuration
-docker_users:
-  - "{{ setup_user }}"
-
-# Browsers to install
-browsers:
-  - google-chrome-stable
-
-# OS configuration
 configure_grub_windows_first: true
+
+# Basic system packages
+basic_packages:
+  - tree
+  - stow
+  - vim
+  - build-essential
+  - software-properties-common
+  - apt-transport-https
+  - ca-certificates
+  - gnupg
 
 # Networking tools
 networking_tools:
@@ -36,18 +26,7 @@ networking_tools:
   - net-tools
   - nmap
   - curl
-
-# Basic system packages
-basic_packages:
-  - tree
-  - stow
-  - vim
   - wget
-  - build-essential
-  - software-properties-common
-  - apt-transport-https
-  - ca-certificates
-  - gnupg
 
 # VS Code extensions
 vscode_extensions:
@@ -65,4 +44,23 @@ vscode_extensions:
   - ms-python.flake8
 
 # NVM configuration
+# Get the latest version from https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating
+# Current version: 0.40.1
 nvm_version: "0.40.1"
+
+# Node.js versions to install via NVM
+node_versions:
+  - v22
+  - v20
+  - v18
+  - v16.16.0
+  - v10
+
+# Docker configuration
+docker_users:
+  - "{{ setup_user }}"
+
+# Browsers to install
+browsers:
+  - google-chrome-stable
+
