@@ -2,6 +2,19 @@
 # Description: SafeEyes configuration and dotfiles
 # Migrated from: install-software-scripts/80-safeeyes.sh (config part)
 
+- name: Add SafeEyes PPA
+  apt_repository:
+    repo: ppa:safeeyes-team/safeeyes
+    state: present
+  become: yes
+
+- name: Install SafeEyes
+  apt:
+    name: safeeyes
+    state: present
+    update_cache: yes
+  become: yes
+
 - name: Check if SafeEyes configuration files are real files
   stat:
     path: "{{ item }}"
@@ -20,7 +33,5 @@
 
 - name: Deploy SafeEyes dotfiles
   command: stow -v -d {{ setup_repo }}/dotfiles/ -t ~ safeeyes
-  args:
-    chdir: "{{ setup_repo }}/dotfiles"
   register: stow_safeeyes
   changed_when: "'LINK' in (stow_safeeyes.stderr | default(''))"

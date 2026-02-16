@@ -54,7 +54,5 @@
 
 - name: Deploy VS Code dotfiles
   command: stow -v -d {{ setup_repo }}/dotfiles/ -t ~ vscode
-  args:
-    chdir: "{{ setup_repo }}/dotfiles"
   register: stow_vscode
   changed_when: "'LINK' in (stow_vscode.stderr | default(''))"

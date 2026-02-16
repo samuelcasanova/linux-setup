@@ -2,6 +2,12 @@
 # Description: KeePassXC configuration and dotfiles
 # Migrated from: install-software-scripts/70-keepass.sh (config part)
 
+- name: Install KeePassXC
+  apt:
+    name: keepassxc
+    state: present
+  become: yes
+
 - name: Check if KeePassXC configuration files are real files
   stat:
     path: "{{ item }}"
@@ -20,7 +26,5 @@
 
 - name: Deploy KeePassXC dotfiles
   command: stow -v -d {{ setup_repo }}/dotfiles/ -t ~ keepass
-  args:
-    chdir: "{{ setup_repo }}/dotfiles"
   register: stow_keepass
   changed_when: "'LINK' in (stow_keepass.stderr | default(''))"
