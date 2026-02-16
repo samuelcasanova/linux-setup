@@ -1,0 +1,18 @@
+---
+- name: Check if uv is installed
+  stat:
+    path: ~/.local/bin/uv
+  register: uv_stat
+
+- name: Install uv
+  shell: curl -LsSf https://astral.sh/uv/install.sh | sh
+  when: not uv_stat.stat.exists
+
+- name: Verify uv installation
+  command: ~/.local/bin/uv --version
+  register: uv_verify
+  changed_when: false
+
+- name: Display uv version
+  debug:
+    var: uv_verify.stdout

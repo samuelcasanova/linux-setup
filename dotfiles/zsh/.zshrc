@@ -128,3 +128,5 @@ fi
 if [ -f ~/.bash_functions ]; then
     . ~/.bash_functions
 fi
+
+. "$HOME/.local/bin/env"
