@@ -42,6 +42,7 @@ vscode_extensions:
   - usernamehw.errorlens
   - ms-python.python
   - ms-python.flake8
+  - ms-python.mypy-type-checker
 
 # NVM configuration
 # Get the latest version from https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating
