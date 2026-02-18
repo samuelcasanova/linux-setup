@@ -1,0 +1,23 @@
+---
+- name: Check if Discord is installed
+  command: dpkg-query -W -f='${Status}' discord
+  register: discord_check
+  failed_when: false
+  changed_when: false
+  check_mode: no
+
+- name: Install Discord
+  block:
+    - name: Download Discord deb
+      get_url:
+        url: "https://discord.com/api/download?platform=linux&format=deb"
+        dest: /tmp/discord.deb
+        mode: '0644'
+    
+    - name: Install Discord from deb
+      apt:
+        deb: /tmp/discord.deb
+      become: yes
+  when: 
+    - "'install ok installed' not in discord_check.stdout"
+    - not ansible_check_mode

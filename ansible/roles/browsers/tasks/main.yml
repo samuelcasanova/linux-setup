@@ -1,0 +1,73 @@
+---
+- name: Install Google Chrome
+  block:
+    - name: Ensure keyrings directory exists
+      file:
+        path: /usr/share/keyrings
+        state: directory
+        mode: '0755'
+      become: yes
+
+    - name: Download Google Chrome GPG key
+      get_url:
+        url: https://dl.google.com/linux/linux_signing_key.pub
+        dest: /tmp/google-chrome-key.pub
+        mode: '0644'
+
+    - name: De-armor Google Chrome GPG key
+      shell: gpg --dearmor < /tmp/google-chrome-key.pub > /usr/share/keyrings/google-chrome.gpg
+      args:
+        creates: /usr/share/keyrings/google-chrome.gpg
+      become: yes
+      when: not ansible_check_mode
+
+    - name: Check if Google Chrome GPG key exists
+      stat:
+        path: /usr/share/keyrings/google-chrome.gpg
+      register: chrome_key_stat
+
+    - name: Add Google Chrome repository
+      apt_repository:
+        repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main"
+        filename: google-chrome
+        state: present
+      become: yes
+      when: not ansible_check_mode or chrome_key_stat.stat.exists
+
+    - name: Install Google Chrome
+      apt:
+        name: google-chrome-stable
+        state: present
+        update_cache: yes
+      become: yes
+      when: not ansible_check_mode
+
+- name: Install Brave Browser
+  block:
+    - name: Download Brave Browser keyring
+      get_url:
+        url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+        dest: /usr/share/keyrings/brave-browser-archive-keyring.gpg
+        mode: '0644'
+      become: yes
+
+    - name: Check if Brave Browser keyring exists
+      stat:
+        path: /usr/share/keyrings/brave-browser-archive-keyring.gpg
+      register: brave_key_stat
+
+    - name: Add Brave Browser repository
+      apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"
+        filename: brave-browser-release
+        state: present
+      become: yes
+      when: not ansible_check_mode or brave_key_stat.stat.exists
+
+    - name: Install Brave Browser
+      apt:
+        name: brave-browser
+        state: present
+        update_cache: yes
+      become: yes
+      when: not ansible_check_mode

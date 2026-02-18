@@ -1,0 +1,8 @@
+---
+- name: Phase 4 - Browsers and Communication
+  hosts: localhost
+  connection: local
+
+  roles:
+    - browsers
+    - discord

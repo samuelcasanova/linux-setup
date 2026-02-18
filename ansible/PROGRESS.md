@@ -47,16 +47,23 @@ El script `init.sh` se ejecutó correctamente en Docker y verificó:
 - ✅ Estructura de directorios lista
 
 ## Phase 3: Development Tools (Priority 2)
-- [ ] Migrate `30-docker.sh` (Docker installation and configuration)
-- [ ] Migrate `35-nvm.sh` (NVM and Node.js versions)
-- [ ] Migrate `36-vscode.sh` (VS Code installation)
-- [ ] Migrate `36-antigravity.sh` (Antigravity setup)
-- [ ] Test Phase 3 on fresh VM/container
+- [x] Migrate `30-docker.sh` (Docker installation and configuration)
+- [x] Migrate `35-nvm.sh` (NVM and Node.js versions)
+- [x] Migrate `36-vscode.sh` (VS Code installation)
+- [x] Migrate `36-antigravity.sh` (Antigravity setup)
+- [x] Test Phase 3 on fresh VM/container
 
 ## Phase 4: Browsers and Communication (Priority 2)
-- [ ] Migrate `16-browsers.sh` (browser installations)
-- [ ] Migrate `93.discord.sh` (Discord)
-- [ ] Test Phase 4 on fresh VM/container
+- [x] Migrate `16-browsers.sh` (browser installations)
+- [x] Migrate `93.discord.sh` (Discord)
+- [x] Test Phase 4 on fresh VM/container
+
+## Verificación de Fase 4 ✅
+
+El playbook `phase4-browsers.yml` se ejecutó correctamente en Docker:
+- ✅ **browsers**: Google Chrome y Brave Browser instalados vía sus repositorios oficiales (idempotente y eficiente).
+- ✅ **discord**: Discord instalado vía .deb con verificación previa de existencia para evitar descargas innecesarias.
+- ✅ **robustez**: Todos los roles de la fase 4 soportan ahora el modo `--check` (dry-run) sin errores.
 
 ## Phase 5: Work-Specific Tools (Priority 3)
 - [ ] Migrate `17-personal-repositories.sh`

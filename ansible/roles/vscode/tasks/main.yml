@@ -2,8 +2,14 @@
 # Description: Install VS Code and manage extensions and dotfiles
 # Migrated from: install-software-scripts/36-vscode.sh
 
-- name: Add VS Code GPG key
-  shell: wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/keyrings/microsoft.gpg
+- name: Download VS Code GPG key
+  get_url:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    dest: /tmp/microsoft.asc
+    mode: '0644'
+
+- name: Dearmor VS Code GPG key
+  command: gpg --dearmor -o /etc/apt/keyrings/microsoft.gpg /tmp/microsoft.asc
   args:
     creates: /etc/apt/keyrings/microsoft.gpg
   become: yes
