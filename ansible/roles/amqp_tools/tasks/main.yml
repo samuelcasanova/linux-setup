@@ -1,0 +1,6 @@
+---
+- name: Install AMQP tools
+  apt:
+    name: amqp-tools
+    state: present
+  become: yes

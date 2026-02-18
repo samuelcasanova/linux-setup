@@ -66,12 +66,12 @@ El playbook `phase4-browsers.yml` se ejecutó correctamente en Docker:
 - ✅ **robustez**: Todos los roles de la fase 4 soportan ahora el modo `--check` (dry-run) sin errores.
 
 ## Phase 5: Work-Specific Tools (Priority 3)
-- [ ] Migrate `17-personal-repositories.sh`
-- [ ] Migrate `37-amqp-tools.sh`
-- [ ] Migrate `50-wifec-open-vpn.sh`
-- [ ] Migrate `60-immfly-wifec.sh`
-- [ ] Migrate `66-viasat-vpn.sh`
-- [ ] Migrate `66-wifec-kubernetes.sh`
+- [x] Migrate `17-personal-repositories.sh`
+- [x] Migrate `37-amqp-tools.sh`
+- [x] Migrate `50-wifec-open-vpn.sh`
+- [x] Migrate `60-immfly-wifec.sh`
+- [x] Migrate `66-viasat-vpn.sh`
+- [x] Migrate `66-wifec-kubernetes.sh`
 - [ ] Test Phase 5 on fresh VM/container
 
 ## Phase 6: Productivity Applications (Priority 3)

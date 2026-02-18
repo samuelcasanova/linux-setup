@@ -1,0 +1,60 @@
+---
+- name: Install dependencies for OpenVPN 3
+  apt:
+    name:
+      - apt-transport-https
+      - curl
+    state: present
+  become: yes
+
+- name: Ensure keyrings directory exists
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Add OpenVPN 3 repository key
+  shell: curl -sSfL https://packages.openvpn.net/packages-repo.gpg > /etc/apt/keyrings/openvpn.asc
+  args:
+    creates: /etc/apt/keyrings/openvpn.asc
+  become: yes
+
+- name: Add OpenVPN 3 repository
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/openvpn.asc] https://packages.openvpn.net/openvpn3/debian {{ ansible_distribution_release }} main"
+    filename: openvpn3
+    state: present
+  become: yes
+
+- name: Install OpenVPN 3
+  apt:
+    name: openvpn3
+    state: present
+    update_cache: yes
+  become: yes
+  when: not ansible_check_mode
+
+- name: Install wifecvpn systemd service
+  become: yes
+  when: not ansible_check_mode
+  block:
+    - name: Copy wifecvpn.service
+      copy:
+        src: "{{ setup_repo }}/install-software-scripts/support-files/wifecvpn.service"
+        dest: /etc/systemd/system/wifecvpn.service
+        remote_src: yes
+        mode: '0644'
+      register: vpn_service_file
+
+    - name: Reload systemd
+      systemd:
+        daemon_reload: yes
+      when: vpn_service_file.changed
+
+    - name: Enable and start wifecvpn service
+      systemd:
+        name: wifecvpn
+        enabled: yes
+        state: started
+      failed_when: false # Might fail if the .ovpn file in the private repo doesn't exist yet

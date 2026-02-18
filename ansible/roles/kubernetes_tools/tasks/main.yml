@@ -1,0 +1,46 @@
+---
+- name: Get latest kubectl version
+  uri:
+    url: https://storage.googleapis.com/kubernetes-release/release/stable.txt
+    return_content: yes
+  register: kubectl_version
+  check_mode: no
+
+- name: Install kubectl
+  get_url:
+    url: "https://storage.googleapis.com/kubernetes-release/release/{{ kubectl_version.content | trim }}/bin/linux/amd64/kubectl"
+    dest: /usr/local/bin/kubectl
+    mode: '0755'
+  become: yes
+  when: not ansible_check_mode
+
+- name: Install Immfly kubectl plugins
+  shell: curl -Ls https://plugins.cloud.int.immfly.io/install.sh | sh
+  become: yes
+  ignore_errors: yes
+  when: not ansible_check_mode
+
+- name: Get latest k9s version
+  uri:
+    url: https://api.github.com/repos/derailed/k9s/releases/latest
+    return_content: yes
+  register: k9s_latest
+  check_mode: no
+
+- name: Set k9s version fact
+  set_fact:
+    k9s_version: "{{ k9s_latest.json.tag_name }}"
+
+- name: Download and install k9s
+  block:
+    - name: Download k9s deb
+      get_url:
+        url: "https://github.com/derailed/k9s/releases/download/{{ k9s_version }}/k9s_linux_amd64.deb"
+        dest: /tmp/k9s_linux_amd64.deb
+        mode: '0644'
+    
+    - name: Install k9s from deb
+      apt:
+        deb: /tmp/k9s_linux_amd64.deb
+      become: yes
+  when: not ansible_check_mode

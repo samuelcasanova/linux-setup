@@ -1,0 +1,54 @@
+---
+- name: Ensure Immfly directories exist
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "{{ home_dir }}/git/immfly"
+    - "{{ home_dir }}/git/immfly/airside"
+    - "{{ home_dir }}/git/immfly/groundside"
+    - "{{ home_dir }}/git/immfly/libs"
+
+- name: Install make
+  apt:
+    name: make
+    state: present
+  become: yes
+
+- name: Clone Immfly repositories
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    accept_hostkey: yes
+  loop: "{{ immfly_repositories }}"
+  ignore_errors: yes
+
+- name: Private repo configurations
+  block:
+    - name: Check if private repo exists
+      stat:
+        path: "{{ setup_repo_private }}"
+      register: private_repo_stat
+
+    - name: Run setup-wifec.sh from private repo
+      command: "{{ setup_repo_private }}/install-software-scripts/support-files/immfly-wifec/setup-wifec.sh"
+      when: private_repo_stat.stat.exists
+      ignore_errors: yes
+
+    - name: Copy .npmrc for ife-app
+      copy:
+        src: "{{ setup_repo_private }}/immfly-wifec/ife-app/.npmrc"
+        dest: "{{ home_dir }}/git/immfly/airside/ife-app/.npmrc"
+        remote_src: yes
+      when: private_repo_stat.stat.exists
+      ignore_errors: yes
+
+    - name: Configure Immfly docker registry
+      file:
+        src: "{{ setup_repo_private }}/dotfiles/docker/config.json"
+        dest: "{{ home_dir }}/.docker/config.json"
+        state: link
+        force: yes
+      when: private_repo_stat.stat.exists
+      ignore_errors: yes

@@ -1,0 +1,14 @@
+---
+- name: Ensure personal git directory exists
+  file:
+    path: "{{ home_dir }}/git/personal"
+    state: directory
+    mode: '0755'
+
+- name: Clone personal repositories
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ home_dir }}/git/personal/{{ item.name }}"
+    accept_hostkey: yes
+  loop: "{{ personal_repositories }}"
+  ignore_errors: yes # Might fail if SSH keys are not set up or in Docker without SSH access

@@ -65,3 +65,40 @@ docker_users:
 browsers:
   - google-chrome-stable
 
+# Personal Repositories
+personal_repositories:
+  - { name: 'codely-aggregates-course', repo: 'git@github.com:CodelyTV/aggregates-course.git' }
+  - { name: 'codely-typescript-ddd-example', repo: 'git@github.com:CodelyTV/typescript-ddd-example.git' }
+  - { name: 'ddd-course-codelytv', repo: 'git@github.com:samuelcasanova/ddd-course-codelytv.git' }
+  - { name: 'elasticsearch-codelytv-course', repo: 'git@github.com:samuelcasanova/elasticsearch-codelytv-course.git' }
+  - { name: 'samuelcasanova.github.io', repo: 'git@github.com:samuelcasanova/samuelcasanova.github.io.git' }
+
+# Immfly Repositories
+immfly_repositories:
+  - { dest: '{{ home_dir }}/git/immfly/local-environment', repo: 'git@git.immfly.com:immfly/local-environment.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/ife-app', repo: 'git@git.immfly.com:immfly/ife-app.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/voe-magazine', repo: 'git@git.immfly.com:immfly/voe-magazine.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/air-services', repo: 'git@git.immfly.com:immfly/airside/air-services.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/flight-info-service', repo: 'git@git.immfly.com:immfly/flight-info.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/route-service', repo: 'git@git.immfly.com:immfly/microservices/routes/service.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/immfly-notifier-service', repo: 'git@git.immfly.com:immfly/immfly-notifier.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/route-admin-service', repo: 'git@git.immfly.com:immfly/microservices/routes/admin.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/flightinfo-adapter', repo: 'git@git.immfly.com:immfly/flightinfo-adapter.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/aircraft', repo: 'git@git.immfly.com:immfly/aircraft.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/inventory-service', repo: 'git@git.immfly.com:immfly/microservices/inventory/service.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/charon-air', repo: 'git@git.immfly.com:immfly/charon-air.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/musement-api', repo: 'git@git.immfly.com:immfly/musement-api.git' }
+  - { dest: '{{ home_dir }}/git/immfly/groundside/grd-vouchers', repo: 'git@git.immfly.com:immfly/microservices/grd-vouchers.git' }
+  - { dest: '{{ home_dir }}/git/immfly/libs/lib-python', repo: 'git@git.immfly.com:immfly/microservices/lib-python.git' }
+  - { dest: '{{ home_dir }}/git/immfly/libs/sentry-python-lib', repo: 'git@git.immfly.com:immfly/microservices/contrib/sentry.git' }
+  - { dest: '{{ home_dir }}/git/immfly/libs/devops-resources', repo: 'git@git.immfly.com:immfly/shared/devops-resources.git' }
+  - { dest: '{{ home_dir }}/git/immfly/libs/node-amqp-lib', repo: 'git@git.immfly.com:immfly/shared/node-amqp-lib.git' }
+  - { dest: '{{ home_dir }}/git/immfly/libs/node-config-lib', repo: 'git@git.immfly.com:immfly/shared/node-config-lib.git' }
+  - { dest: '{{ home_dir }}/git/immfly/libs/node-couchdb-lib', repo: 'git@git.immfly.com:immfly/shared/node-couchdb-lib.git' }
+  - { dest: '{{ home_dir }}/git/immfly/libs/node-logging-lib', repo: 'git@git.immfly.com:immfly/shared/node-logging-lib.git' }
+  - { dest: '{{ home_dir }}/git/immfly/libs/node-dependency-injection-lib', repo: 'git@git.immfly.com:immfly/shared/node-dependency-injection-lib.git' }
+  - { dest: '{{ home_dir }}/git/immfly/libs/node-error-tracking-lib', repo: 'git@git.immfly.com:immfly/shared/node-error-tracking-lib.git' }
+  - { dest: '{{ home_dir }}/git/immfly/libs/node-events-lib', repo: 'git@git.immfly.com:immfly/shared/node-events-lib.git' }
+  - { dest: '{{ home_dir }}/git/immfly/libs/node-http-lib', repo: 'git@git.immfly.com:immfly/shared/node-http-lib.git' }
+  - { dest: '{{ home_dir }}/git/immfly/libs/node-shared-types-lib', repo: 'git@git.immfly.com:immfly/shared/node-shared-types-lib.git' }
+
