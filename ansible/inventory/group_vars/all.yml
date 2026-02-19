@@ -44,9 +44,10 @@ vscode_extensions:
   - ms-python.flake8
   - ms-python.mypy-type-checker
 
-# NVM configuration
-# Get the latest version from https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating
-# Current version: 0.40.1
+# Software versions to review and update with latest versions
+# https://www.realvnc.com/en/connect/download/viewer/linux/
+realvnc_version: "7.13.1"
+# https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating
 nvm_version: "0.40.1"
 
 # Node.js versions to install via NVM
@@ -101,4 +102,3 @@ immfly_repositories:
   - { dest: '{{ home_dir }}/git/immfly/libs/node-events-lib', repo: 'git@git.immfly.com:immfly/shared/node-events-lib.git' }
   - { dest: '{{ home_dir }}/git/immfly/libs/node-http-lib', repo: 'git@git.immfly.com:immfly/shared/node-http-lib.git' }
   - { dest: '{{ home_dir }}/git/immfly/libs/node-shared-types-lib', repo: 'git@git.immfly.com:immfly/shared/node-shared-types-lib.git' }
-

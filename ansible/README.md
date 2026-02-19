@@ -24,6 +24,14 @@ sudo apt-get install -y git ansible
 
 **Nota**: Ubuntu 22.04 instala Ansible 2.10.8 y Git, que son suficientes para este proyecto.
 
+### Post-instalación
+
+There are some needed steps after the installation:
+
+1. **Brave**: Open the browser and configure the personal account. Get the token from other computer or mobile.
+2. **Obsidian**: Now open the Obsidian app and configure the vault pointint to ~/git/secondbrain'. Make sure you have installed and enable the following plugins: emoji shortcodes, file hider and Git (with backup and pull intervals to 1 minute).
+3. **Keepass**: Open the app and configure the vault pointint to the Onedrive kdbx file.
+
 ## 🚀 Inicio Rápido
 
 ### 1. Instalar Ansible (solo para ejecución en sistema real)

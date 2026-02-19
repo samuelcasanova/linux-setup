@@ -1,0 +1,9 @@
+# Role: libreoffice
+# Description: LibreOffice installation
+# Migrated from: install-software-scripts/71-libreoffice.sh
+
+- name: Install LibreOffice
+  apt:
+    name: libreoffice
+    state: present
+  become: yes

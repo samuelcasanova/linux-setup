@@ -1,0 +1,32 @@
+# Role: postman
+# Description: Postman installation
+# Migrated from: install-software-scripts/62-postman.sh
+
+- name: Download Postman
+  get_url:
+    url: https://dl.pstmn.io/download/latest/linux64
+    dest: /tmp/postman.tar.gz
+
+- name: Create temporary directory for extraction
+  file:
+    path: /tmp/postman_extract
+    state: directory
+
+- name: Extract Postman
+  unarchive:
+    src: /tmp/postman.tar.gz
+    dest: /tmp/postman_extract
+    remote_src: yes
+
+- name: Move Postman to /opt
+  command: mv /tmp/postman_extract/Postman /opt/Postman
+  args:
+    creates: /opt/Postman
+  become: yes
+
+- name: Copy Postman desktop entry
+  copy:
+    src: "{{ setup_repo }}/install-software-scripts/support-files/postman.desktop"
+    dest: /usr/share/applications/postman.desktop
+    mode: '0644'
+  become: yes

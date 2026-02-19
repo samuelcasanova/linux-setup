@@ -1,0 +1,9 @@
+# Role: okular
+# Description: Okular installation
+# Migrated from: install-software-scripts/72-okular.sh
+
+- name: Install Okular
+  apt:
+    name: okular
+    state: present
+  become: yes

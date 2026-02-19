@@ -1,0 +1,36 @@
+# Role: obsidian
+# Description: Obsidian installation and vault setup
+# Migrated from: install-software-scripts/61-obsidian.sh
+
+- name: Get latest Obsidian version from GitHub
+  uri:
+    url: https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest
+    return_content: yes
+  register: obsidian_latest
+
+- name: Find deb installer URL
+  set_fact:
+    obsidian_deb_url: "{{ obsidian_latest.json.assets | selectattr('name', 'search', 'amd64.deb') | map(attribute='browser_download_url') | first }}"
+
+- name: Download Obsidian deb
+  get_url:
+    url: "{{ obsidian_deb_url }}"
+    dest: "/tmp/obsidian.deb"
+
+- name: Install Obsidian
+  apt:
+    deb: "/tmp/obsidian.deb"
+  become: yes
+
+- name: Ensure git directory exists
+  file:
+    path: "~/git"
+    state: directory
+
+- name: Clone secondbrain repository
+  git:
+    repo: "git@github.com:samuelcasanova/secondbrain.git"
+    dest: "~/git/secondbrain"
+    accept_hostkey: yes
+    key_file: "~/.ssh/id_ed25519"
+  ignore_errors: yes # Might fail if SSH key is not authorized yet

@@ -1,0 +1,14 @@
+---
+- name: Phase 6 - Productivity Tools
+  hosts: localhost
+  connection: local
+
+  roles:
+    - obsidian
+    - postman
+    - sqlectron
+    - keepass
+    - libreoffice
+    - okular
+    - rclone
+    - realvnc

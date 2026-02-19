@@ -1,0 +1,23 @@
+# Role: sqlectron
+# Description: SQLectron installation
+# Migrated from: install-software-scripts/63-sqlectron.sh
+
+- name: Get latest SQLectron version from GitHub
+  uri:
+    url: https://api.github.com/repos/sqlectron/sqlectron-gui/releases/latest
+    return_content: yes
+  register: sqlectron_latest
+
+- name: Find deb installer URL
+  set_fact:
+    sqlectron_deb_url: "{{ sqlectron_latest.json.assets | selectattr('name', 'search', 'amd64.deb') | map(attribute='browser_download_url') | first }}"
+
+- name: Download SQLectron deb
+  get_url:
+    url: "{{ sqlectron_deb_url }}"
+    dest: "/tmp/sqlectron.deb"
+
+- name: Install SQLectron
+  apt:
+    deb: "/tmp/sqlectron.deb"
+  become: yes

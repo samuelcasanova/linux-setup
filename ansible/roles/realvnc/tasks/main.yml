@@ -1,0 +1,28 @@
+# Role: realvnc
+# Description: RealVNC Viewer installation
+# Migrated from: install-software-scripts/65-realvnc.sh
+
+- name: Download RealVNC Viewer
+  get_url:
+    url: "https://www.realvnc.com/download/file/viewer.files/VNC-Viewer-{{ realvnc_version }}-Linux-x64.deb"
+    dest: /tmp/realvnc.deb
+
+- name: Install RealVNC Viewer
+  apt:
+    deb: /tmp/realvnc.deb
+  become: yes
+
+- name: Check if .vnc directory is a real directory
+  stat:
+    path: ~/.vnc
+  register: vnc_stat
+
+- name: Backup existing .vnc directory
+  command: mv ~/.vnc /tmp/
+  when: vnc_stat.stat.exists and not vnc_stat.stat.islnk
+  failed_when: false
+
+- name: Deploy realvnc dotfiles from private repo
+  command: stow -v -d {{ setup_repo_private }}/dotfiles/ -t ~ realvnc
+  register: stow_vnc
+  changed_when: "'LINK' in (stow_vnc.stderr | default(''))"

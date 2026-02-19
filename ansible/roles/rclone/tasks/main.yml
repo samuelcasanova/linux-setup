@@ -1,0 +1,43 @@
+# Role: rclone
+# Description: RClone installation and Onedrive configuration
+# Migrated from: install-software-scripts/20-rclone.sh
+
+- name: Install RClone
+  shell: curl https://rclone.org/install.sh | sudo bash
+  args:
+    creates: /usr/bin/rclone
+
+- name: Create onedrive mount point
+  file:
+    path: "~/onedrive"
+    state: directory
+
+- name: Check if rclone configuration files are real files
+  stat:
+    path: ~/.config/rclone
+  register: rclone_stat
+
+- name: Backup existing rclone configuration
+  command: mv ~/.config/rclone /tmp/
+  when: rclone_stat.stat.exists and not rclone_stat.stat.islnk
+  failed_when: false
+
+- name: Deploy rclone dotfiles from private repo
+  command: stow -v -d {{ setup_repo_private }}/dotfiles/ -t ~ rclone
+  register: stow_rclone
+  changed_when: "'LINK' in (stow_rclone.stderr | default(''))"
+
+- name: Copy rclonemount systemd service
+  copy:
+    src: "{{ setup_repo }}/install-software-scripts/support-files/rclonemount.service"
+    dest: /etc/systemd/system/rclonemount.service
+    mode: '0644'
+  become: yes
+
+- name: Start and enable rclonemount service
+  systemd:
+    name: rclonemount
+    state: started
+    enabled: yes
+    daemon_reload: yes
+  become: yes

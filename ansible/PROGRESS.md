@@ -75,14 +75,14 @@ El playbook `phase4-browsers.yml` se ejecutó correctamente en Docker:
 - [ ] Test Phase 5 on fresh VM/container
 
 ## Phase 6: Productivity Applications (Priority 3)
-- [ ] Migrate `20-rclone.sh`
-- [ ] Migrate `61-obsidian.sh`
-- [ ] Migrate `62-postman.sh`
-- [ ] Migrate `63-sqlectron.sh`
-- [ ] Migrate `65-real-vnc.sh`
-- [ ] Migrate `70-keepass.sh`
-- [ ] Migrate `71-libreoffice.sh`
-- [ ] Migrate `72-okular.sh`
+- [x] Migrate `20-rclone.sh`
+- [x] Migrate `61-obsidian.sh`
+- [x] Migrate `62-postman.sh`
+- [x] Migrate `63-sqlectron.sh`
+- [x] Migrate `65-real-vnc.sh`
+- [x] Migrate `70-keepass.sh`
+- [x] Migrate `71-libreoffice.sh`
+- [x] Migrate `72-okular.sh`
 - [ ] Test Phase 6 on fresh VM/container
 
 ## Phase 7: Media and Utilities (Priority 4)
