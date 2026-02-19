@@ -4,11 +4,12 @@
   connection: local
 
   roles:
+    - ssh # to be removed
     - obsidian
-    - postman
-    - sqlectron
-    - keepass
-    - libreoffice
-    - okular
+    # - postman
+    # - sqlectron
+    # - keepass
+    # - libreoffice
+    # - okular
     - rclone
     - realvnc

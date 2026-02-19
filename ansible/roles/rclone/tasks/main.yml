@@ -2,23 +2,30 @@
 # Description: RClone installation and Onedrive configuration
 # Migrated from: install-software-scripts/20-rclone.sh
 
-- name: Install RClone
-  shell: curl https://rclone.org/install.sh | sudo bash
+- name: Download RClone install script
+  get_url:
+    url: https://rclone.org/install.sh
+    dest: /tmp/install_rclone.sh
+    mode: '0755'
+
+- name: Run RClone install script
+  command: bash /tmp/install_rclone.sh
+  become: yes
   args:
     creates: /usr/bin/rclone
 
 - name: Create onedrive mount point
   file:
-    path: "~/onedrive"
+    path: "{{ home_dir }}/onedrive"
     state: directory
 
 - name: Check if rclone configuration files are real files
   stat:
-    path: ~/.config/rclone
+    path: "{{ home_dir }}/.config/rclone"
   register: rclone_stat
 
 - name: Backup existing rclone configuration
-  command: mv ~/.config/rclone /tmp/
+  command: mv {{ home_dir }}/.config/rclone /tmp/
   when: rclone_stat.stat.exists and not rclone_stat.stat.islnk
   failed_when: false
 
@@ -26,6 +33,7 @@
   command: stow -v -d {{ setup_repo_private }}/dotfiles/ -t ~ rclone
   register: stow_rclone
   changed_when: "'LINK' in (stow_rclone.stderr | default(''))"
+  ignore_errors: yes # Skip if private repo is not available (common in Docker tests)
 
 - name: Copy rclonemount systemd service
   copy:
@@ -41,3 +49,4 @@
     enabled: yes
     daemon_reload: yes
   become: yes
+  ignore_errors: "{{ ansible_virtualization_type == 'docker' or (ansible_env.container is defined and ansible_env.container == 'docker') }}"

@@ -26,7 +26,9 @@ echo "================================================"
 
 # Build the test image (use ansible/ as context to access install-ansible.sh)
 echo "Building test Docker image..."
+rsync -a ../../linux-setup-private ./files
 docker build -t kubuntu-ansible-test -f "$SCRIPT_DIR/Dockerfile" "$ANSIBLE_DIR"
+rm -rf ./files/linux-setup-private
 
 # Run the playbook in the container
 echo ""

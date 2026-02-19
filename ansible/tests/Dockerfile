@@ -18,6 +18,8 @@ RUN apt-get update && \
         curl \
         wget \
         stow \
+        unzip \
+        ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 # Create user 'samuel' matching the real system
@@ -37,6 +39,8 @@ RUN /tmp/init.sh && rm /tmp/init.sh
 # Switch to samuel user
 USER samuel
 WORKDIR /home/samuel
+
+COPY --chown=samuel:samuel files/linux-setup-private /home/samuel/git/setups/linux-setup-private
 
 # Default command
 CMD ["/bin/bash"]
