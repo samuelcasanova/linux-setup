@@ -14,7 +14,7 @@ echo -e 'Installing the systemd service to initialize on each reboot\n'
 mkdir -p ~/onedrive || if [ ${?} -gt 0 ]; then exit 1; fi
 if [ -f /etc/systemd/system/rclonemount.service ]; then sudo mv /etc/systemd/system/rclonemount.service /tmp; fi
 #The systemctl enable fails if the next cp is changed to a ln -s
-sudo cp ~/git/setups/linux-setup/install-software-scripts/support-files/rclonemount.service /etc/systemd/system/rclonemount.service
+sudo cp ~/git/setups/linux-setup/support-files/rclonemount.service /etc/systemd/system/rclonemount.service
 sudo systemctl start rclonemount || if [ ${?} -gt 0 ]; then exit 1; fi
 sudo systemctl enable rclonemount.service || if [ ${?} -gt 0 ]; then exit 1; fi
 

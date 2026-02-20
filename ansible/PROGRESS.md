@@ -102,8 +102,8 @@ El playbook `phase7-media.yml` se ejecutó correctamente en Docker:
 
 
 ## Phase 8: Support Scripts and Final Integration
-- [ ] Migrate support scripts (setvpn.sh, switch-between-audio-outputs.sh, update-.air-repos.sh)
-- [ ] Create master playbook with tags for selective execution
+- [x] Migrate support scripts (only `switch-between-audio-outputs.sh`, others deprecated)
+- [x] Create master playbook (`main.yml`)
 - [ ] Create documentation for running playbooks
 - [ ] Full end-to-end test on fresh VM
 - [ ] Update README with Ansible instructions

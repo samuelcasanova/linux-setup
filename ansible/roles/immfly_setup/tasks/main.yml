@@ -32,7 +32,7 @@
       register: private_repo_stat
 
     - name: Run setup-wifec.sh from private repo
-      command: "{{ setup_repo_private }}/install-software-scripts/support-files/immfly-wifec/setup-wifec.sh"
+      command: "{{ setup_repo_private }}/support-files/immfly-wifec/setup-wifec.sh"
       when: private_repo_stat.stat.exists
       ignore_errors: yes
 

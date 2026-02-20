@@ -1,0 +1,7 @@
+---
+- name: Phase 8 - Support Scripts and Integration
+  hosts: localhost
+  connection: local
+
+  roles:
+    - switch_audios

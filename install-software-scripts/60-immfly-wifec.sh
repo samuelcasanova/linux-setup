@@ -6,7 +6,7 @@ mkdir -p ~/git/immfly
 pushd ~/git/immfly/
 echo -e '\nInstalling local environment (backend services)\n'
 git clone git@git.immfly.com:immfly/local-environment.git || if [ ${?} -gt 0 ]; then exit 1; fi
-~/git/setups/linux-setup-private/install-software-scripts/support-files/immfly-wifec/setup-wifec.sh || if [ ${?} -gt 0 ]; then exit 1; fi
+~/git/setups/linux-setup-private/support-files/immfly-wifec/setup-wifec.sh || if [ ${?} -gt 0 ]; then exit 1; fi
 popd
 
 mkdir -p ~/git/immfly/airside

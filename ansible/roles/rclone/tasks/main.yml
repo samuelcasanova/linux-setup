@@ -37,7 +37,7 @@
 
 - name: Copy rclonemount systemd service
   copy:
-    src: "{{ setup_repo }}/install-software-scripts/support-files/rclonemount.service"
+    src: "{{ setup_repo }}/support-files/rclonemount.service"
     dest: /etc/systemd/system/rclonemount.service
     mode: '0644'
   become: yes

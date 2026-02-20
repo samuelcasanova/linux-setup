@@ -41,7 +41,7 @@
   block:
     - name: Copy wifecvpn.service
       copy:
-        src: "{{ setup_repo }}/install-software-scripts/support-files/wifecvpn.service"
+        src: "{{ setup_repo }}/support-files/wifecvpn.service"
         dest: /etc/systemd/system/wifecvpn.service
         remote_src: yes
         mode: '0644'

@@ -1,0 +1,17 @@
+---
+# Role: switch_audios
+# Description: Installation of audio output switching script to ~/.local/bin
+# Migrated from: support-files/
+
+- name: Ensure ~/.local/bin exists
+  file:
+    path: "{{ home_dir }}/.local/bin"
+    state: directory
+    mode: '0755'
+
+- name: Copy support scripts to ~/.local/bin
+  copy:
+    src: "{{ setup_repo }}/support-files/switch-between-audio-outputs.sh"
+    dest: "{{ home_dir }}/.local/bin/switch-between-audio-outputs.sh"
+    mode: '0755'
+    remote_src: yes

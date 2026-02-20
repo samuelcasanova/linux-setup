@@ -1,0 +1,14 @@
+---
+# Master Playbook for Kubuntu Setup
+# This playbook imports all phases in sequence.
+# You can run specific phases using tags (though import_playbook doesn't support tags directly in the same way,
+# the individual playbooks can have tags or we can list roles here).
+
+- import_playbook: phase1-core-system.yml
+- import_playbook: phase2-desktop.yml
+- import_playbook: phase3-dev-tools.yml
+- import_playbook: phase4-browsers.yml
+- import_playbook: phase5-work-tools.yml
+- import_playbook: phase6-productivity.yml
+- import_playbook: phase7-media.yml
+- import_playbook: phase8-integration.yml
