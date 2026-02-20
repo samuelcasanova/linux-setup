@@ -35,9 +35,9 @@
   changed_when: "'LINK' in (stow_rclone.stderr | default(''))"
   ignore_errors: yes # Skip if private repo is not available (common in Docker tests)
 
-- name: Copy rclonemount systemd service
-  copy:
-    src: "{{ setup_repo }}/support-files/rclonemount.service"
+- name: Deploy rclonemount systemd service from template
+  template:
+    src: rclonemount.service.j2
     dest: /etc/systemd/system/rclonemount.service
     mode: '0644'
   become: yes

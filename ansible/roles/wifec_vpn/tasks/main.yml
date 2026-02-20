@@ -39,11 +39,10 @@
   become: yes
   when: not ansible_check_mode
   block:
-    - name: Copy wifecvpn.service
-      copy:
-        src: "{{ setup_repo }}/support-files/wifecvpn.service"
+    - name: Deploy wifecvpn.service from template
+      template:
+        src: wifecvpn.service.j2
         dest: /etc/systemd/system/wifecvpn.service
-        remote_src: yes
         mode: '0644'
       register: vpn_service_file
 

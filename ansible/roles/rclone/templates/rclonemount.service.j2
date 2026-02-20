@@ -1,0 +1,19 @@
+[Unit]
+Description=rclonemount
+AssertPathIsDirectory={{ home_dir }}/onedrive
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ setup_user }}
+Group={{ setup_user }}
+ExecStart=/usr/bin/rclone mount \
+        --config={{ home_dir }}/.config/rclone/rclone.conf \
+        --vfs-cache-mode off \
+        onedrive: {{ home_dir }}/onedrive
+ExecStop=/bin/fusermount -u {{ home_dir }}/onedrive
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
