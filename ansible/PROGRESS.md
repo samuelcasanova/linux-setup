@@ -86,11 +86,20 @@ El playbook `phase4-browsers.yml` se ejecutó correctamente en Docker:
 - [ ] Test Phase 6 on fresh VM/container
 
 ## Phase 7: Media and Utilities (Priority 4)
-- [ ] Migrate `80-safeeyes.sh`
-- [ ] Migrate `90-vlc.sh`
-- [ ] Migrate `91-pinta.sh`
-- [ ] Migrate `92-obs-studio.sh`
-- [ ] Test Phase 7 on fresh VM/container
+- [x] Migrate `80-safeeyes.sh`
+- [x] Migrate `90-vlc.sh`
+- [x] Migrate `91-pinta.sh`
+- [x] Migrate `92-obs-studio.sh`
+- [x] Test Phase 7 on fresh VM/container
+
+## Verificación de Fase 7 ✅
+
+El playbook `phase7-media.yml` se ejecutó correctamente en Docker:
+- ✅ **safeeyes**: PPA añadido, paquete instalado y dotfiles desplegados con stow.
+- ✅ **vlc**: Instalado correctamente.
+- ✅ **pinta**: Repositorio xtradeb añadido e instalado correctamente con sus dependencias.
+- ✅ **obs_studio**: PPA añadido e instalado correctamente.
+
 
 ## Phase 8: Support Scripts and Final Integration
 - [ ] Migrate support scripts (setvpn.sh, switch-between-audio-outputs.sh, update-.air-repos.sh)

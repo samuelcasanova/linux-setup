@@ -1,0 +1,17 @@
+---
+# Role: obs_studio
+# Description: OBS Studio installation
+# Migrated from: install-software-scripts/92-obs-studio.sh
+
+- name: Add OBS Studio PPA
+  apt_repository:
+    repo: ppa:obsproject/obs-studio
+    state: present
+  become: yes
+
+- name: Install OBS Studio
+  apt:
+    name: obs-studio
+    state: present
+    update_cache: yes
+  become: yes

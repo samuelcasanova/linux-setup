@@ -1,0 +1,11 @@
+---
+# Role: vlc
+# Description: VLC Media Player installation
+# Migrated from: install-software-scripts/90-vlc.sh
+
+- name: Install VLC
+  apt:
+    name: vlc
+    state: present
+    update_cache: yes
+  become: yes

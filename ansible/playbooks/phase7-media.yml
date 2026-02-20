@@ -1,0 +1,10 @@
+---
+- name: Phase 7 - Media and Utilities
+  hosts: localhost
+  connection: local
+
+  roles:
+    - safeeyes
+    - vlc
+    - pinta
+    - obs_studio

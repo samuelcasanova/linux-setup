@@ -1,0 +1,29 @@
+---
+# Role: pinta
+# Description: Pinta image editor installation
+# Migrated from: install-software-scripts/91-pinta.sh
+
+- name: Download xtradeb-apt-source
+  get_url:
+    url: https://launchpad.net/~xtradeb/+archive/ubuntu/apps/+files/xtradeb-apt-source_0.4_all.deb
+    dest: /tmp/xtradeb-apt-source_0.4_all.deb
+    mode: '0644'
+
+- name: Install xtradeb-apt-source
+  apt:
+    deb: /tmp/xtradeb-apt-source_0.4_all.deb
+  become: yes
+
+- name: Update apt cache and install libadwaita-1-0 and Pinta
+  apt:
+    name:
+      - libadwaita-1-0
+      - pinta
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: Remove temporary deb file
+  file:
+    path: /tmp/xtradeb-apt-source_0.4_all.deb
+    state: absent
