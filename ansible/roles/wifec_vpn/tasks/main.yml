@@ -15,16 +15,19 @@
   become: yes
 
 - name: Add OpenVPN 3 repository key
-  shell: curl -sSfL https://packages.openvpn.net/packages-repo.gpg > /etc/apt/keyrings/openvpn.asc
-  args:
-    creates: /etc/apt/keyrings/openvpn.asc
+  get_url:
+    url: https://packages.openvpn.net/packages-repo.gpg
+    dest: /etc/apt/keyrings/openvpn.asc
+    mode: '0644'
   become: yes
 
 - name: Add OpenVPN 3 repository
-  apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/openvpn.asc] https://packages.openvpn.net/openvpn3/debian {{ ansible_distribution_release }} main"
-    filename: openvpn3
-    state: present
+  copy:
+    content: "deb [arch=amd64 signed-by=/etc/apt/keyrings/openvpn.asc] https://packages.openvpn.net/openvpn3/debian {{ ansible_distribution_release }} main\n"
+    dest: /etc/apt/sources.list.d/openvpn-packages.list
+    owner: root
+    group: root
+    mode: '0644'
   become: yes
 
 - name: Install OpenVPN 3

@@ -5,7 +5,6 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-# We use Jinja2 variables {{ ... }} which will be replaced during execution
 ExecStart=openvpn3 session-start -c {{ setup_repo_private }}/immfly-wifec/vpn/wifec-open-vpn-config.ovpn
 RemainAfterExit=yes
 

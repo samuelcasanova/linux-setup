@@ -14,6 +14,13 @@
     deb: /tmp/xtradeb-apt-source_0.4_all.deb
   become: yes
 
+- name: Fix xtradeb PPA SSL certificate error by using http
+  replace:
+    path: /etc/apt/sources.list.d/xtradeb-ubuntu.sources
+    regexp: 'https://ppa.launchpad.net'
+    replace: 'http://ppa.launchpad.net'
+  become: yes
+
 - name: Update apt cache and install libadwaita-1-0 and Pinta
   apt:
     name:

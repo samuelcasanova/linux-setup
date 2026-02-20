@@ -10,14 +10,21 @@
   become: yes
 
 - name: Add Antigravity GPG key
-  shell: curl -fsSL https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg | gpg --dearmor --yes -o /etc/apt/keyrings/antigravity-repo-key.gpg
+  get_url:
+    url: https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg
+    dest: /tmp/antigravity-key.gpg
+    mode: '0644'
+  become: yes
+
+- name: De-armor Antigravity GPG key
+  shell: gpg --dearmor < /tmp/antigravity-key.gpg > /etc/apt/keyrings/antigravity-repo-key.gpg
   args:
     creates: /etc/apt/keyrings/antigravity-repo-key.gpg
   become: yes
 
 - name: Add Antigravity repository
   apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/antigravity-repo-key.gpg] https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main"
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/antigravity-repo-key.gpg] https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main"
     state: present
     filename: antigravity
   become: yes

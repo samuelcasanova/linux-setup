@@ -1,0 +1,7 @@
+---
+- name: Step 4 - Work and Productivity Tools
+  hosts: localhost
+  connection: local
+
+  roles:
+    - wifec_vpn
