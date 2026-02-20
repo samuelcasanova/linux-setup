@@ -66,10 +66,10 @@ docker build -t kubuntu-ansible-test .
 ./tests/test-playbook.sh test-connection.yml
 
 # Con argumentos adicionales de Ansible
-./tests/test-playbook.sh phase1-core-system.yml --check --diff
+./tests/test-playbook.sh step1-core-system.yml --check --diff
 
 # Modo verbose
-./tests/test-playbook.sh phase1-core-system.yml -v
+./tests/test-playbook.sh step1-core-system.yml -v
 ```
 
 ### Testing Manual en Docker
@@ -97,10 +97,10 @@ ansible/
 │       └── all.yml         # Variables globales
 ├── playbooks/
 │   ├── test-connection.yml # Playbook de prueba
-│   ├── main.yml           # Playbook principal (próximamente)
-│   └── phase*.yml         # Playbooks por fase
+│   ├── main.yml           # Playbook principal
+│   └── step*.yml          # Playbooks por paso
 ├── roles/
-│   └── ...                # Roles de Ansible (próximamente)
+│   └── ...                # Roles de Ansible
 ├── files/                 # Archivos estáticos
 ├── templates/             # Templates Jinja2
 └── tests/
@@ -116,10 +116,10 @@ ansible/
 cd ~/git/setups/linux-setup/ansible
 
 # Modo dry-run (no hace cambios)
-ansible-playbook playbooks/phase1-core-system.yml --check --diff
+ansible-playbook playbooks/step1-core-system.yml --check --diff
 
 # Ejecución real
-ansible-playbook playbooks/phase1-core-system.yml
+ansible-playbook playbooks/step1-core-system.yml
 
 # Con tags específicos
 ansible-playbook playbooks/main.yml --tags "docker,vscode"
@@ -157,19 +157,14 @@ Puedes sobrescribir variables en tiempo de ejecución:
 ansible-playbook playbooks/main.yml -e "setup_user=otro_usuario"
 ```
 
-## 🔄 Fases de Migración
+## 🔄 Pasos de Instalación
 
-El proyecto está organizado en fases incrementales:
+El proyecto está organizado en pasos incrementales que se pueden ejecutar por separado o todos juntos vía `main.yml`:
 
-1. **Phase 0**: Setup inicial (este paso) ✅
-2. **Phase 1**: Core System (OS basics, bash, zsh, git, ssh)
-3. **Phase 2**: Desktop Environment (KDE, dotfiles)
-4. **Phase 3**: Development Tools (Docker, NVM, VS Code)
-5. **Phase 4**: Browsers and Communication
-6. **Phase 5**: Work-Specific Tools
-7. **Phase 6**: Productivity Applications
-8. **Phase 7**: Media and Utilities
-9. **Phase 8**: Integration and Documentation
+1.  **Step 1: Core System**: Base del SO, Bash, Zsh, Git, SSH, KeePass y RClone.
+2.  **Step 2: Desktop Environment**: KDE, SafeEyes, Audio Switcher, Navegadores, LibreOffice, Okular, VLC, Pinta y OBS Studio.
+3.  **Step 3: Development Tools**: Docker, NVM, VS Code, Antigravity, Python, Entorno Immfly y Repositorios Personales.
+4.  **Step 4: Work and Productivity Tools**: Herramientas AMQP, VPN, Kubernetes, Discord, Obsidian, Postman y Sqlectron.
 
 ## 🐛 Troubleshooting
 

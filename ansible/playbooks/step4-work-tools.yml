@@ -1,11 +1,13 @@
 ---
-- name: Phase 5 - Work-Specific Tools
+- name: Step 4 - Work and Productivity Tools
   hosts: localhost
   connection: local
 
   roles:
-    - personal_repos
     - amqp_tools
     - wifec_vpn
-    - immfly_setup
     - kubernetes_tools
+    - discord
+    - obsidian
+    - postman
+    - sqlectron

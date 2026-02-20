@@ -1,5 +1,5 @@
 ---
-- name: Phase 3 - Development Tools
+- name: Step 3 - Development Tools
   hosts: localhost
   connection: local
 
@@ -9,3 +9,5 @@
     - vscode
     - antigravity
     - python
+    - immfly_setup
+    - personal_repos

@@ -1,0 +1,19 @@
+---
+# Playbook for Step 1: Core System Setup
+# This playbook migrates the core system configuration scripts to Ansible
+#
+# Run with: ansible-playbook playbooks/step1-core-system.yml
+# Test with: ./tests/test-playbook.sh step1-core-system.yml
+
+- name: Step 1 - Core System Setup
+  hosts: localhost
+  become: no
+  
+  roles:
+    - os_basics
+    - bash
+    - zsh
+    - git
+    - ssh
+    - keepass
+    - rclone
