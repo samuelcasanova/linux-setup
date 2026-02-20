@@ -7,8 +7,20 @@
     path: ~/.nvm/nvm.sh
   register: nvm_stat
 
+- name: Get latest NVM version from GitHub
+  uri:
+    url: https://api.github.com/repos/nvm-sh/nvm/releases/latest
+    return_content: yes
+  register: nvm_latest_release
+  when: not nvm_stat.stat.exists
+
+- name: Set NVM version fact
+  set_fact:
+    nvm_version_to_install: "{{ nvm_latest_release.json.tag_name | default('master') }}"
+  when: not nvm_stat.stat.exists
+
 - name: Download and install NVM
-  shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v{{ nvm_version }}/install.sh | bash
+  shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_version_to_install | default('master') }}/install.sh | bash
   when: not nvm_stat.stat.exists
 
 - name: Install Node.js versions

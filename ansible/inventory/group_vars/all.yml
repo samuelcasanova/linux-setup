@@ -44,11 +44,6 @@ vscode_extensions:
   - ms-python.flake8
   - ms-python.mypy-type-checker
 
-# Software versions to review and update with latest versions
-# https://www.realvnc.com/en/connect/download/viewer/linux/
-realvnc_version: "7.13.1"
-# https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating
-nvm_version: "0.40.1"
 
 # Node.js versions to install via NVM
 node_versions:
