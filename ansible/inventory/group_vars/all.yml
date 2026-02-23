@@ -97,3 +97,4 @@ immfly_repositories:
   - { dest: '{{ home_dir }}/git/immfly/libs/node-events-lib', repo: 'git@git.immfly.com:immfly/shared/node-events-lib.git' }
   - { dest: '{{ home_dir }}/git/immfly/libs/node-http-lib', repo: 'git@git.immfly.com:immfly/shared/node-http-lib.git' }
   - { dest: '{{ home_dir }}/git/immfly/libs/node-shared-types-lib', repo: 'git@git.immfly.com:immfly/shared/node-shared-types-lib.git' }
+  - { dest: '{{ home_dir }}/git/immfly/libs/payment-service-client-python', repo: 'git@git.immfly.com:immfly/microservices/payment-service/client-python.git' }
