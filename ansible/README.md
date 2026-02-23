@@ -2,27 +2,47 @@
 
 Este directorio contiene la configuración de Ansible para automatizar la instalación y configuración de Kubuntu.
 
-## 📋 Requisitos Previos
+### Instalar en Kubuntu desde cero
 
-- **Ansible**: Necesario para ejecutar los playbooks
-- **Docker**: Para testing (opcional, pero recomendado)
-- **Python 3**: Viene preinstalado en Kubuntu
+Cuando arranque el menú de instalación, elegir la opción "Instalación mínima". Esto instalará automáticamente Git. Cuando termine el asistente y reinicie el sistema, actualiza todos los paquetes pendientes. Cuando termine, abre "Web Browser" y navega a este repositorio público en github.com para ir copiando y pegando los comandos.
 
-### Instalar Git y Ansible en Kubuntu Nuevo
-
-Si estás configurando un Kubuntu desde cero, primero necesitas instalar Git y Ansible:
+A continuación, abre Konsole, y ejecuta los siguientes comandos:
 
 ```bash
-# Opción 1: Usar el script de inicialización
-cd ~/git/setups/linux-setup/ansible
-./init.sh
-
-# Opción 2: Instalación manual
-sudo apt-get update
-sudo apt-get install -y git ansible
+cd /tmp
+git clone https://github.com/samuelcasanova/linux-setup-private.git
 ```
 
-**Nota**: Ubuntu 22.04 instala Ansible 2.10.8 y Git, que son suficientes para este proyecto.
+Entra tu usuario, samuelcasanova, y como password el personal access token (Settings --> Developer settings --> Personal access tokens --> Tokens (classic) --> Create new token with repo scope).
+
+```bash
+cp -r linux-setup-private/dotfiles/ssh/.ssh/* ~/.ssh/
+cd ~/.ssh/
+find . -type f ! -name "config" ! -name "known_hosts" ! -name "*.pub" ! -name "*.pemf" | xargs chmod 600
+find . -type f -name "*.pub" | xargs chmod 644
+find . -type f -name "*.pem" | xargs chmod 644
+cd ~
+mkdir -p git/setups
+git clone git@github.com:samuelcasanova/linux-setup.git
+git clone git@github.com:samuelcasanova/linux-setup-private.git
+```
+
+A continuación instala ansible:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y ansible
+```
+
+### 1. Verifica la configuración de ansible y ejecuta todos los playbooks
+
+Prueba la configuración de ansible y ejecuta todos los playbooks:
+
+```bash
+cd ~/git/setups/linux-setup/ansible
+ansible-playbook playbooks/test-connection.yml
+ansible-playbook playbooks/main.yml
+```
 
 ### Post-instalación
 
@@ -32,16 +52,10 @@ There are some needed steps after the installation:
 2. **Obsidian**: Now open the Obsidian app and configure the vault pointint to ~/git/secondbrain'. Make sure you have installed and enable the following plugins: emoji shortcodes, file hider and Git (with backup and pull intervals to 1 minute).
 3. **Keepass**: Open the app and configure the vault pointint to the Onedrive kdbx file.
 
+
 ## 🚀 Inicio Rápido
 
-### 1. Instalar Ansible (solo para ejecución en sistema real)
-
-```bash
-sudo apt-get update
-sudo apt-get install -y ansible
-```
-
-### 2. Verificar la Configuración
+### 1. Verificar la Configuración
 
 ```bash
 cd ~/git/setups/linux-setup/ansible
