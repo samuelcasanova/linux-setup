@@ -3,20 +3,22 @@
 # Description: Pinta image editor installation
 # Migrated from: install-software-scripts/91-pinta.sh
 
-- name: Download xtradeb-apt-source
-  get_url:
-    url: https://launchpad.net/~xtradeb/+archive/ubuntu/apps/+files/xtradeb-apt-source_0.4_all.deb
-    dest: /tmp/xtradeb-apt-source_0.4_all.deb
-    mode: '0644'
+- name: Remove old xtradeb-apt-source deb822 file
+  file:
+    path: /etc/apt/sources.list.d/xtradeb-ubuntu.sources
+    state: absent
+  become: yes
 
-- name: Install xtradeb-apt-source
-  apt:
-    deb: /tmp/xtradeb-apt-source_0.4_all.deb
+- name: Add xtradeb PPA
+  apt_repository:
+    repo: 'ppa:xtradeb/apps'
+    state: present
+    filename: xtradeb-apps
   become: yes
 
 - name: Fix xtradeb PPA SSL certificate error by using http
   replace:
-    path: /etc/apt/sources.list.d/xtradeb-ubuntu.sources
+    path: /etc/apt/sources.list.d/xtradeb-apps.list
     regexp: 'https://ppa.launchpad.net'
     replace: 'http://ppa.launchpad.net'
   become: yes
@@ -30,7 +32,3 @@
     update_cache: yes
   become: yes
 
-- name: Remove temporary deb file
-  file:
-    path: /tmp/xtradeb-apt-source_0.4_all.deb
-    state: absent

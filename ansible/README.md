@@ -19,8 +19,8 @@ Entra tu usuario, samuelcasanova, y como password el personal access token (Sett
 cp -r linux-setup-private/dotfiles/ssh/.ssh/* ~/.ssh/
 cd ~/.ssh/
 find . -type f ! -name "config" ! -name "known_hosts" ! -name "*.pub" ! -name "*.pemf" | xargs chmod 600
-find . -type f -name "*.pub" | xargs chmod 644
-find . -type f -name "*.pem" | xargs chmod 644
+find . -type f -name "*.pub" | xargs chmod 600
+find . -type f -name "*.pem" | xargs chmod 600
 cd ~
 mkdir -p git/setups
 git clone git@github.com:samuelcasanova/linux-setup.git
@@ -44,6 +44,8 @@ ansible-playbook playbooks/test-connection.yml
 ansible-playbook playbooks/main.yml
 ```
 
+If you get an error about an issue doing sudo, try to do `sudo ls` and then try again.
+
 ### Post-instalación
 
 There are some needed steps after the installation:
@@ -51,6 +53,7 @@ There are some needed steps after the installation:
 1. **Brave**: Open the browser and configure the personal account. Get the token from other computer or mobile.
 2. **Obsidian**: Now open the Obsidian app and configure the vault pointint to ~/git/secondbrain'. Make sure you have installed and enable the following plugins: emoji shortcodes, file hider and Git (with backup and pull intervals to 1 minute).
 3. **Keepass**: Open the app and configure the vault pointint to the Onedrive kdbx file.
+4. **Antigravity**: Open the app and configure the account to connect to Google.
 
 
 ## 🚀 Inicio Rápido
