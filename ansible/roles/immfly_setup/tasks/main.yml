@@ -32,7 +32,7 @@
       register: private_repo_stat
 
     - name: Run setup-wifec.sh from private repo
-      command: "{{ setup_repo_private }}/support-files/immfly-wifec/setup-wifec.sh"
+      command: "{{ setup_repo_private }}/immfly-wifec/setup-wifec.sh"
       when: private_repo_stat.stat.exists
       ignore_errors: yes
 
@@ -43,6 +43,13 @@
         remote_src: yes
       when: private_repo_stat.stat.exists
       ignore_errors: yes
+
+    - name: Ensure .docker directory exists
+      file:
+        path: "{{ home_dir }}/.docker"
+        state: directory
+        mode: '0700'
+      when: private_repo_stat.stat.exists
 
     - name: Configure Immfly docker registry
       file:

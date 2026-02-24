@@ -44,7 +44,13 @@ ansible-playbook playbooks/test-connection.yml
 ansible-playbook playbooks/main.yml
 ```
 
-If you get an error about an issue doing sudo, try to do `sudo ls` and then try again.
+Si tienes problemas con sudo, ejecuta `sudo ls` y vuelve a intentarlo.
+
+Si tienes que repetir un role específico, puedes ejecutarlo directamente con:
+
+```bash
+ansible localhost -m include_role -a "name=nombre_del_role" -e "setup_repo=$(pwd)"
+```
 
 ### Post-instalación
 
