@@ -22,7 +22,6 @@
     dest: "{{ item.dest }}"
     accept_hostkey: yes
   loop: "{{ immfly_repositories }}"
-  ignore_errors: yes
 
 - name: Private repo configurations
   block:
@@ -34,7 +33,6 @@
     - name: Run setup-wifec.sh from private repo
       command: "{{ setup_repo_private }}/immfly-wifec/setup-wifec.sh"
       when: private_repo_stat.stat.exists
-      ignore_errors: yes
 
     - name: Copy .npmrc for ife-app
       copy:
@@ -42,7 +40,6 @@
         dest: "{{ home_dir }}/git/immfly/airside/ife-app/.npmrc"
         remote_src: yes
       when: private_repo_stat.stat.exists
-      ignore_errors: yes
 
     - name: Ensure .docker directory exists
       file:
@@ -58,4 +55,3 @@
         state: link
         force: yes
       when: private_repo_stat.stat.exists
-      ignore_errors: yes

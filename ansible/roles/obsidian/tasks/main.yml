@@ -33,4 +33,3 @@
     dest: "~/git/secondbrain"
     accept_hostkey: yes
     key_file: "~/.ssh/id_ed25519"
-  ignore_errors: yes # Might fail if SSH key is not authorized yet

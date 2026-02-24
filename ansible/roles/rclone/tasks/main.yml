@@ -33,7 +33,6 @@
   command: stow -v -d {{ setup_repo_private }}/dotfiles/ -t ~ rclone
   register: stow_rclone
   changed_when: "'LINK' in (stow_rclone.stderr | default(''))"
-  ignore_errors: yes # Skip if private repo is not available (common in Docker tests)
 
 - name: Deploy rclonemount systemd service from template
   template:

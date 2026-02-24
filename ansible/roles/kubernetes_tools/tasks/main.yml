@@ -17,7 +17,6 @@
 - name: Install Immfly kubectl plugins
   shell: curl -Ls https://plugins.cloud.int.immfly.io/install.sh | sh
   become: yes
-  ignore_errors: yes
   when: not ansible_check_mode
 
 - name: Get latest k9s version
