@@ -84,6 +84,7 @@ immfly_repositories:
   - { dest: '{{ home_dir }}/git/immfly/airside/inventory-service', repo: 'git@git.immfly.com:immfly/microservices/inventory/service.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/charon-air', repo: 'git@git.immfly.com:immfly/charon-air.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/musement-api', repo: 'git@git.immfly.com:immfly/musement-api.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/routeros-api', repo: 'git@git.immfly.com:immfly/routeros-api.git' }
   - { dest: '{{ home_dir }}/git/immfly/groundside/grd-vouchers', repo: 'git@git.immfly.com:immfly/microservices/grd-vouchers.git' }
   - { dest: '{{ home_dir }}/git/immfly/libs/lib-python', repo: 'git@git.immfly.com:immfly/microservices/lib-python.git' }
   - { dest: '{{ home_dir }}/git/immfly/libs/sentry-python-lib', repo: 'git@git.immfly.com:immfly/microservices/contrib/sentry.git' }
@@ -98,3 +99,4 @@ immfly_repositories:
   - { dest: '{{ home_dir }}/git/immfly/libs/node-http-lib', repo: 'git@git.immfly.com:immfly/shared/node-http-lib.git' }
   - { dest: '{{ home_dir }}/git/immfly/libs/node-shared-types-lib', repo: 'git@git.immfly.com:immfly/shared/node-shared-types-lib.git' }
   - { dest: '{{ home_dir }}/git/immfly/libs/payment-service-client-python', repo: 'git@git.immfly.com:immfly/microservices/payment-service/client-python.git' }
+  - { dest: '{{ home_dir }}/git/immfly/libs/flight-info-client-python', repo: 'git@git.immfly.com:immfly/microservices/contrib/flightinfo.git' }

@@ -1,0 +1,14 @@
+---
+- name: Create udev rule for keyboard access to HID raw devices
+  copy:
+    dest: /etc/udev/rules.d/50-keyboards.rules
+    content: |
+      SUBSYSTEM=="hidraw", KERNEL=="hidraw*", MODE="0660", TAG+="uaccess"
+    mode: '0644'
+  become: yes
+  register: keyboard_udev_rule
+
+- name: Reload udev rules
+  command: udevadm control --reload-rules
+  become: yes
+  when: keyboard_udev_rule.changed
