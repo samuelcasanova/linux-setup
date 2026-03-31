@@ -2,7 +2,7 @@
 ShowCopyMoveMenu=true
 
 [DetailsMode]
-PreviewSize=64
+PreviewSize=32
 
 [ExtractDialog]
 2 screens: Height=560

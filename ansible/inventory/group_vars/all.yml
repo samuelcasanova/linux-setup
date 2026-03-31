@@ -78,7 +78,7 @@ immfly_repositories:
   - { dest: '{{ home_dir }}/git/immfly/airside/flight-info-service', repo: 'git@git.immfly.com:immfly/flight-info.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/route-service', repo: 'git@git.immfly.com:immfly/microservices/routes/service.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/immfly-notifier-service', repo: 'git@git.immfly.com:immfly/immfly-notifier.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/route-admin-service', repo: 'git@git.immfly.com:immfly/microservices/routes/admin.git' }
+  - { dest: '{{ home_dir }}/git/immfly/groundside/route-admin-service', repo: 'git@git.immfly.com:immfly/microservices/routes/admin.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/flightinfo-adapter', repo: 'git@git.immfly.com:immfly/flightinfo-adapter.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/aircraft', repo: 'git@git.immfly.com:immfly/aircraft.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/inventory-service', repo: 'git@git.immfly.com:immfly/microservices/inventory/service.git' }
