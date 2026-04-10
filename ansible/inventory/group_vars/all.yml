@@ -102,3 +102,4 @@ immfly_repositories:
   - { dest: '{{ home_dir }}/git/immfly/libs/flight-info-client-python', repo: 'git@git.immfly.com:immfly/microservices/contrib/flightinfo.git' }
   - { dest: '{{ home_dir }}/git/immfly/libs/payment-service-packages-python', repo: 'git@git.immfly.com:immfly/microservices/payment-service/packages.git' }
   - { dest: '{{ home_dir }}/git/immfly/groundside/grd-payment-service', repo: 'git@git.immfly.com:immfly/microservices/payment-service/service.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/ecommerce', repo: 'git@git.immfly.com:immfly/retail/ecommerce.git' }
