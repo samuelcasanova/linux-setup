@@ -32,3 +32,14 @@
     executable: /bin/bash
     creates: "~/.nvm/versions/node/{{ item }}"
   loop: "{{ node_versions }}"
+
+- name: Check if Bun is installed
+  stat:
+    path: ~/.bun/bin/bun
+  register: bun_stat
+
+- name: Install Bun
+  shell: curl -fsSL https://bun.com/install | bash
+  args:
+    executable: /bin/bash
+  when: not bun_stat.stat.exists

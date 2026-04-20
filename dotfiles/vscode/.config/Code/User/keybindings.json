@@ -2,36 +2,66 @@
 [
   {
     "key": "ctrl+k s",
-    "command": "workbench.action.files.saveFiles"
+    "command": "workbench.action.files.saveFiles",
   },
   {
     "key": "ctrl+n",
     "command": "explorer.newFile",
-    "when": "explorerViewletFocus"
+    "when": "explorerViewletFocus",
   },
   {
     "key": "ctrl+shift+n",
     "command": "explorer.newFolder",
-    "when": "explorerViewletFocus"
+    "when": "explorerViewletFocus",
   },
   {
     "key": "ctrl+[Semicolon]",
     "command": "editor.action.smartSelect.expand",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus",
   },
   {
     "key": "shift+alt+right",
     "command": "-editor.action.smartSelect.expand",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus",
   },
   {
     "key": "ctrl+shift+[Semicolon]",
     "command": "editor.action.smartSelect.shrink",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus",
   },
   {
     "key": "shift+alt+left",
     "command": "-editor.action.smartSelect.shrink",
-    "when": "editorTextFocus"
-  }
+    "when": "editorTextFocus",
+  },
+  {
+    "key": "ctrl+l",
+    "command": "claude-vscode.blur",
+    "when": "!config.claudeCode.useTerminal && !editorTextFocus",
+  },
+  {
+    "key": "ctrl+escape",
+    "command": "-claude-vscode.blur",
+    "when": "!config.claudeCode.useTerminal && !editorTextFocus",
+  },
+  {
+    "key": "ctrl+l",
+    "command": "claude-vscode.focus",
+    "when": "editorTextFocus && !config.claudeCode.useTerminal",
+  },
+  {
+    "key": "ctrl+escape",
+    "command": "-claude-vscode.focus",
+    "when": "editorTextFocus && !config.claudeCode.useTerminal",
+  },
+  {
+    "key": "ctrl+l",
+    "command": "claude-vscode.terminal.open.keyboard",
+    "when": "config.claudeCode.useTerminal",
+  },
+  {
+    "key": "ctrl+escape",
+    "command": "-claude-vscode.terminal.open.keyboard",
+    "when": "config.claudeCode.useTerminal",
+  },
 ]

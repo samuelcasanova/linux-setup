@@ -130,3 +130,10 @@ if [ -f ~/.bash_functions ]; then
 fi
 
 . "$HOME/.local/bin/env"
+
+# bun completions
+[ -s "/home/samuel/.bun/_bun" ] && source "/home/samuel/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
