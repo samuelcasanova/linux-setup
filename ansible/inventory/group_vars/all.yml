@@ -43,7 +43,7 @@ vscode_extensions:
   - ms-python.python
   - ms-python.flake8
   - ms-python.mypy-type-checker
-
+  - anthropic.claude-code
 
 # Node.js versions to install via NVM
 node_versions:
