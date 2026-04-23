@@ -7,24 +7,24 @@
   "files.autoSave": "onFocusChange",
   "security.workspace.trust.untrustedFiles": "open",
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "always"
-    }
+      "source.fixAll.eslint": "always",
+    },
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "always"
-    }
+      "source.fixAll.eslint": "always",
+    },
   },
   "eslint.format.enable": true,
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
@@ -43,24 +43,24 @@
   "javascript.preferences.importModuleSpecifier": "relative",
   "sonarlint.rules": {
     "typescript:S2004": {
-      "level": "off"
+      "level": "off",
     },
     "secrets:S6698": {
-      "level": "off"
+      "level": "off",
     },
     "kubernetes:S6897": {
-      "level": "off"
+      "level": "off",
     },
     "typescript:S2933": {
-      "level": "on"
-    }
+      "level": "on",
+    },
   },
   "sonarlint.pathToNodeExecutable": "/home/samuel/.nvm/versions/node/v22.13.1/bin/node",
   "sonarlint.connectedMode.connections.sonarcloud": [
     {
       "organizationKey": "aviosgroup",
-      "connectionId": "aviosgroup"
-    }
+      "connectionId": "aviosgroup",
+    },
   ],
   "jest.jestCommandLine": "node_modules/.bin/jest",
   "jest.runMode": "watch",
@@ -87,7 +87,7 @@
     "contributors": false,
     "repositories": false,
     "searchAndCompare": false,
-    "launchpad": false
+    "launchpad": false,
   },
   "diffEditor.maxComputationTime": 0,
   "github.copilot.enable": {
@@ -95,7 +95,7 @@
     "plaintext": false,
     "markdown": false,
     "scminput": false,
-    "typescript": true
+    "typescript": true,
   },
   "github.copilot.nextEditSuggestions.enabled": true,
   "git.replaceTagsWhenPull": true,
@@ -104,8 +104,10 @@
   "gitlens.remotes": [
     {
       "domain": "git.immfly.com",
-      "type": "GitLab"
-    }
+      "type": "GitLab",
+    },
   ],
-  "python.defaultInterpreterPath": "/bin/python3"
+  "python.defaultInterpreterPath": "/bin/python3",
+  "claudeCode.preferredLocation": "panel",
+  "chat.disableAIFeatures": true,
 }
