@@ -105,3 +105,4 @@ immfly_repositories:
   - { dest: '{{ home_dir }}/git/immfly/airside/ecommerce', repo: 'git@git.immfly.com:immfly/retail/ecommerce.git' }
   - { dest: '{{ home_dir }}/git/immfly/groundside/billing-service', repo: 'git@git.immfly.com:immfly/microservices/billing-service/service.git' }
   - { dest: '{{ home_dir }}/git/immfly/groundside/inflight-tui', repo: 'git@git.immfly.com:immfly/inflight-tui.git' }
+  - { dest: '{{ home_dir }}/git/immfly/groundside/payment-service-worker', repo: 'git@git.immfly.com:immfly/microservices/payment-service/worker.git' }
