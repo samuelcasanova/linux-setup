@@ -76,3 +76,12 @@
   command: stow -v -d {{ setup_repo }}/dotfiles/ -t ~ vscode
   register: stow_vscode
   changed_when: "'LINK' in (stow_vscode.stderr | default(''))"
+
+- name: Install rtk CLI
+  shell: curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
+  args:
+    creates: ~/.local/bin/rtk
+
+- name: Activate rtk global hook
+  command: rtk init --global
+  changed_when: false
