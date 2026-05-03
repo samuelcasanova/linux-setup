@@ -23,6 +23,7 @@ find . -type f -name "*.pub" | xargs chmod 600
 find . -type f -name "*.pem" | xargs chmod 600
 cd ~
 mkdir -p git/setups
+cd git/setups
 git clone git@github.com:samuelcasanova/linux-setup.git
 git clone git@github.com:samuelcasanova/linux-setup-private.git
 ```
