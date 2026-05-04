@@ -28,12 +28,15 @@ git clone git@github.com:samuelcasanova/linux-setup.git
 git clone git@github.com:samuelcasanova/linux-setup-private.git
 ```
 
-A continuación instala ansible:
+A continuación instala ansible y configura passwordless sudo para tu usuario:
 
 ```bash
 sudo apt-get update
 sudo apt-get install -y ansible
+echo 'samuel ALL=(ALL) NOPASSWD: ALL' | sudo tee /etc/sudoers.d/samuel
 ```
+
+> Ansible escala privilegios tarea a tarea con `become: yes`. Sin NOPASSWD, el plugin de conexión local no puede pasar la contraseña a `sudo` y falla con timeout.
 
 ### 1. Verifica la configuración de ansible y ejecuta todos los playbooks
 
@@ -42,7 +45,7 @@ Prueba la configuración de ansible y ejecuta todos los playbooks:
 ```bash
 cd ~/git/setups/linux-setup/ansible
 ansible-playbook playbooks/test-connection.yml
-ansible-playbook playbooks/main.yml --ask-become-pass
+ansible-playbook playbooks/main.yml
 ```
 
 Si tienes que repetir un role específico, puedes ejecutarlo directamente con:
@@ -138,10 +141,10 @@ ansible/
 cd ~/git/setups/linux-setup/ansible
 
 # Modo dry-run (no hace cambios)
-ansible-playbook playbooks/step1-core-system.yml --check --diff --ask-become-pass
+ansible-playbook playbooks/step1-core-system.yml --check --diff
 
 # Ejecución real
-ansible-playbook playbooks/step1-core-system.yml --ask-become-pass
+ansible-playbook playbooks/step1-core-system.yml
 
 # Con tags específicos
 ansible-playbook playbooks/main.yml --tags "docker,vscode"
@@ -200,14 +203,12 @@ cd ~/git/setups/linux-setup/ansible
 ansible-playbook -i inventory/local.yml playbooks/test-connection.yml
 ```
 
-### Error de permisos con sudo
+### Error de permisos con sudo / become timeout
+
+Ansible usa `become: yes` por tarea y no puede pasar la contraseña a `sudo` por el plugin de conexión local. La solución es passwordless sudo:
 
 ```bash
-# Verificar que tu usuario está en sudoers
-sudo -v
-
-# Si necesitas password, añade --ask-become-pass
-ansible-playbook playbooks/main.yml --ask-become-pass
+echo 'samuel ALL=(ALL) NOPASSWD: ALL' | sudo tee /etc/sudoers.d/samuel
 ```
 
 ### Docker no encuentra el volumen
