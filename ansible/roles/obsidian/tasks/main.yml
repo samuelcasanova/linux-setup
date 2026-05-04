@@ -24,12 +24,12 @@
 
 - name: Ensure git directory exists
   file:
-    path: "~/git"
+    path: "{{ home_dir }}/git"
     state: directory
 
 - name: Clone secondbrain repository
   git:
     repo: "git@github.com:samuelcasanova/secondbrain.git"
-    dest: "~/git/secondbrain"
+    dest: "{{ home_dir }}/git/secondbrain"
     accept_hostkey: yes
-    key_file: "~/.ssh/id_ed25519"
+    key_file: "{{ home_dir }}/.ssh/id_ed25519"

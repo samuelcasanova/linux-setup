@@ -12,8 +12,8 @@
   stat:
     path: "{{ item }}"
   loop:
-    - ~/.config/keepassxc
-    - ~/.config/KeePassXCrc
+    - "{{ home_dir }}/.config/keepassxc"
+    - "{{ home_dir }}/.config/KeePassXCrc"
   register: keepass_stats
 
 - name: Backup existing KeePassXC configuration
@@ -25,6 +25,6 @@
   failed_when: false
 
 - name: Deploy KeePassXC dotfiles
-  command: stow -v -d {{ setup_repo }}/dotfiles/ -t ~ keepass
+  command: stow -v -d {{ setup_repo }}/dotfiles/ -t {{ home_dir }} keepass
   register: stow_keepass
   changed_when: "'LINK' in (stow_keepass.stderr | default(''))"

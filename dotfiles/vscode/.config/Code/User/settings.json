@@ -110,4 +110,5 @@
   "python.defaultInterpreterPath": "/bin/python3",
   "claudeCode.preferredLocation": "panel",
   "chat.disableAIFeatures": true,
+  "flake8.cwd": "${workspaceFolder}/app",
 }

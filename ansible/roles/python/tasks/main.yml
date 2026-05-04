@@ -1,7 +1,7 @@
 ---
 - name: Check if uv is installed
   stat:
-    path: ~/.local/bin/uv
+    path: "{{ home_dir }}/.local/bin/uv"
   register: uv_stat
 
 - name: Install uv
@@ -9,7 +9,7 @@
   when: not uv_stat.stat.exists
 
 - name: Verify uv installation
-  command: ~/.local/bin/uv --version
+  command: "{{ home_dir }}/.local/bin/uv --version"
   register: uv_verify
   changed_when: false
 

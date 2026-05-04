@@ -11,7 +11,7 @@
 
 - name: Check if oh-my-zsh is already installed
   stat:
-    path: ~/.oh-my-zsh
+    path: "{{ home_dir }}/.oh-my-zsh"
   register: ohmyzsh_installed
 
 - name: Install oh-my-zsh
@@ -21,29 +21,29 @@
 - name: Clone zsh-syntax-highlighting plugin
   git:
     repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-    dest: ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
+    dest: "{{ home_dir }}/.oh-my-zsh/plugins/zsh-syntax-highlighting"
     update: no
 
 - name: Clone zsh-autosuggestions plugin
   git:
     repo: https://github.com/zsh-users/zsh-autosuggestions.git
-    dest: ~/.oh-my-zsh/plugins/zsh-autosuggestions
+    dest: "{{ home_dir }}/.oh-my-zsh/plugins/zsh-autosuggestions"
     update: no
 
 - name: Check if .zshrc is a real file
   stat:
-    path: ~/.zshrc
+    path: "{{ home_dir }}/.zshrc"
   register: zshrc_stat
 
 - name: Backup existing zsh configuration
-  command: mv ~/.zshrc /tmp/
+  command: mv {{ home_dir }}/.zshrc /tmp/
   args:
-    removes: ~/.zshrc
+    removes: "{{ home_dir }}/.zshrc"
   when: zshrc_stat.stat.exists and not zshrc_stat.stat.islnk
   failed_when: false
 
 - name: Deploy zsh dotfiles
-  command: stow -v -d {{ setup_repo }}/dotfiles/ -t ~ zsh
+  command: stow -v -d {{ setup_repo }}/dotfiles/ -t {{ home_dir }} zsh
   register: stow_zsh
   changed_when: "'LINK' in stow_zsh.stderr"
 
@@ -61,7 +61,7 @@
     state: directory
     mode: '0755'
   become: yes
-  
+
 - name: Add eza GPG key
   shell: curl -fsSL https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
   args:

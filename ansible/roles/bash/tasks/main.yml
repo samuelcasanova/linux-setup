@@ -7,8 +7,8 @@
   stat:
     path: "{{ item }}"
   loop:
-    - ~/.bashrc
-    - ~/.bash_env_vars
+    - "{{ home_dir }}/.bashrc"
+    - "{{ home_dir }}/.bash_env_vars"
   register: bash_stats
 
 - name: Backup existing bash configuration
@@ -20,7 +20,7 @@
   failed_when: false
 
 - name: Deploy bash dotfiles from public repo
-  command: stow -v -d {{ setup_repo }}/dotfiles/ -t ~ bash
+  command: stow -v -d {{ setup_repo }}/dotfiles/ -t {{ home_dir }} bash
   register: stow_bash_public
   changed_when: "'LINK' in stow_bash_public.stderr"
 
@@ -30,7 +30,7 @@
   register: private_bash_dir
 
 - name: Deploy bash dotfiles from private repo
-  command: stow -v -d {{ setup_repo_private }}/dotfiles/ -t ~ bash
+  command: stow -v -d {{ setup_repo_private }}/dotfiles/ -t {{ home_dir }} bash
   register: stow_bash_private
   changed_when: "'LINK' in stow_bash_private.stderr"
   when: setup_repo_private is defined and private_bash_dir.stat.exists

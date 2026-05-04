@@ -5,13 +5,13 @@
 
 - name: Check if .ssh is a real directory
   stat:
-    path: ~/.ssh
+    path: "{{ home_dir }}/.ssh"
   register: ssh_dir_stat
 
 - name: Backup existing SSH directory
-  command: mv ~/.ssh /tmp/
+  command: mv {{ home_dir }}/.ssh /tmp/
   args:
-    removes: ~/.ssh
+    removes: "{{ home_dir }}/.ssh"
   when: ssh_dir_stat.stat.exists and not ssh_dir_stat.stat.islnk
   failed_when: false
 
@@ -21,7 +21,7 @@
   register: private_ssh_dir
 
 - name: Deploy SSH dotfiles from private repo
-  command: stow -v -d {{ setup_repo_private }}/dotfiles/ -t ~ ssh
+  command: stow -v -d {{ setup_repo_private }}/dotfiles/ -t {{ home_dir }} ssh
   args:
     chdir: "{{ setup_repo_private }}/dotfiles"
   register: stow_ssh

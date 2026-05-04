@@ -4,7 +4,7 @@
 
 - name: Check if NVM is installed
   stat:
-    path: ~/.nvm/nvm.sh
+    path: "{{ home_dir }}/.nvm/nvm.sh"
   register: nvm_stat
 
 - name: Get latest NVM version from GitHub
@@ -25,17 +25,17 @@
 
 - name: Install Node.js versions
   shell: |
-    export NVM_DIR="$HOME/.nvm"
+    export NVM_DIR="{{ home_dir }}/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     nvm install {{ item }}
   args:
     executable: /bin/bash
-    creates: "~/.nvm/versions/node/{{ item }}"
+    creates: "{{ home_dir }}/.nvm/versions/node/{{ item }}"
   loop: "{{ node_versions }}"
 
 - name: Check if Bun is installed
   stat:
-    path: ~/.bun/bin/bun
+    path: "{{ home_dir }}/.bun/bin/bun"
   register: bun_stat
 
 - name: Install Bun

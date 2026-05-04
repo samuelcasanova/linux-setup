@@ -10,7 +10,7 @@
 
 - name: Check if KDE configuration files are real files
   stat:
-    path: "~/.config/{{ item }}"
+    path: "{{ home_dir }}/.config/{{ item }}"
   loop:
     - discoverrc
     - dolphinrc
@@ -29,9 +29,9 @@
   register: kde_file_stats
 
 - name: Backup existing KDE configuration files
-  command: mv ~/.config/{{ item.item }} /tmp/kde/.config/
+  command: mv {{ home_dir }}/.config/{{ item.item }} /tmp/kde/.config/
   args:
-    removes: "~/.config/{{ item.item }}"
+    removes: "{{ home_dir }}/.config/{{ item.item }}"
   loop: "{{ kde_file_stats.results }}"
   when: item.stat.exists and not item.stat.islnk
   failed_when: false
@@ -40,8 +40,8 @@
   stat:
     path: "{{ item }}"
   loop:
-    - ~/.config/xsettingsd
-    - ~/.local/share/konsole
+    - "{{ home_dir }}/.config/xsettingsd"
+    - "{{ home_dir }}/.local/share/konsole"
   register: kde_dir_stats
 
 - name: Backup existing KDE configuration directories
@@ -53,7 +53,7 @@
   failed_when: false
 
 - name: Deploy KDE dotfiles
-  command: stow -v -d {{ setup_repo }}/dotfiles/ -t ~ kde
+  command: stow -v -d {{ setup_repo }}/dotfiles/ -t {{ home_dir }} kde
   args:
     chdir: "{{ setup_repo }}/dotfiles"
   register: stow_kde
