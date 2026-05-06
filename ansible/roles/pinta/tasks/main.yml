@@ -9,18 +9,25 @@
     state: absent
   become: yes
 
-- name: Add xtradeb PPA
-  apt_repository:
-    repo: 'ppa:xtradeb/apps'
-    state: present
-    filename: xtradeb-apps
+- name: Create directory for apt keyrings
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
   become: yes
 
-- name: Fix xtradeb PPA SSL certificate error by using http
-  replace:
-    path: /etc/apt/sources.list.d/xtradeb-apps.list
-    regexp: 'https://ppa.launchpad.net'
-    replace: 'http://ppa.launchpad.net'
+- name: Download xtradeb PPA key
+  shell: |
+    curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x5301FA4FD93244FBC6F6149982BB6851C64F6880" | gpg --dearmor -o /etc/apt/keyrings/xtradeb-apps.gpg
+  args:
+    creates: /etc/apt/keyrings/xtradeb-apps.gpg
+  become: yes
+
+- name: Add xtradeb PPA
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/xtradeb-apps.gpg] https://ppa.launchpadcontent.net/xtradeb/apps/ubuntu {{ ansible_distribution_release }} main"
+    state: present
+    filename: xtradeb-apps
   become: yes
 
 - name: Update apt cache and install libadwaita-1-0 and Pinta
