@@ -83,5 +83,5 @@
     creates: "{{ home_dir }}/.local/bin/rtk"
 
 - name: Activate rtk global hook
-  command: rtk init --global
+  command: "{{ home_dir }}/.local/bin/rtk init --global"
   changed_when: false
