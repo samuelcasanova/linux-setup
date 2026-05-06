@@ -2,10 +2,25 @@
 # Description: SafeEyes configuration and dotfiles
 # Migrated from: install-software-scripts/80-safeeyes.sh (config part)
 
+- name: Create directory for apt keyrings
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Download SafeEyes PPA key
+  shell: |
+    curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3CA9236CC08B02848B45F40D8BF5CC8A8802F482" | gpg --dearmor -o /etc/apt/keyrings/safeeyes.gpg
+  args:
+    creates: /etc/apt/keyrings/safeeyes.gpg
+  become: yes
+
 - name: Add SafeEyes PPA
   apt_repository:
-    repo: ppa:safeeyes-team/safeeyes
+    repo: "deb [signed-by=/etc/apt/keyrings/safeeyes.gpg] https://ppa.launchpadcontent.net/safeeyes-team/safeeyes/ubuntu {{ ansible_distribution_release }} main"
     state: present
+    filename: safeeyes
   become: yes
 
 - name: Install SafeEyes
