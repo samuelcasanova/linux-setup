@@ -3,10 +3,25 @@
 # Description: OBS Studio installation
 # Migrated from: install-software-scripts/92-obs-studio.sh
 
+- name: Create directory for apt keyrings
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Download OBS Studio PPA key
+  shell: |
+    curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xBC7345F522079769F5BBE987EFC71127F425E228" | gpg --dearmor -o /etc/apt/keyrings/obs-studio.gpg
+  args:
+    creates: /etc/apt/keyrings/obs-studio.gpg
+  become: yes
+
 - name: Add OBS Studio PPA
   apt_repository:
-    repo: ppa:obsproject/obs-studio
+    repo: "deb [signed-by=/etc/apt/keyrings/obs-studio.gpg] https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu {{ ansible_distribution_release }} main"
     state: present
+    filename: obs-studio
   become: yes
 
 - name: Install OBS Studio
