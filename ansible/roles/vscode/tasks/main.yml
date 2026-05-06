@@ -82,6 +82,12 @@
   args:
     creates: "{{ home_dir }}/.local/bin/rtk"
 
+- name: Ensure .claude directory exists
+  file:
+    path: "{{ home_dir }}/.claude"
+    state: directory
+    mode: "0755"
+
 - name: Activate rtk global hook
   command: "{{ home_dir }}/.local/bin/rtk init --global"
   changed_when: false
