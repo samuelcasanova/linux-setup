@@ -4,7 +4,7 @@ Este directorio contiene la configuración de Ansible para automatizar la instal
 
 ### Instalar en Kubuntu desde cero
 
-Cuando arranque el menú de instalación, elegir la opción "Instalación mínima". Esto instalará automáticamente Git. Cuando termine el asistente y reinicie el sistema, actualiza todos los paquetes pendientes. Cuando termine, abre "Web Browser" y navega a este repositorio público en github.com para ir copiando y pegando los comandos.
+Cuando arranque el menú de instalación, elegir la opción "Instalación mínima". Esto instalará automáticamente Git. Cuando termine el asistente y reinicie el sistema, actualiza todos los paquetes pendientes.
 
 A continuación, abre Konsole, y ejecuta los siguientes comandos:
 
