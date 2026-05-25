@@ -34,6 +34,7 @@
     mode: '0600'
   loop:
     - linux*
+    - immfly*
     - id*
   when: setup_repo_private is defined and private_ssh_dir.stat.exists
   become: no
