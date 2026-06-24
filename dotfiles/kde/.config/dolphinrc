@@ -21,8 +21,8 @@ Recent URLs[$e]=file:///tmp/
 detailViewIconSize=16
 
 [KPropertiesDialog]
-2 screens: Height=464
-2 screens: Width=428
+2 screens: Height=616
+2 screens: Width=438
 
 [MainWindow]
 MenuBar=Disabled

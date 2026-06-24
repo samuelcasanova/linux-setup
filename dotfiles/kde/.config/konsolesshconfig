@@ -131,6 +131,16 @@ sshkey=~/.ssh/immfly_servers_id_rsa
 useSshConfig=true
 username=root
 
+[SSH Config][if007]
+hostname=if007
+identifier=if007
+importedFromSshConfig=true
+port=32765
+profileName=Samuel
+sshkey=~/.ssh/immfly_servers_id_rsa
+useSshConfig=true
+username=root
+
 [SSH Config][if009]
 hostname=if009
 identifier=if009
