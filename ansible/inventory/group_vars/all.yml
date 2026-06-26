@@ -78,14 +78,19 @@ immfly_repositories:
   - { dest: '{{ home_dir }}/git/immfly/airside/flight-info-service', repo: 'git@git.immfly.com:immfly/flight-info.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/route-service', repo: 'git@git.immfly.com:immfly/microservices/routes/service.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/immfly-notifier-service', repo: 'git@git.immfly.com:immfly/immfly-notifier.git' }
-  - { dest: '{{ home_dir }}/git/immfly/groundside/route-admin-service', repo: 'git@git.immfly.com:immfly/microservices/routes/admin.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/flightinfo-adapter', repo: 'git@git.immfly.com:immfly/flightinfo-adapter.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/aircraft', repo: 'git@git.immfly.com:immfly/aircraft.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/inventory-service', repo: 'git@git.immfly.com:immfly/microservices/inventory/service.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/charon-air', repo: 'git@git.immfly.com:immfly/charon-air.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/musement-api', repo: 'git@git.immfly.com:immfly/musement-api.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/routeros-api', repo: 'git@git.immfly.com:immfly/routeros-api.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/payment-service', repo: 'git@git.immfly.com:immfly/microservices/payment-service/service.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/ecommerce', repo: 'git@git.immfly.com:immfly/retail/ecommerce.git' }
   - { dest: '{{ home_dir }}/git/immfly/groundside/grd-vouchers', repo: 'git@git.immfly.com:immfly/microservices/grd-vouchers.git' }
+  - { dest: '{{ home_dir }}/git/immfly/groundside/inventory-service', repo: 'git@git.immfly.com:immfly/microservices/inventory/service.git' }
+  - { dest: '{{ home_dir }}/git/immfly/groundside/billing-service', repo: 'git@git.immfly.com:immfly/microservices/billing-service/service.git' }
+  - { dest: '{{ home_dir }}/git/immfly/groundside/inflight-tui', repo: 'git@git.immfly.com:immfly/inflight-tui.git' }
+  - { dest: '{{ home_dir }}/git/immfly/groundside/payment-service-worker', repo: 'git@git.immfly.com:immfly/microservices/payment-service/worker.git' }
+  - { dest: '{{ home_dir }}/git/immfly/groundside/route-admin-service', repo: 'git@git.immfly.com:immfly/microservices/routes/admin.git' }
   - { dest: '{{ home_dir }}/git/immfly/libs/lib-python', repo: 'git@git.immfly.com:immfly/microservices/lib-python.git' }
   - { dest: '{{ home_dir }}/git/immfly/libs/sentry-python-lib', repo: 'git@git.immfly.com:immfly/microservices/contrib/sentry.git' }
   - { dest: '{{ home_dir }}/git/immfly/libs/devops-resources', repo: 'git@git.immfly.com:immfly/shared/devops-resources.git' }
@@ -101,8 +106,3 @@ immfly_repositories:
   - { dest: '{{ home_dir }}/git/immfly/libs/payment-service-client-python', repo: 'git@git.immfly.com:immfly/microservices/payment-service/client-python.git' }
   - { dest: '{{ home_dir }}/git/immfly/libs/flight-info-client-python', repo: 'git@git.immfly.com:immfly/microservices/contrib/flightinfo.git' }
   - { dest: '{{ home_dir }}/git/immfly/libs/payment-service-packages-python', repo: 'git@git.immfly.com:immfly/microservices/payment-service/packages.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/payment-service', repo: 'git@git.immfly.com:immfly/microservices/payment-service/service.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/ecommerce', repo: 'git@git.immfly.com:immfly/retail/ecommerce.git' }
-  - { dest: '{{ home_dir }}/git/immfly/groundside/billing-service', repo: 'git@git.immfly.com:immfly/microservices/billing-service/service.git' }
-  - { dest: '{{ home_dir }}/git/immfly/groundside/inflight-tui', repo: 'git@git.immfly.com:immfly/inflight-tui.git' }
-  - { dest: '{{ home_dir }}/git/immfly/groundside/payment-service-worker', repo: 'git@git.immfly.com:immfly/microservices/payment-service/worker.git' }

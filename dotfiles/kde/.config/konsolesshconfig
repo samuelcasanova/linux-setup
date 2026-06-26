@@ -121,6 +121,16 @@ sshkey=~/.ssh/hangar
 useSshConfig=true
 username=immfly
 
+[SSH Config][homeserver]
+hostname=homeserver
+identifier=homeserver
+importedFromSshConfig=true
+port=
+profileName=
+sshkey=~/.ssh/personal/immfly_servers_id_rsa
+useSshConfig=true
+username=samuel
+
 [SSH Config][if001]
 hostname=if001
 identifier=if001
