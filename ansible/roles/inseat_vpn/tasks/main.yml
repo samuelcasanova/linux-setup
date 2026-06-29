@@ -1,0 +1,55 @@
+---
+- name: Install dependencies for OpenVPN 3
+  apt:
+    name:
+      - apt-transport-https
+      - curl
+    state: present
+  become: yes
+
+- name: Ensure keyrings directory exists
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+  become: yes
+
+- name: Add OpenVPN 3 repository key
+  get_url:
+    url: https://packages.openvpn.net/packages-repo.gpg
+    dest: /etc/apt/keyrings/openvpn.asc
+    mode: '0644'
+  become: yes
+
+- name: Add OpenVPN 3 repository
+  copy:
+    content: "deb [arch=amd64 signed-by=/etc/apt/keyrings/openvpn.asc] https://packages.openvpn.net/openvpn3/debian {{ ansible_distribution_release }} main\n"
+    dest: /etc/apt/sources.list.d/openvpn-packages.list
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Install OpenVPN 3
+  apt:
+    name: openvpn3
+    state: present
+    update_cache: yes
+  become: yes
+  when: not ansible_check_mode
+
+- name: Deploy inseat VPN switcher scripts
+  become: yes
+  when: not ansible_check_mode
+  block:
+    - name: Deploy enable-inseat-vpn script
+      template:
+        src: enable-inseat-vpn.sh.j2
+        dest: /usr/local/bin/enable-inseat-vpn
+        mode: '0755'
+
+    - name: Deploy disable-inseat-vpn script
+      template:
+        src: disable-inseat-vpn.sh.j2
+        dest: /usr/local/bin/disable-inseat-vpn
+        mode: '0755'

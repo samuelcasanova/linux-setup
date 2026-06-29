@@ -45,3 +45,12 @@
     name: "{{ networking_tools }}"
     state: present
   become: yes
+
+- name: Configure passwordless sudo for setup user
+  lineinfile:
+    path: /etc/sudoers.d/{{ setup_user }}-nopasswd
+    line: "{{ setup_user }} ALL=(ALL) NOPASSWD: ALL"
+    create: yes
+    mode: '0440'
+    validate: 'visudo -cf %s'
+  become: yes

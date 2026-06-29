@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+echo "Disconnecting inseat VPN..."
+openvpn3 session-manage --config {{ setup_repo_private }}/immfly-inseat/vpn/inseat-open-vpn-config.ovpn --disconnect
+
+echo "Starting wifec VPN..."
+sudo systemctl start wifecvpn
+
+echo "Connected to wifec VPN."
