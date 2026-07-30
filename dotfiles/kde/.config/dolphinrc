@@ -1,15 +1,24 @@
+MenuBar=Disabled
+
+[ContentDisplay]
+DirectorySizeCount=false
+
 [ContextMenu]
 ShowCopyMoveMenu=true
 
 [DetailsMode]
-PreviewSize=32
+PreviewSize=80
 
 [ExtractDialog]
 2 screens: Height=560
 2 screens: Width=1605
 DirHistory[$e]=/tmp/
 
+[FoldersPanel]
+HiddenFilesShown=true
+
 [General]
+ShowFullPathInTitlebar=true
 Version=202
 ViewPropsTimestamp=2024,7,31,19,16,50.511
 
@@ -22,7 +31,7 @@ detailViewIconSize=16
 
 [KPropertiesDialog]
 2 screens: Height=616
-2 screens: Width=438
+2 screens: Width=440
 
 [MainWindow]
 MenuBar=Disabled
@@ -30,3 +39,6 @@ ToolBarsMovable=Disabled
 
 [PreviewSettings]
 Plugins=appimagethumbnail,audiothumbnail,blenderthumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,mobithumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs
+
+[VersionControl]
+enabledPlugins=Git

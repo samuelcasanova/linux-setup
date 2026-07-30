@@ -1,0 +1,23 @@
+---
+# Role: cryptomator
+# Description: Cryptomator installation
+
+- name: Get latest Cryptomator version from GitHub
+  uri:
+    url: https://api.github.com/repos/cryptomator/cryptomator/releases/latest
+    return_content: yes
+  register: cryptomator_latest
+
+- name: Find deb installer URL
+  set_fact:
+    cryptomator_deb_url: "{{ cryptomator_latest.json.assets | selectattr('name', 'search', 'amd64.deb$') | map(attribute='browser_download_url') | first }}"
+
+- name: Download Cryptomator deb
+  get_url:
+    url: "{{ cryptomator_deb_url }}"
+    dest: "/tmp/cryptomator.deb"
+
+- name: Install Cryptomator
+  apt:
+    deb: "/tmp/cryptomator.deb"
+  become: yes
