@@ -16,4 +16,4 @@
     - git
     - ssh
     - keepass
-    - rclone
+    - smb_mount

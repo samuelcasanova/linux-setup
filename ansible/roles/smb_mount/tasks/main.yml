@@ -1,0 +1,81 @@
+---
+# Role: smb_mount
+# Description: Persist SMB/CIFS network shares via /etc/fstab, mounted lazily
+#              via systemd automount so boot never blocks on the network.
+# Credentials for each entry in smb_mounts must exist at
+#   {{ setup_repo_private }}/smb/creds/<name>
+# with contents:
+#   username=youruser
+#   password=yourpassword
+#   domain=WORKGROUP
+
+- name: Install cifs-utils
+  apt:
+    name: cifs-utils
+    state: present
+  become: yes
+
+- name: Ensure Samba credentials directory exists
+  file:
+    path: /etc/samba/creds
+    state: directory
+    mode: '0700'
+    owner: root
+    group: root
+  become: yes
+
+- name: Check for private credentials file for each SMB share
+  stat:
+    path: "{{ setup_repo_private }}/smb/creds/{{ item.name }}"
+  register: smb_creds_stat
+  loop: "{{ smb_mounts }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Deploy SMB credentials files from private repo
+  copy:
+    src: "{{ setup_repo_private }}/smb/creds/{{ item.item.name }}"
+    dest: "/etc/samba/creds/{{ item.item.name }}"
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0600'
+  become: yes
+  loop: "{{ smb_creds_stat.results }}"
+  loop_control:
+    label: "{{ item.item.name }}"
+  when: item.stat.exists
+
+- name: Warn about missing SMB credentials files
+  debug:
+    msg: >-
+      No credentials file found at
+      {{ setup_repo_private }}/smb/creds/{{ item.item.name }} -
+      create it (username=..., password=..., domain=WORKGROUP) then re-run this role.
+  loop: "{{ smb_creds_stat.results }}"
+  loop_control:
+    label: "{{ item.item.name }}"
+  when: not item.stat.exists
+
+- name: Ensure SMB mount points exist
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: '0755'
+  become: yes
+  loop: "{{ smb_mounts }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Add persistent fstab entries for SMB shares (lazy systemd automount)
+  ansible.posix.mount:
+    path: "{{ item.path }}"
+    src: "{{ item.src }}"
+    fstype: cifs
+    opts: "credentials=/etc/samba/creds/{{ item.name }},uid={{ item.uid | default(smb_mount_default_uid) }},gid={{ item.gid | default(smb_mount_default_gid) }},iocharset=utf8,vers={{ item.vers | default('3.0') }},_netdev,x-systemd.automount,x-systemd.mount-timeout=10,noauto"
+    state: present
+  become: yes
+  loop: "{{ smb_mounts }}"
+  loop_control:
+    label: "{{ item.name }}"
+  notify: Reload systemd daemon

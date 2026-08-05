@@ -1,0 +1,7 @@
+---
+# Handlers for smb_mount role
+
+- name: Reload systemd daemon
+  systemd:
+    daemon_reload: yes
+  become: yes

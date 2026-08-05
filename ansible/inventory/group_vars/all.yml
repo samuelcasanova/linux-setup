@@ -9,6 +9,19 @@ setup_repo_private: "{{ home_dir }}/git/setups/linux-setup-private"
 dotfiles_dir: "{{ setup_repo }}/dotfiles"
 configure_grub_windows_first: true
 
+# SMB/CIFS network shares, persisted via /etc/fstab + systemd automount
+# (see roles/smb_mount). Credentials for each entry must exist at
+# {{ setup_repo_private }}/smb/creds/<name> with contents:
+#   username=youruser
+#   password=yourpassword
+#   domain=WORKGROUP
+smb_mount_default_uid: 1000
+smb_mount_default_gid: 1000
+smb_mounts:
+  - name: samuel
+    src: "//192.168.1.2/Samuel"
+    path: /mnt/smb
+
 # Basic system packages
 basic_packages:
   - tree

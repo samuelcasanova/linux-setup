@@ -12,7 +12,7 @@ PreviewSize=80
 [ExtractDialog]
 2 screens: Height=560
 2 screens: Width=1605
-DirHistory[$e]=/tmp/
+DirHistory[$e]=/tmp/onedrive/,/tmp/
 
 [FoldersPanel]
 HiddenFilesShown=true
@@ -25,8 +25,8 @@ ViewPropsTimestamp=2024,7,31,19,16,50.511
 [KFileDialog Settings]
 Places Icons Auto-resize=false
 Places Icons Static Size=22
-Recent Files[$e]=file:$HOME,file:$HOME
-Recent URLs[$e]=file:///tmp/
+Recent Files[$e]=file:$HOME
+Recent URLs[$e]=file:///tmp/,file:$HOME/,file:///tmp/onedrive/
 detailViewIconSize=16
 
 [KPropertiesDialog]
