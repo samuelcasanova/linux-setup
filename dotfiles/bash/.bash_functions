@@ -12,19 +12,6 @@ tests_viasat() {
     npm run test:integration
 }
 
-vpn_restart() {
-    sudo ~/git/setups/linux-setup/install-software-scripts/support-files/setvpn.sh down
-    sudo ~/git/setups/linux-setup/install-software-scripts/support-files/setvpn.sh up
-}
-
-vpn_start() {
-    sudo ~/git/setups/linux-setup/install-software-scripts/support-files/setvpn.sh up
-}
-
-vpn_stop() {
-    sudo ~/git/setups/linux-setup/install-software-scripts/support-files/setvpn.sh down
-}
-
 progress() {
     echo -ne 'Progress: #......... 10%\r\c'
     sleep 1

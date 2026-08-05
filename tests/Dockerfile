@@ -29,7 +29,7 @@ RUN useradd -m -s /bin/bash samuel && \
 # Create directory structure matching real system
 RUN mkdir -p /home/samuel/git/setups
 
-# Copy the initialization script from ansible directory
+# Copy the initialization script from the repo root
 COPY --chown=samuel:samuel init.sh /tmp/init.sh
 RUN chmod +x /tmp/init.sh
 

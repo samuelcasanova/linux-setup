@@ -47,7 +47,7 @@ if [ "$INTERACTIVE" = true ]; then
     ansible --version | head -n 1
     echo ""
     echo "Next steps:"
-    echo "  cd ~/git/setups/linux-setup/ansible"
+    echo "  cd ~/git/setups/linux-setup"
     echo "  ansible-playbook playbooks/main.yml"
     echo ""
 fi

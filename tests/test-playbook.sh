@@ -17,25 +17,25 @@ fi
 
 # Get the directory where this script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-ANSIBLE_DIR="$(dirname "$SCRIPT_DIR")"
-REPO_ROOT="$(dirname "$ANSIBLE_DIR")"
+REPO_ROOT="$(dirname "$SCRIPT_DIR")"
+PRIVATE_REPO="$(dirname "$REPO_ROOT")/linux-setup-private"
 
 echo "================================================"
 echo "Testing playbook: $PLAYBOOK"
 echo "================================================"
 
-# Build the test image (use ansible/ as context to access install-ansible.sh)
+# Build the test image (use the repo root as context to access init.sh)
 echo "Building test Docker image..."
-rsync -a ../../linux-setup-private ./files
-docker build -t kubuntu-ansible-test -f "$SCRIPT_DIR/Dockerfile" "$ANSIBLE_DIR"
-rm -rf ./files/linux-setup-private
+rsync -a "$PRIVATE_REPO" "$SCRIPT_DIR/files/"
+docker build -t kubuntu-ansible-test -f "$SCRIPT_DIR/Dockerfile" "$REPO_ROOT"
+rm -rf "$SCRIPT_DIR/files/linux-setup-private"
 
 # Run the playbook in the container
 echo ""
 echo "Running playbook in container..."
 docker run --rm \
     -v "$REPO_ROOT:/home/samuel/git/setups/linux-setup:ro" \
-    -w /home/samuel/git/setups/linux-setup/ansible \
+    -w /home/samuel/git/setups/linux-setup \
     kubuntu-ansible-test \
     ansible-playbook "playbooks/$PLAYBOOK" "$@"
 
