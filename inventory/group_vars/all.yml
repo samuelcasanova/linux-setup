@@ -9,6 +9,14 @@ setup_repo_private: "{{ home_dir }}/git/setups/linux-setup-private"
 dotfiles_dir: "{{ setup_repo }}/dotfiles"
 configure_grub_windows_first: true
 
+# Home LAN connection — the corporate VPN (roles/wifec_vpn) claims itself as the DNS resolver
+# for every domain once connected, so this connection needs an explicit per-domain override to
+# keep the home network's own hostnames (AdGuard rewrites, homeserver repo) resolving via the
+# LAN's own resolver instead of the VPN's, without touching the VPN's own DNS behavior at all.
+wifec_vpn_lan_connection: "Wired connection 1"
+wifec_vpn_lan_ifname: "enp0s31f6"
+wifec_vpn_lan_dns_override_domain: "casanovacatalan.duckdns.org"
+
 # SMB/CIFS network shares, persisted via /etc/fstab + systemd automount
 # (see roles/smb_mount). Credentials for each entry must exist at
 # {{ setup_repo_private }}/smb/creds/<name> with contents:
