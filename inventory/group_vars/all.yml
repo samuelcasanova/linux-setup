@@ -17,6 +17,15 @@ wifec_vpn_lan_connection: "Wired connection 1"
 wifec_vpn_lan_ifname: "enp0s31f6"
 wifec_vpn_lan_dns_override_domain: "casanovacatalan.duckdns.org"
 
+# Location-aware VPN switching (roles/home_wireguard) — home LAN, office WiFi, and "elsewhere"
+# each need a different combination of the corporate OpenVPN (wifec) and a personal WireGuard
+# VPN back to the home network active. See roles/home_wireguard/templates/vpn-location-toggle.sh.j2
+# for the actual state logic; these are just the identifiers it keys off.
+office_wifi_ssid: "IMMFLY GROUP"
+wifi_ifname: "wlp0s20f3"
+home_wireguard_conn_name: "HomeWireGuard"
+home_wireguard_client_config_path: "{{ setup_repo_private }}/home-wireguard/laptop.conf"
+
 # SMB/CIFS network shares, persisted via /etc/fstab + systemd automount
 # (see roles/smb_mount). Credentials for each entry must exist at
 # {{ setup_repo_private }}/smb/creds/<name> with contents:
@@ -62,7 +71,6 @@ vscode_extensions:
   - pkief.material-icon-theme
   - usernamehw.errorlens
   - ms-python.python
-  - ms-python.flake8
   - ms-python.mypy-type-checker
   - anthropic.claude-code
 
@@ -107,6 +115,7 @@ immfly_repositories:
   - { dest: '{{ home_dir }}/git/immfly/airside/payment-service', repo: 'git@git.immfly.com:immfly/microservices/payment-service/service.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/ecommerce', repo: 'git@git.immfly.com:immfly/retail/ecommerce.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/cabincast-api', repo: 'git@git.immfly.com:immfly/microservices/cabincast-api.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/avionics-controller', repo: 'git@git.immfly.com:infra/avionics-controller.git' }
   - { dest: '{{ home_dir }}/git/immfly/groundside/grd-vouchers', repo: 'git@git.immfly.com:immfly/microservices/grd-vouchers.git' }
   - { dest: '{{ home_dir }}/git/immfly/groundside/inventory-service', repo: 'git@git.immfly.com:immfly/microservices/inventory/service.git' }
   - { dest: '{{ home_dir }}/git/immfly/groundside/billing-service', repo: 'git@git.immfly.com:immfly/microservices/billing-service/service.git' }

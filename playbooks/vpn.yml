@@ -6,3 +6,4 @@
   roles:
     - wifec_vpn
     - inseat_vpn
+    - home_wireguard

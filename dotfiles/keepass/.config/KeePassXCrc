@@ -3,6 +3,6 @@
 2 screens: Width=982
 
 [KFileDialog Settings]
-Recent Files[$e]=KeePassPasswords.kdbx,file:///mnt/smb/Documents/KeePassPasswords.kdbx
-Recent URLs[$e]=file:$HOME/onedrive/,file:$HOME/,file:///mnt/smb/Documents/
+Recent Files[$e]=KeePassPasswords.kdbx,file:///tmp/keepass.csv,file:///mnt/smb/Documents/KeePassPasswords.kdbx
+Recent URLs[$e]=file:$HOME/onedrive/,file:$HOME/,file:///mnt/smb/Documents/,file:///tmp/
 detailViewIconSize=16

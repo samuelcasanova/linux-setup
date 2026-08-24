@@ -1,0 +1,93 @@
+---
+# Imports a wg-easy-generated client config (created manually via the WireGuard admin UI —
+# see the README note in group_vars/all.yml) into NetworkManager, then sets it up to be
+# controlled entirely by the location-aware dispatcher script (templates/vpn-location-toggle.sh.j2)
+# rather than NetworkManager's own autoconnect.
+
+- name: Install wireguard-tools
+  # NetworkManager (>=1.16) has native WireGuard support, but `nmcli connection import type
+  # wireguard` and the wg CLI (used for debugging — `wg show`) both need this package present.
+  # Was already installed on this machine before this role existed, origin unclear (possibly a
+  # NetworkManager dependency, possibly manual) — making it explicit here so a fresh machine
+  # actually gets it via this repo instead of relying on it having shown up some other way.
+  ansible.builtin.apt:
+    name: wireguard-tools
+    state: present
+  become: true
+
+- name: Check whether the WireGuard client config to import actually exists yet
+  ansible.builtin.stat:
+    path: "{{ home_wireguard_client_config_path }}"
+  register: wg_client_config
+
+- name: Check whether the HomeWireGuard connection already exists
+  ansible.builtin.command: nmcli -t -f NAME connection show
+  register: nm_connections
+  changed_when: false
+  become: true
+
+- name: Import the WireGuard client config into NetworkManager (first deploy only)
+  when:
+    - wg_client_config.stat.exists
+    - home_wireguard_conn_name not in nm_connections.stdout_lines
+  become: true
+  block:
+    - name: Import the config
+      ansible.builtin.command:
+        cmd: "nmcli connection import type wireguard file {{ home_wireguard_client_config_path }}"
+      register: import_result
+
+    - name: Extract the imported connection's actual name
+      # nmcli names the connection after whatever it derives from the file (commonly the
+      # filename or interface name) — reported back like "Connection 'laptop' (uuid-here)
+      # successfully added." Parse that out rather than assume a specific name.
+      ansible.builtin.set_fact:
+        imported_conn_name: "{{ (import_result.stdout | regex_search(\"Connection '([^']+)'\", '\\1'))[0] }}"
+
+    - name: Rename it to the clear, stable name the dispatcher script expects
+      ansible.builtin.command:
+        cmd: >-
+          nmcli connection modify "{{ imported_conn_name }}"
+          connection.id "{{ home_wireguard_conn_name }}"
+      when: imported_conn_name != home_wireguard_conn_name
+
+- name: Fail loudly if the client config doesn't exist yet, rather than silently skip everything
+  ansible.builtin.fail:
+    msg: >-
+      {{ home_wireguard_client_config_path }} doesn't exist yet. Create a client for this laptop
+      in wg-easy's UI first (README: Allowed IPs must be 10.8.0.0/24,192.168.1.0/24 — NOT the
+      0.0.0.0/0 default, or this VPN will fight the corporate OpenVPN for default-route/DNS
+      priority once both are active), download the config, and place it at that path.
+  when: not wg_client_config.stat.exists
+
+- name: Ensure HomeWireGuard does not auto-connect (the dispatcher script controls it explicitly)
+  ansible.builtin.command:
+    cmd: "nmcli connection modify {{ home_wireguard_conn_name }} connection.autoconnect no"
+  become: true
+  changed_when: true
+
+- name: Ensure HomeWireGuard scopes DNS to the home domain only, not a full resolver claim
+  # Belt-and-suspenders alongside the split-tunnel Allowed IPs set on the wg-easy client itself
+  # (see the fail message above) — mirrors roles/wifec_vpn's identical fix for the corporate VPN.
+  ansible.builtin.command:
+    cmd: >-
+      nmcli connection modify {{ home_wireguard_conn_name }}
+      ipv4.dns-search "~{{ wifec_vpn_lan_dns_override_domain }}"
+  become: true
+  changed_when: true
+
+- name: Deploy the location-aware VPN dispatcher script
+  # NetworkManager runs every executable in this directory on every interface state change,
+  # with the interface name and action as $1/$2 — but the script ignores those and re-evaluates
+  # the full network state fresh each time it's called, so it's correct regardless of which
+  # specific interface changed or in what order multiple events fire.
+  #
+  # NetworkManager silently refuses to run a dispatcher script that's group- or world-writable
+  # (a real gotcha — mode has to be exactly this, not more permissive).
+  ansible.builtin.template:
+    src: vpn-location-toggle.sh.j2
+    dest: /etc/NetworkManager/dispatcher.d/vpn-location-toggle
+    owner: root
+    group: root
+    mode: "0755"
+  become: true

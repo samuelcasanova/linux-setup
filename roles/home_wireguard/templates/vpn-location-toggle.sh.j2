@@ -1,0 +1,90 @@
+#!/bin/bash
+# Deployed by roles/home_wireguard — DO NOT EDIT ON THE SERVER, edit the .j2 template instead.
+#
+# Safety mechanisms below exist because of a real incident: an earlier version of this script
+# unconditionally re-issued `nmcli`/`systemctl` commands on every invocation with no state check
+# and no rate limit. Since bringing a VPN up/down is itself an interface state change, that
+# created a genuine feedback loop — roughly one invocation every 20ms, causing a real
+# connect/disconnect storm the user had to manually stop. Three independent safeguards now,
+# so no single one failing can cause a repeat:
+#   1. A non-blocking lock — if a previous invocation is still running, skip immediately rather
+#      than queue or run concurrently.
+#   2. A hard minimum interval between real runs, checked and enforced before anything else —
+#      a backstop regardless of whether the state-checking logic below has a bug.
+#   3. State-checking before every action — only call nmcli/systemctl when the current state
+#      actually differs from the target, instead of unconditionally re-applying it.
+# Also: WiFi detection now reads the connection already bound to the device instead of
+# `nmcli dev wifi` (which triggers a scan — itself a possible source of extra dispatcher events).
+
+action="${2:-}"
+case "$action" in
+  up|down|vpn-up|vpn-down) ;;
+  *) exit 0 ;;
+esac
+
+LOCK_FILE="/run/vpn-location-toggle.lock"
+STATE_FILE="/run/vpn-location-toggle.last-run"
+MIN_INTERVAL_SECS=5
+
+exec 9>"$LOCK_FILE"
+flock -n 9 || exit 0
+
+now=$(date +%s)
+last=$(cat "$STATE_FILE" 2>/dev/null || echo 0)
+if [ $(( now - last )) -lt "$MIN_INTERVAL_SECS" ]; then
+  exit 0
+fi
+echo "$now" > "$STATE_FILE"
+
+HOME_WIRED_CONN="{{ wifec_vpn_lan_connection }}"
+WIFI_IFNAME="{{ wifi_ifname }}"
+OFFICE_WIFI_SSID="{{ office_wifi_ssid }}"
+WG_CONN="{{ home_wireguard_conn_name }}"
+WIFEC_CONFIG="{{ setup_repo_private }}/immfly-wifec/vpn/wifec-open-vpn-config.ovpn"
+
+is_connection_active() {
+  [ "$(nmcli -t -g GENERAL.STATE connection show "$1" 2>/dev/null)" = "activated" ]
+}
+
+home_wired_active=false
+is_connection_active "$HOME_WIRED_CONN" && home_wired_active=true
+
+# Reads the connection profile already bound to the wifi device — no scan triggered.
+current_wifi_conn="$(nmcli -t -g GENERAL.CONNECTION device show "$WIFI_IFNAME" 2>/dev/null)"
+office_wifi_active=false
+[ "$current_wifi_conn" = "$OFFICE_WIFI_SSID" ] && office_wifi_active=true
+
+logger -t vpn-location-toggle "home_wired=$home_wired_active office_wifi=$office_wifi_active (wifi_conn=$current_wifi_conn)"
+
+wg_active=false
+is_connection_active "$WG_CONN" && wg_active=true
+
+if $home_wired_active; then
+  if $wg_active; then
+    logger -t vpn-location-toggle "action: bringing WireGuard down"
+    nmcli connection down "$WG_CONN" >/dev/null 2>&1 || true
+  fi
+else
+  if ! $wg_active; then
+    logger -t vpn-location-toggle "action: bringing WireGuard up"
+    nmcli connection up "$WG_CONN" >/dev/null 2>&1 || true
+  fi
+fi
+
+wifec_active=false
+[ "$(systemctl is-active wifecvpn 2>/dev/null)" = "active" ] && wifec_active=true
+
+if $office_wifi_active; then
+  if $wifec_active; then
+    logger -t vpn-location-toggle "action: stopping wifec (at the office)"
+    systemctl stop wifecvpn >/dev/null 2>&1 || true
+    openvpn3 session-manage --config "$WIFEC_CONFIG" --disconnect >/dev/null 2>&1 || true
+  fi
+else
+  if ! $wifec_active; then
+    logger -t vpn-location-toggle "action: starting wifec"
+    systemctl start wifecvpn >/dev/null 2>&1 || true
+  fi
+fi
+
+exit 0
