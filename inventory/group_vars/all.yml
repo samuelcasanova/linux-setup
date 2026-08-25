@@ -23,6 +23,29 @@ wifec_vpn_lan_dns_override_domain: "casanovacatalan.duckdns.org"
 # for the actual state logic; these are just the identifiers it keys off.
 office_wifi_ssid: "IMMFLY GROUP"
 wifi_ifname: "wlp0s20f3"
+
+# Every subdomain of casanovacatalan.duckdns.org proxied through NPM (homeserver repo, README
+# Step 18+) — add a line here whenever a new one gets proxied. This can't be a single wildcard
+# covering the whole domain: the WireGuard endpoint itself is casanovacatalan.duckdns.org, so a
+# routing rule covering the bare apex creates a deadlock (can't resolve the endpoint without the
+# tunnel, can't establish the tunnel without resolving the endpoint) — confirmed live, the tunnel
+# came up but nothing worked until this was narrowed to exact subdomains. A "subdomains-only,
+# excludes the apex" syntax (`~.domain`) was tried and confirmed live NOT to register as a
+# routing domain at all on this system (NetworkManager 1.46.0) — resolvectl showed nothing bound
+# to the interface even with the tunnel fully connected. This enumerated list is what's actually
+# proven to work.
+# Each already carries the "~" routing-domain marker nmcli/systemd-resolved need, so the task
+# that consumes this list is just a plain join(',') — no regex/transformation required.
+home_wireguard_proxied_subdomains:
+  - "~vault.casanovacatalan.duckdns.org"
+  - "~home.casanovacatalan.duckdns.org"
+  - "~photos.casanovacatalan.duckdns.org"
+  - "~frigate.casanovacatalan.duckdns.org"
+  - "~adguard.casanovacatalan.duckdns.org"
+  - "~uptime.casanovacatalan.duckdns.org"
+  - "~ha.casanovacatalan.duckdns.org"
+  - "~wireguard.casanovacatalan.duckdns.org"
+  - "~backrest.casanovacatalan.duckdns.org"
 home_wireguard_conn_name: "HomeWireGuard"
 home_wireguard_client_config_path: "{{ setup_repo_private }}/home-wireguard/laptop.conf"
 

@@ -66,13 +66,19 @@
   become: true
   changed_when: true
 
-- name: Ensure HomeWireGuard scopes DNS to the home domain only, not a full resolver claim
-  # Belt-and-suspenders alongside the split-tunnel Allowed IPs set on the wg-easy client itself
-  # (see the fail message above) — mirrors roles/wifec_vpn's identical fix for the corporate VPN.
+- name: Ensure HomeWireGuard scopes DNS to only the proxied subdomains, not the whole domain
+  # NOT a single wildcard covering the whole domain, unlike roles/wifec_vpn's identical-looking
+  # fix for the corporate VPN — that one is safe to apply as a wildcard because it lives on the
+  # wired LAN connection, a completely separate interface from OpenVPN's own tunnel. Here, the
+  # WireGuard endpoint IS casanovacatalan.duckdns.org — a wildcard covering the apex creates a
+  # real deadlock (can't resolve the endpoint without the tunnel, can't establish the tunnel
+  # without resolving the endpoint), confirmed live: the tunnel connected but nothing worked
+  # until this was narrowed to exact subdomains (see home_wireguard_proxied_subdomains in
+  # group_vars/all.yml for the list and the full incident notes).
   ansible.builtin.command:
     cmd: >-
       nmcli connection modify {{ home_wireguard_conn_name }}
-      ipv4.dns-search "~{{ wifec_vpn_lan_dns_override_domain }}"
+      ipv4.dns-search "{{ home_wireguard_proxied_subdomains | join(',') }}"
   become: true
   changed_when: true
 
