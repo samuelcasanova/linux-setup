@@ -1,0 +1,45 @@
+---
+# Role: claude
+# Description: Deploy the global Claude Code configuration (CLAUDE.md, RTK.md, settings.json)
+#              as dotfiles. The rtk CLI itself and `rtk init --global` are installed by the
+#              vscode role, which runs before this one.
+
+# ~/.claude must already exist as a real directory before stowing: it also holds Claude Code's
+# runtime state (projects/, sessions/, shell-snapshots/) and .credentials.json. If it were
+# missing, stow would fold the whole package and symlink ~/.claude straight to this repo,
+# dumping all that state — credentials included — inside the working tree.
+- name: Ensure .claude directory exists
+  file:
+    path: "{{ home_dir }}/.claude"
+    state: directory
+    mode: '0755'
+
+- name: Create Claude backup directory
+  file:
+    path: /tmp/claude
+    state: directory
+    mode: '0755'
+
+- name: Check if Claude configuration files are real files
+  stat:
+    path: "{{ item }}"
+  loop:
+    - "{{ home_dir }}/.claude/CLAUDE.md"
+    - "{{ home_dir }}/.claude/RTK.md"
+    - "{{ home_dir }}/.claude/settings.json"
+  register: claude_stats
+
+- name: Backup existing Claude configuration
+  command: mv {{ item.item }} /tmp/claude/
+  args:
+    removes: "{{ item.item }}"
+  loop: "{{ claude_stats.results }}"
+  when: item.stat.exists and not item.stat.islnk
+  failed_when: false
+
+# --no-folding keeps ~/.claude a real directory with per-file symlinks inside it, for the same
+# reason the directory is created above.
+- name: Deploy Claude dotfiles
+  command: stow -v --no-folding -d {{ setup_repo }}/dotfiles/ -t {{ home_dir }} claude
+  register: stow_claude
+  changed_when: "'LINK' in (stow_claude.stderr | default(''))"

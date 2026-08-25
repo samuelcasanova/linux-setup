@@ -23,3 +23,6 @@ Thumbs.db
 # Ansible vault password files
 .vault_pass
 vault_pass.txt
+
+# Claude Code secrets — only CLAUDE.md, RTK.md and settings.json belong in the claude dotfiles
+dotfiles/claude/.claude/.credentials.json

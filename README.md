@@ -81,7 +81,7 @@ The project is organized into incremental steps that can be run separately or al
 
 1. **Step 1 — Core System**: OS basics, Bash, Zsh, Git, SSH, KeePass, SMB share mount.
 2. **Step 2 — Desktop Environment**: KDE, keyboards, SafeEyes, audio switcher, browsers, LibreOffice, Okular, VLC, Pinta, OBS Studio, Cryptomator.
-3. **Step 3 — Development Tools**: Docker, NVM, VS Code, Antigravity, Python, Immfly environment, personal repositories.
+3. **Step 3 — Development Tools**: Docker, NVM, VS Code, Claude Code configuration, Antigravity, Python, Immfly environment, personal repositories.
 4. **Step 4 — Work and Productivity Tools**: AMQP tools, VPN, Kubernetes, Discord, Obsidian, Postman, Sqlectron, AWS CLI.
 
 There's also `playbooks/vpn.yml`, a standalone playbook for just the VPN roles (`wifec_vpn`, `inseat_vpn`).

@@ -1,0 +1,65 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.amazon.es)",
+      "Read(//home/samuel/**)",
+      "Bash(find)",
+      "Bash(rtk find *)",
+      "Bash(rtk proxy find *)",
+      "Bash(sudo find *)",
+      "Bash(sudo rtk find *)",
+      "Bash(curl *)",
+      "Bash(rtk curl *)",
+      "Bash(grep *)",
+      "Bash(rtk grep *)",
+      "Bash(rtk proxy grep *)",
+      "Bash(sudo grep *)",
+      "Bash(sudo rtk grep *)",
+      "Bash(ls *)",
+      "Bash(rtk ls *)",
+      "Bash(rtk proxy ls *)",
+      "Bash(sudo ls *)",
+      "Bash(sudo rtk ls *)",
+      "Bash(read *)",
+      "Bash(rtk read *)",
+      "Bash(rtk proxy read *)",
+      "Bash(sudo read *)",
+      "Bash(sudo rtk read *)",
+      "Bash(wc *)",
+      "Bash(rtk wc *)",
+      "Bash(rtk proxy wc *)",
+      "Bash(sudo wc *)",
+      "Bash(sudo rtk wc *)",
+      "Bash(cat *)",
+      "Bash(rtk cat *)",
+      "Bash(rtk proxy cat *)",
+      "Bash(sudo cat *)",
+      "Bash(sudo rtk cat *)",
+      "Bash(rtk pip *)",
+      "Bash(docker *)",
+      "Bash(rtk docker *)",
+      "Bash(git status *)",
+      "Bash(rtk git status *)",
+      "Bash(git diff *)",
+      "Bash(rtk git diff *)",
+      "Bash(git log *)",
+      "Bash(rtk git log *)",
+      "Bash(rtk uv *)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk hook claude"
+          }
+        ]
+      }
+    ]
+  },
+  "model": "opus"
+}
