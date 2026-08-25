@@ -17,12 +17,13 @@ wifec_vpn_lan_connection: "Wired connection 1"
 wifec_vpn_lan_ifname: "enp0s31f6"
 wifec_vpn_lan_dns_override_domain: "casanovacatalan.duckdns.org"
 
-# Location-aware VPN switching (roles/home_wireguard) — home LAN, office WiFi, and "elsewhere"
-# each need a different combination of the corporate OpenVPN (wifec) and a personal WireGuard
-# VPN back to the home network active. See roles/home_wireguard/templates/vpn-location-toggle.sh.j2
-# for the actual state logic; these are just the identifiers it keys off.
-office_wifi_ssid: "IMMFLY GROUP"
-wifi_ifname: "wlp0s20f3"
+# Location-aware VPN switching (roles/home_wireguard) — only WireGuard (back to the home
+# network) is toggled by location: down at home (redundant, already on the LAN), up everywhere
+# else. Corporate OpenVPN (wifec) is intentionally NOT part of this — it stays always-on via its
+# own systemd unit (roles/wifec_vpn) regardless of location. An earlier version of this toggled
+# wifec off on office WiFi too, on the theory office WiFi already gives full corporate access —
+# that assumption was wrong; wifec needs to stay on even at the office. See
+# roles/home_wireguard/templates/vpn-location-toggle.sh.j2 for the actual state logic.
 
 # Every subdomain of casanovacatalan.duckdns.org proxied through NPM (homeserver repo, README
 # Step 18+) — add a line here whenever a new one gets proxied. This can't be a single wildcard
