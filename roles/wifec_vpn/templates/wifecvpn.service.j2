@@ -6,6 +6,9 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 ExecStart=openvpn3 session-start -c {{ setup_repo_private }}/immfly-wifec/vpn/wifec-open-vpn-config.ovpn
+# Without this, `systemctl stop` leaves the openvpn3 session running, and the next `start` fails
+# with "User authentication failed" — the server refusing a duplicate login, not a credentials problem.
+ExecStop=openvpn3 session-manage --config {{ setup_repo_private }}/immfly-wifec/vpn/wifec-open-vpn-config.ovpn --disconnect
 RemainAfterExit=yes
 
 [Install]
