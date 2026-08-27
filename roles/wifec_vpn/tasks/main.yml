@@ -62,12 +62,11 @@
       failed_when: false # Might fail if the .ovpn file in the private repo doesn't exist yet
 
 # This VPN (openvpn3-linux) claims itself as the resolver for *every* domain
-# (systemd-resolved's "~." routing domain) once connected, regardless of the
-# `route ... net_gateway` exclusion already added for the home LAN subnet in
-# the .ovpn file — routing and DNS-domain-scope are separate mechanisms, and
-# the IP route alone doesn't stop DNS lookups for home-LAN hostnames from
-# being sent to the VPN's own DNS server (which has no idea about them and
-# just returns the domain's real public record instead). Rather than fight
+# (systemd-resolved's "~." routing domain) once connected. An IP route can't
+# fix that — routing and DNS-domain-scope are separate mechanisms, so lookups
+# for home-LAN hostnames still go to the VPN's own DNS server (which has no
+# idea about them and just returns the domain's real public record instead).
+# Rather than fight
 # the VPN's own DNS behavior (risking breaking corporate resolution), this
 # adds a narrow, persistent per-domain override on the LAN connection itself:
 # only casanovacatalan.duckdns.org and its subdomains get routed to the LAN's
