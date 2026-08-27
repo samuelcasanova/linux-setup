@@ -1,7 +1,12 @@
 @RTK.md
 
 # Commands
-- Only use workarounds like prefixing /bin/ or "timeout XX" to commands only when strictly needed, not by default, to let settings.json do its job with allowed commands.
+- **Write Bash commands in their plainest form** — bare binary name, no absolute path (`/bin/ls`),
+  no `timeout`/`env`/`bash -c` wrapper. Decoration misses my settings.json allowlist and prompts me.
+  This does not apply to `rtk`: keep using it as RTK.md describes.
+- **A failed or empty result is never a reason to add a prefix.** Don't retry decorated — report
+  what you got and find the real cause.
+- Genuinely need a wrapper? Say why in one line, then use it.
 
 # Code style
 - **Don't add comments unless strictly needed.** Code must be self-explanatory: prefer clear names
