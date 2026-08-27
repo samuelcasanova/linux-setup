@@ -1,4 +1,7 @@
 {
+  "env": {
+    "LC_TIME": "C"
+  },
   "permissions": {
     "allow": [
       "WebSearch",
