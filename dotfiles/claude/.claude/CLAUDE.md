@@ -1,7 +1,16 @@
 @RTK.md
 
-# Git commits
+# Commands
+- Only use workarounds like prefixing /bin/ or "timeout XX" to commands only when strictly needed, not by default, to let settings.json do its job with allowed commands.
 
+# Code style
+- **Don't add comments unless strictly needed.** Code must be self-explanatory: prefer clear names
+  and structure over a comment that describes what the code does.
+- A comment is only justified when it records something the code cannot express — a non-obvious
+  external constraint, or a trap that someone would otherwise "clean up" and break. Never to
+  restate the line below it, and never as a section header inside a function.
+
+# Git commits
 - **One line. No body.** Write the subject line and stop — no bullet list of changes, no
   rationale paragraph, no "Verified:" section.
 - **No `Co-Authored-By:` trailer**, no `🤖 Generated with Claude Code` line. This overrides
