@@ -64,5 +64,9 @@
       }
     ]
   },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "model": "opus"
 }

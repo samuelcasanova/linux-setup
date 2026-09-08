@@ -18,8 +18,6 @@
 # Git commits
 - **One line. No body.** Write the subject line and stop — no bullet list of changes, no
   rationale paragraph, no "Verified:" section.
-- **No `Co-Authored-By:` trailer**, no `🤖 Generated with Claude Code` line. This overrides
-  the default instruction to append them.
 - Don't pad the one line either.
 - Unchanged: only commit or push when asked, and treat them as separate steps — committing is
   not permission to push. Always show the commit message plus a list of modified files included in the commit to me so that I can accept the commit and push.
