@@ -2,15 +2,17 @@
 # Description: Obsidian installation and vault setup
 # Migrated from: install-software-scripts/61-obsidian.sh
 
-- name: Get latest Obsidian version from GitHub
+# The GitHub "latest" release is often an Android-only build with no desktop
+# assets, so scan recent releases for the newest one shipping an amd64 deb.
+- name: Get recent Obsidian releases from GitHub
   uri:
-    url: https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest
+    url: https://api.github.com/repos/obsidianmd/obsidian-releases/releases?per_page=30
     return_content: yes
-  register: obsidian_latest
+  register: obsidian_releases
 
 - name: Find deb installer URL
   set_fact:
-    obsidian_deb_url: "{{ obsidian_latest.json.assets | selectattr('name', 'search', 'amd64.deb') | map(attribute='browser_download_url') | first }}"
+    obsidian_deb_url: "{{ obsidian_releases.json | rejectattr('prerelease') | map(attribute='assets') | flatten | selectattr('name', 'search', 'amd64\\.deb$') | map(attribute='browser_download_url') | first }}"
 
 - name: Download Obsidian deb
   get_url:
