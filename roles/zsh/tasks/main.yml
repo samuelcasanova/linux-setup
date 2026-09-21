@@ -18,17 +18,21 @@
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   when: not ohmyzsh_installed.stat.exists
 
-- name: Clone zsh-syntax-highlighting plugin
-  git:
-    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-    dest: "{{ home_dir }}/.oh-my-zsh/plugins/zsh-syntax-highlighting"
-    update: no
+- name: Check if zsh plugins are already installed
+  stat:
+    path: "{{ home_dir }}/.oh-my-zsh/plugins/{{ item }}"
+  loop:
+    - zsh-syntax-highlighting
+    - zsh-autosuggestions
+  register: zsh_plugin_stats
 
-- name: Clone zsh-autosuggestions plugin
+- name: Clone zsh plugins
   git:
-    repo: https://github.com/zsh-users/zsh-autosuggestions.git
-    dest: "{{ home_dir }}/.oh-my-zsh/plugins/zsh-autosuggestions"
+    repo: "https://github.com/zsh-users/{{ item.item }}.git"
+    dest: "{{ home_dir }}/.oh-my-zsh/plugins/{{ item.item }}"
     update: no
+  loop: "{{ zsh_plugin_stats.results }}"
+  when: not item.stat.exists
 
 - name: Check if .zshrc is a real file
   stat:
