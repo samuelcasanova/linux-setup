@@ -114,4 +114,6 @@
       "connectionId": "immflyretail",
     },
   ],
+  "claudeCode.hideOnboarding": true,
+  "update.showReleaseNotes": false,
 }

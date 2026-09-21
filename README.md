@@ -93,9 +93,10 @@ Some steps still need to be done manually after the playbooks finish:
 1. **Google account**: log into your personal Google account in Chrome, then Immfly, then Testing.
 2. **Displays**: set the main display as "Primary" and reorder monitors as needed.
 3. **Brave**: open the browser and configure the personal account (get the token from another computer or mobile).
-4. **Obsidian**: configure the vault pointing to `~/git/secondbrain`. Install and enable the emoji shortcodes, file hider, and Git plugins (with backup/pull intervals set to 1 minute).
-5. **KeePass**: configure the vault pointing to the OneDrive `.kdbx` file.
+4. **Bitwarden**: configure the vault pointing to Vaultwarden `https://vault.casanovacatalan.duckdns.org`.
+5. **Obsidian**: configure the vault pointing to `~/git/secondbrain`. Install and enable the emoji shortcodes, file hider, and Git plugins (with backup/pull intervals set to 1 minute).
 6. **VS Code**: configure the account to connect to Claude.
+7. **Cryptomator**: open cryptomator vault, in /mnt/smb/Vault/Personal
 
 ## Testing with Docker
 

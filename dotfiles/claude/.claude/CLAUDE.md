@@ -15,6 +15,13 @@
   external constraint, or a trap that someone would otherwise "clean up" and break. Never to
   restate the line below it, and never as a section header inside a function.
 
+# Immfly projects
+- **Temporary project files** (deliverables, working docs, data pulled for an audit — anything
+  that isn't a repo file) go in a dedicated subfolder under
+  `/mnt/smb/Documents/02. Work PARA/01. Projects/`, one subfolder per project.
+- Name that subfolder starting with the Jira ticket code (e.g. `IFEC-3096-<slug>`); if there is
+  no ticket, start it with the current date (`YYYY-MM-DD-<slug>`) instead.
+
 # Git commits
 - **One line. No body.** Write the subject line and stop — no bullet list of changes, no
   rationale paragraph, no "Verified:" section.
