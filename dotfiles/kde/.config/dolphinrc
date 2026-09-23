@@ -10,9 +10,9 @@ ShowCopyMoveMenu=true
 PreviewSize=80
 
 [ExtractDialog]
-2 screens: Height=560
-2 screens: Width=1605
-DirHistory[$e]=/tmp/onedrive/,/tmp/
+2 screens: Height=620
+2 screens: Width=1280
+DirHistory[$e]=/tmp/,/tmp/onedrive/
 
 [FoldersPanel]
 HiddenFilesShown=true
@@ -26,7 +26,7 @@ ViewPropsTimestamp=2024,7,31,19,16,50.511
 Places Icons Auto-resize=false
 Places Icons Static Size=22
 Recent Files[$e]=file:$HOME
-Recent URLs[$e]=file:///tmp/,file:$HOME/,file:///tmp/onedrive/
+Recent URLs[$e]=file:///tmp/,file:$HOME/
 detailViewIconSize=16
 
 [KPropertiesDialog]

@@ -2,6 +2,10 @@
   "env": {
     "LC_TIME": "C"
   },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "permissions": {
     "allow": [
       "WebSearch",
@@ -54,9 +58,13 @@
       "Bash(rtk git diff *)",
       "Bash(git log *)",
       "Bash(rtk git log *)",
+      "Bash(git show *)",
+      "Bash(rtk git show *)",
+      "Bash(uv *)",
       "Bash(rtk uv *)"
     ]
   },
+  "model": "opus",
   "hooks": {
     "PreToolUse": [
       {
@@ -70,9 +78,9 @@
       }
     ]
   },
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  },
-  "model": "opus"
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  }
 }
