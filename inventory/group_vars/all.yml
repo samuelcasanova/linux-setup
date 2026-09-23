@@ -47,6 +47,9 @@ home_wireguard_proxied_subdomains:
   - "~ha.casanovacatalan.duckdns.org"
   - "~wireguard.casanovacatalan.duckdns.org"
   - "~backrest.casanovacatalan.duckdns.org"
+  - "~npm.casanovacatalan.duckdns.org"
+  - "~finance.casanovacatalan.duckdns.org"
+  - "~finance-import.casanovacatalan.duckdns.org"
 home_wireguard_conn_name: "HomeWireGuard"
 home_wireguard_client_config_path: "{{ setup_repo_private }}/home-wireguard/laptop.conf"
 
