@@ -55,7 +55,7 @@ home_wireguard_client_config_path: "{{ setup_repo_private }}/home-wireguard/lapt
 
 # SMB/CIFS network shares, persisted via /etc/fstab + systemd automount
 # (see roles/smb_mount). Credentials for each entry must exist at
-# {{ setup_repo_private }}/smb/creds/<name> with contents:
+# {{ setup_repo_private }}/smb/creds/<creds> (<creds> defaults to <name>) with contents:
 #   username=youruser
 #   password=yourpassword
 #   domain=WORKGROUP
@@ -65,6 +65,30 @@ smb_mounts:
   - name: samuel
     src: "//192.168.1.2/Samuel"
     path: /mnt/smb
+  - name: music
+    src: "//192.168.1.2/Music"
+    path: /mnt/smb-music
+    creds: samuel
+  - name: pictures
+    src: "//192.168.1.2/Pictures"
+    path: /mnt/smb-pictures
+    creds: samuel
+  - name: videos
+    src: "//192.168.1.2/Videos"
+    path: /mnt/smb-videos
+    creds: samuel
+
+# Home folders replaced by symlinks into the shares above, mirroring the Windows machines'
+# known-folder redirects (windows-setup: support-files/network-folders.psd1).
+home_folder_links:
+  - name: Documents
+    target: /mnt/smb/Documents
+  - name: Music
+    target: /mnt/smb-music/samuel/Music
+  - name: Pictures
+    target: /mnt/smb-pictures
+  - name: Videos
+    target: /mnt/smb-videos
 
 # Basic system packages
 basic_packages:

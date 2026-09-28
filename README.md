@@ -79,7 +79,7 @@ ansible-playbook playbooks/test-connection.yml -vvv
 
 The project is organized into incremental steps that can be run separately or all together via `main.yml`:
 
-1. **Step 1 — Core System**: OS basics, Bash, Zsh, Git, SSH, SMB share mount.
+1. **Step 1 — Core System**: OS basics, Bash, Zsh, Git, SSH, SMB share mounts, home folders on the shares.
 2. **Step 2 — Desktop Environment**: KDE, keyboards, SafeEyes, audio switcher, browsers, LibreOffice, Okular, VLC, Pinta, OBS Studio, Cryptomator.
 3. **Step 3 — Development Tools**: Docker, NVM, VS Code, Claude Code configuration, Python, Immfly environment, personal repositories.
 4. **Step 4 — Work and Productivity Tools**: AMQP tools, VPN, Kubernetes, Discord, Obsidian, Postman, Sqlectron, AWS CLI.
@@ -165,7 +165,8 @@ Variables are defined in `inventory/group_vars/all.yml`:
 - `home_dir`: home directory
 - `setup_repo`: path to this repository
 - `setup_repo_private`: path to the sibling `linux-setup-private` repo, which holds secrets (SSH keys, VPN configs, SMB credentials, etc.)
-- `smb_mounts`: SMB/CIFS shares to persist via `/etc/fstab` (see the `smb_mount` role)
+- `smb_mounts`: SMB/CIFS shares to persist via `/etc/fstab` (see the `smb_mount` role); `creds` lets several shares reuse one credentials file
+- `home_folder_links`: `~/Documents`, `~/Music`, `~/Pictures` and `~/Videos` become symlinks into those shares, as the Windows machines redirect them (see the `home_folders` role). Off the home LAN they only work with WireGuard up, and there is no offline copy. The role also sets `enabled=False` in `~/.config/user-dirs.conf`, because `xdg-user-dirs-update` otherwise resets any folder it can't reach at login to `$HOME`
 - `node_versions`: Node.js versions to install
 - `docker_users`: users allowed to use Docker
 

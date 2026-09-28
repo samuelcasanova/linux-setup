@@ -1,0 +1,40 @@
+---
+# Role: home_folders
+# Description: Replace ~/Documents, ~/Music, ~/Pictures and ~/Videos with symlinks into the
+#              homeserver SMB shares mounted by roles/smb_mount (see home_folder_links).
+
+# xdg-user-dirs-update runs at every login and resets any XDG dir it cannot find to $HOME.
+# Logging in with the server unreachable would otherwise repoint these folders permanently.
+- name: Stop xdg-user-dirs-update from rewriting the XDG dirs
+  copy:
+    dest: "{{ home_dir }}/.config/user-dirs.conf"
+    content: |
+      enabled=False
+      filename_encoding=UTF-8
+    mode: '0644'
+
+- name: Check current home folders
+  stat:
+    path: "{{ home_dir }}/{{ item.name }}"
+  register: home_folder_stat
+  loop: "{{ home_folder_links }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+# rmdir refuses a non-empty directory, so nothing local is ever deleted by this role.
+- name: Remove empty local home folders
+  command: "rmdir {{ item.stat.path }}"
+  loop: "{{ home_folder_stat.results }}"
+  loop_control:
+    label: "{{ item.item.name }}"
+  when: item.stat.isdir is defined and item.stat.isdir and not item.stat.islnk
+
+- name: Link home folders to the SMB shares
+  file:
+    src: "{{ item.target }}"
+    dest: "{{ home_dir }}/{{ item.name }}"
+    state: link
+    follow: no
+  loop: "{{ home_folder_links }}"
+  loop_control:
+    label: "{{ item.name }} -> {{ item.target }}"

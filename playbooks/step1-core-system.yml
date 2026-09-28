@@ -16,3 +16,4 @@
     - git
     - ssh
     - smb_mount
+    - home_folders

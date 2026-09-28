@@ -3,8 +3,8 @@
 # Description: Persist SMB/CIFS network shares via /etc/fstab, mounted lazily
 #              via systemd automount so boot never blocks on the network.
 # Credentials for each entry in smb_mounts must exist at
-#   {{ setup_repo_private }}/smb/creds/<name>
-# with contents:
+#   {{ setup_repo_private }}/smb/creds/<creds>
+# where <creds> defaults to the entry's name, with contents:
 #   username=youruser
 #   password=yourpassword
 #   domain=WORKGROUP
@@ -26,7 +26,7 @@
 
 - name: Check for private credentials file for each SMB share
   stat:
-    path: "{{ setup_repo_private }}/smb/creds/{{ item.name }}"
+    path: "{{ setup_repo_private }}/smb/creds/{{ item.creds | default(item.name) }}"
   register: smb_creds_stat
   loop: "{{ smb_mounts }}"
   loop_control:
@@ -34,8 +34,8 @@
 
 - name: Deploy SMB credentials files from private repo
   copy:
-    src: "{{ setup_repo_private }}/smb/creds/{{ item.item.name }}"
-    dest: "/etc/samba/creds/{{ item.item.name }}"
+    src: "{{ item.stat.path }}"
+    dest: "/etc/samba/creds/{{ item.item.creds | default(item.item.name) }}"
     remote_src: yes
     owner: root
     group: root
@@ -50,7 +50,7 @@
   debug:
     msg: >-
       No credentials file found at
-      {{ setup_repo_private }}/smb/creds/{{ item.item.name }} -
+      {{ item.invocation.module_args.path }} -
       create it (username=..., password=..., domain=WORKGROUP) then re-run this role.
   loop: "{{ smb_creds_stat.results }}"
   loop_control:
@@ -72,10 +72,31 @@
     path: "{{ item.path }}"
     src: "{{ item.src }}"
     fstype: cifs
-    opts: "credentials=/etc/samba/creds/{{ item.name }},uid={{ item.uid | default(smb_mount_default_uid) }},gid={{ item.gid | default(smb_mount_default_gid) }},iocharset=utf8,vers={{ item.vers | default('3.0') }},_netdev,x-systemd.automount,x-systemd.mount-timeout=10,noauto"
+    opts: "credentials=/etc/samba/creds/{{ item.creds | default(item.name) }},uid={{ item.uid | default(smb_mount_default_uid) }},gid={{ item.gid | default(smb_mount_default_gid) }},iocharset=utf8,vers={{ item.vers | default('3.0') }},_netdev,x-systemd.automount,x-systemd.mount-timeout=10,noauto"
     state: present
   become: yes
   loop: "{{ smb_mounts }}"
   loop_control:
     label: "{{ item.name }}"
   notify: Reload systemd daemon
+
+- name: Generate automount units from the new fstab entries
+  meta: flush_handlers
+
+# The fstab generator only creates the automount unit; nothing starts a new one before a reboot.
+- name: Resolve automount unit names
+  command: "systemd-escape --path --suffix=automount {{ item.path }}"
+  register: smb_automount_units
+  changed_when: false
+  loop: "{{ smb_mounts }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Start SMB automount units
+  systemd:
+    name: "{{ item.stdout }}"
+    state: started
+  become: yes
+  loop: "{{ smb_automount_units.results }}"
+  loop_control:
+    label: "{{ item.stdout }}"
