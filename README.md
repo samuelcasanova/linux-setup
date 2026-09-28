@@ -79,7 +79,7 @@ ansible-playbook playbooks/test-connection.yml -vvv
 
 The project is organized into incremental steps that can be run separately or all together via `main.yml`:
 
-1. **Step 1 — Core System**: OS basics, Bash, Zsh, Git, SSH, KeePass, SMB share mount.
+1. **Step 1 — Core System**: OS basics, Bash, Zsh, Git, SSH, SMB share mount.
 2. **Step 2 — Desktop Environment**: KDE, keyboards, SafeEyes, audio switcher, browsers, LibreOffice, Okular, VLC, Pinta, OBS Studio, Cryptomator.
 3. **Step 3 — Development Tools**: Docker, NVM, VS Code, Claude Code configuration, Python, Immfly environment, personal repositories.
 4. **Step 4 — Work and Productivity Tools**: AMQP tools, VPN, Kubernetes, Discord, Obsidian, Postman, Sqlectron, AWS CLI.
