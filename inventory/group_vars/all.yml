@@ -167,6 +167,7 @@ immfly_repositories:
   - { dest: '{{ home_dir }}/git/immfly/airside/ecommerce', repo: 'git@git.immfly.com:immfly/retail/ecommerce.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/cabincast-api', repo: 'git@git.immfly.com:immfly/microservices/cabincast-api.git' }
   - { dest: '{{ home_dir }}/git/immfly/airside/avionics-controller', repo: 'git@git.immfly.com:infra/avionics-controller.git' }
+  - { dest: '{{ home_dir }}/git/immfly/airside/media-service', repo: 'git@git.immfly.com:immfly/media-service.git' }
   - { dest: '{{ home_dir }}/git/immfly/groundside/grd-vouchers', repo: 'git@git.immfly.com:immfly/microservices/grd-vouchers.git' }
   - { dest: '{{ home_dir }}/git/immfly/groundside/inventory-service', repo: 'git@git.immfly.com:immfly/microservices/inventory/service.git' }
   - { dest: '{{ home_dir }}/git/immfly/groundside/billing-service', repo: 'git@git.immfly.com:immfly/microservices/billing-service/service.git' }
