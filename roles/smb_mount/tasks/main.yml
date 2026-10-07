@@ -72,7 +72,8 @@
     path: "{{ item.path }}"
     src: "{{ item.src }}"
     fstype: cifs
-    opts: "credentials=/etc/samba/creds/{{ item.creds | default(item.name) }},uid={{ item.uid | default(smb_mount_default_uid) }},gid={{ item.gid | default(smb_mount_default_gid) }},iocharset=utf8,vers={{ item.vers | default('3.0') }},_netdev,x-systemd.automount,x-systemd.mount-timeout=10,noauto"
+    boot: false
+    opts: "credentials=/etc/samba/creds/{{ item.creds | default(item.name) }},uid={{ item.uid | default(smb_mount_default_uid) }},gid={{ item.gid | default(smb_mount_default_gid) }},iocharset=utf8,vers={{ item.vers | default('3.0') }},_netdev,x-systemd.automount,x-systemd.mount-timeout=10"
     state: present
   become: yes
   loop: "{{ smb_mounts }}"

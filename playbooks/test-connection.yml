@@ -11,15 +11,15 @@
   tasks:
     - name: Display connection success message
       debug:
-        msg: "✓ Ansible is working! Connected to {{ ansible_hostname }}"
+        msg: "✓ Ansible is working! Connected to {{ ansible_facts['hostname'] }}"
     
     - name: Display system information
       debug:
         msg: |
-          OS: {{ ansible_distribution }} {{ ansible_distribution_version }}
-          User: {{ ansible_user_id }}
-          Home: {{ ansible_env.HOME }}
-          Python: {{ ansible_python_version }}
+          OS: {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}
+          User: {{ ansible_facts['user_id'] }}
+          Home: {{ ansible_facts['env']['HOME'] }}
+          Python: {{ ansible_facts['python_version'] }}
     
     - name: Test privilege escalation (sudo)
       command: whoami

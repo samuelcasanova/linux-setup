@@ -19,7 +19,7 @@
 
 - name: Add OBS Studio PPA
   apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/obs-studio.gpg] https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu {{ ansible_distribution_release }} main"
+    repo: "deb [signed-by=/etc/apt/keyrings/obs-studio.gpg] https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu {{ ansible_facts['distribution_release'] }} main"
     state: present
     filename: obs-studio
   become: yes

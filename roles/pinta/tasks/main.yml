@@ -25,7 +25,7 @@
 
 - name: Add xtradeb PPA
   apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/xtradeb-apps.gpg] https://ppa.launchpadcontent.net/xtradeb/apps/ubuntu {{ ansible_distribution_release }} main"
+    repo: "deb [signed-by=/etc/apt/keyrings/xtradeb-apps.gpg] https://ppa.launchpadcontent.net/xtradeb/apps/ubuntu {{ ansible_facts['distribution_release'] }} main"
     state: present
     filename: xtradeb-apps
   become: yes

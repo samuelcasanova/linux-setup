@@ -18,7 +18,7 @@
 
 - name: Add SafeEyes PPA
   apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/safeeyes.gpg] https://ppa.launchpadcontent.net/safeeyes-team/safeeyes/ubuntu {{ ansible_distribution_release }} main"
+    repo: "deb [signed-by=/etc/apt/keyrings/safeeyes.gpg] https://ppa.launchpadcontent.net/safeeyes-team/safeeyes/ubuntu {{ ansible_facts['distribution_release'] }} main"
     state: present
     filename: safeeyes
   become: yes

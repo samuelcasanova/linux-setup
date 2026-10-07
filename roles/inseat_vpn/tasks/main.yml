@@ -23,7 +23,7 @@
 
 - name: Add OpenVPN 3 repository
   copy:
-    content: "deb [arch=amd64 signed-by=/etc/apt/keyrings/openvpn.asc] https://packages.openvpn.net/openvpn3/debian {{ ansible_distribution_release }} main\n"
+    content: "deb [arch=amd64 signed-by=/etc/apt/keyrings/openvpn.asc] https://packages.openvpn.net/openvpn3/debian {{ ansible_facts['distribution_release'] }} main\n"
     dest: /etc/apt/sources.list.d/openvpn-packages.list
     owner: root
     group: root

@@ -28,6 +28,7 @@ if [ "$INTERACTIVE" = true ]; then
     echo -e "\n[2/3] Installing Git and Ansible..."
 fi
 sudo apt-get install -y -qq git ansible software-properties-common
+ansible-galaxy collection install -r "$(dirname "$0")/requirements.yml"
 
 # Verify installation
 if [ "$INTERACTIVE" = true ]; then

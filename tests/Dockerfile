@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM ubuntu:26.04
 
 # Prevent interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -30,11 +30,11 @@ RUN useradd -m -s /bin/bash samuel && \
 RUN mkdir -p /home/samuel/git/setups
 
 # Copy the initialization script from the repo root
-COPY --chown=samuel:samuel init.sh /tmp/init.sh
+COPY --chown=samuel:samuel init.sh requirements.yml /tmp/
 RUN chmod +x /tmp/init.sh
 
 # Initialize system using the same script as production
-RUN /tmp/init.sh && rm /tmp/init.sh
+RUN /tmp/init.sh && rm /tmp/init.sh /tmp/requirements.yml
 
 # Switch to samuel user
 USER samuel
