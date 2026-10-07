@@ -24,8 +24,7 @@
     - kscreenlockerrc
     - klipperrc
     - plasmashellrc
-    - khotkeysrc
-    - powermanagementprofilesrc
+    - powerdevilrc
   register: kde_file_stats
 
 - name: Backup existing KDE configuration files

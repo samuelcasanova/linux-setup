@@ -9,8 +9,13 @@ Rows=1
 [TabBox]
 LayoutName=coverswitch
 
-[Tiling]
+[Tiling][010940a8-1d57-4f00-b71c-e485d16a2cdb][9ec9c34d-a921-4d79-b74b-9d4e069bd351]
 padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][010940a8-1d57-4f00-b71c-e485d16a2cdb][dca3a59c-3b4a-46b1-a22d-8673fc632160]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][18128883-ada8-5c90-b3c5-9988132b1405]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
@@ -65,3 +70,6 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 
 [Tiling][faa5f9a7-57eb-50f7-b0d8-10184b82177c]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Xwayland]
+Scale=1

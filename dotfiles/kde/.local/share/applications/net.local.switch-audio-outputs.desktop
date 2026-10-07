@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Switch Audio Outputs
+Exec=/home/samuel/.local/bin/switch-between-audio-outputs.sh
+Icon=audio-card
+NoDisplay=true
+X-KDE-Shortcuts=Meta+S

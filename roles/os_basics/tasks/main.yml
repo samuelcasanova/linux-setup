@@ -25,10 +25,9 @@
     path: /etc/grub.d/30_os-prober
   register: os_prober_default
 
+# grub-common reinstalls 30_os-prober on release upgrades, so a stale 09 copy must be overwritten
 - name: Move os-prober to boot Windows first (if exists)
-  command: mv /etc/grub.d/30_os-prober /etc/grub.d/09_os-prober
-  args:
-    creates: /etc/grub.d/09_os-prober
+  command: mv -f /etc/grub.d/30_os-prober /etc/grub.d/09_os-prober
   become: yes
   when: os_prober_default.stat.exists
   notify: Update GRUB
