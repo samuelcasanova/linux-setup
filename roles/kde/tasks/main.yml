@@ -2,6 +2,14 @@
 # Description: KDE Desktop configuration and dotfiles
 # Migrated from: install-software-scripts/14-kde.sh
 
+# Without a desktop metapackage do-release-upgrade runs in server mode and mishandles the Plasma transition
+- name: Install the Kubuntu desktop metapackage without its recommended apps
+  apt:
+    name: kubuntu-desktop
+    state: present
+    install_recommends: no
+  become: yes
+
 - name: Create KDE backup directory
   file:
     path: /tmp/kde/.config
@@ -57,3 +65,14 @@
     chdir: "{{ setup_repo }}/dotfiles"
   register: stow_kde
   changed_when: "'LINK' in (stow_kde.stderr | default(''))"
+
+- name: Check if the desktop wallpaper is already set
+  command: grep -q desktop-background.jpg {{ home_dir }}/.config/plasma-org.kde.plasma.desktop-appletsrc
+  register: kde_wallpaper_check
+  changed_when: false
+  failed_when: false
+
+- name: Set the desktop wallpaper
+  command: plasma-apply-wallpaperimage {{ home_dir }}/desktop-background.jpg
+  when: kde_wallpaper_check.rc != 0
+  failed_when: false # Needs a running Plasma session, so it fails in Docker tests
