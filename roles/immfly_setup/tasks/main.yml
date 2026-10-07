@@ -35,6 +35,7 @@
     repo: "{{ item.repo }}"
     dest: "{{ immfly_dir }}/{{ immfly_tier_dirs[item.tier] }}/{{ item.name }}"
     accept_hostkey: yes
+    update: no
   loop: "{{ immfly_registry_services | rejectattr('repo', 'equalto', immfly_ai_context_repo) | list }}"
   loop_control:
     label: "{{ item.name }}"
@@ -44,6 +45,7 @@
     repo: "{{ item.repo }}"
     dest: "{{ item.dest }}"
     accept_hostkey: yes
+    update: no
   loop: "{{ immfly_repositories }}"
 
 - name: Private repo configurations
