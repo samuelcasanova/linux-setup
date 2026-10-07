@@ -4,11 +4,7 @@
     path: "{{ item }}"
     state: directory
     mode: '0755'
-  loop:
-    - "{{ home_dir }}/git/immfly"
-    - "{{ home_dir }}/git/immfly/airside"
-    - "{{ home_dir }}/git/immfly/groundside"
-    - "{{ home_dir }}/git/immfly/libs"
+  loop: "{{ [immfly_dir] | product(immfly_tier_dirs.values()) | map('join', '/') | list }}"
 
 - name: Install make
   apt:
@@ -16,7 +12,34 @@
     state: present
   become: yes
 
-- name: Clone Immfly repositories
+- name: Clone the IFEC platform AI context
+  git:
+    repo: "{{ immfly_ai_context_repo }}"
+    dest: "{{ immfly_ai_context_dir }}"
+    accept_hostkey: yes
+
+- name: Read the IFEC service registry
+  slurp:
+    src: "{{ immfly_ai_context_dir }}/skills/ifec-service-map/registry.yaml"
+  register: immfly_registry_file
+
+# The registry is parsed with awk upstream and is not valid YAML (free-text desc fields hold
+# unquoted colons), so only the name, repo and tier lines are fed to from_yaml.
+- name: Parse the IFEC service registry
+  set_fact:
+    immfly_registry_services: "{{ (immfly_registry_file.content | b64decode).splitlines()
+      | select('match', ' *(- name|repo|tier):') | join('\n') | from_yaml }}"
+
+- name: Clone Immfly repositories from the registry
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ immfly_dir }}/{{ immfly_tier_dirs[item.tier] }}/{{ item.name }}"
+    accept_hostkey: yes
+  loop: "{{ immfly_registry_services | rejectattr('repo', 'equalto', immfly_ai_context_repo) | list }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Clone Immfly repositories not yet in the registry
   git:
     repo: "{{ item.repo }}"
     dest: "{{ item.dest }}"
@@ -37,7 +60,7 @@
     - name: Copy .npmrc for ife-app
       copy:
         src: "{{ setup_repo_private }}/immfly-wifec/ife-app/.npmrc"
-        dest: "{{ home_dir }}/git/immfly/airside/ife-app/.npmrc"
+        dest: "{{ immfly_dir }}/{{ immfly_tier_dirs.air }}/ife-app/.npmrc"
         remote_src: yes
       when: private_repo_stat.stat.exists
 

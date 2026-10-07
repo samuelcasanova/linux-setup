@@ -150,42 +150,14 @@ personal_repositories:
   - { name: 'samuelcasanova.github.io', repo: 'git@github.com:samuelcasanova/samuelcasanova.github.io.git' }
 
 # Immfly Repositories
-immfly_repositories:
-  - { dest: '{{ home_dir }}/git/immfly/local-environment', repo: 'git@git.immfly.com:immfly/local-environment.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/ife-app', repo: 'git@git.immfly.com:immfly/ife-app.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/voe-magazine', repo: 'git@git.immfly.com:immfly/voe-magazine.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/air-services', repo: 'git@git.immfly.com:immfly/airside/air-services.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/flight-info-service', repo: 'git@git.immfly.com:immfly/flight-info.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/route-service', repo: 'git@git.immfly.com:immfly/microservices/routes/service.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/immfly-notifier-service', repo: 'git@git.immfly.com:immfly/immfly-notifier.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/flightinfo-adapter', repo: 'git@git.immfly.com:immfly/flightinfo-adapter.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/aircraft', repo: 'git@git.immfly.com:immfly/aircraft.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/charon-air', repo: 'git@git.immfly.com:immfly/charon-air.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/musement-api', repo: 'git@git.immfly.com:immfly/musement-api.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/routeros-api', repo: 'git@git.immfly.com:immfly/routeros-api.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/payment-service', repo: 'git@git.immfly.com:immfly/microservices/payment-service/service.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/ecommerce', repo: 'git@git.immfly.com:immfly/retail/ecommerce.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/cabincast-api', repo: 'git@git.immfly.com:immfly/microservices/cabincast-api.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/avionics-controller', repo: 'git@git.immfly.com:infra/avionics-controller.git' }
-  - { dest: '{{ home_dir }}/git/immfly/airside/media-service', repo: 'git@git.immfly.com:immfly/media-service.git' }
-  - { dest: '{{ home_dir }}/git/immfly/groundside/grd-vouchers', repo: 'git@git.immfly.com:immfly/microservices/grd-vouchers.git' }
-  - { dest: '{{ home_dir }}/git/immfly/groundside/inventory-service', repo: 'git@git.immfly.com:immfly/microservices/inventory/service.git' }
-  - { dest: '{{ home_dir }}/git/immfly/groundside/billing-service', repo: 'git@git.immfly.com:immfly/microservices/billing-service/service.git' }
-  - { dest: '{{ home_dir }}/git/immfly/groundside/inflight-tui', repo: 'git@git.immfly.com:immfly/inflight-tui.git' }
-  - { dest: '{{ home_dir }}/git/immfly/groundside/payment-service-worker', repo: 'git@git.immfly.com:immfly/microservices/payment-service/worker.git' }
-  - { dest: '{{ home_dir }}/git/immfly/groundside/route-admin-service', repo: 'git@git.immfly.com:immfly/microservices/routes/admin.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/lib-python', repo: 'git@git.immfly.com:immfly/microservices/lib-python.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/sentry-python-lib', repo: 'git@git.immfly.com:immfly/microservices/contrib/sentry.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/devops-resources', repo: 'git@git.immfly.com:immfly/shared/devops-resources.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/node-amqp-lib', repo: 'git@git.immfly.com:immfly/shared/node-amqp-lib.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/node-config-lib', repo: 'git@git.immfly.com:immfly/shared/node-config-lib.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/node-couchdb-lib', repo: 'git@git.immfly.com:immfly/shared/node-couchdb-lib.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/node-logging-lib', repo: 'git@git.immfly.com:immfly/shared/node-logging-lib.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/node-dependency-injection-lib', repo: 'git@git.immfly.com:immfly/shared/node-dependency-injection-lib.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/node-error-tracking-lib', repo: 'git@git.immfly.com:immfly/shared/node-error-tracking-lib.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/node-events-lib', repo: 'git@git.immfly.com:immfly/shared/node-events-lib.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/node-http-lib', repo: 'git@git.immfly.com:immfly/shared/node-http-lib.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/node-shared-types-lib', repo: 'git@git.immfly.com:immfly/shared/node-shared-types-lib.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/payment-service-client-python', repo: 'git@git.immfly.com:immfly/microservices/payment-service/client-python.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/flight-info-client-python', repo: 'git@git.immfly.com:immfly/microservices/contrib/flightinfo.git' }
-  - { dest: '{{ home_dir }}/git/immfly/libs/payment-service-packages-python', repo: 'git@git.immfly.com:immfly/microservices/payment-service/packages.git' }
+# Every repository in the IFEC registry is cloned under the folder of its tier;
+# immfly_repositories is only for the ones not yet in the registry.
+immfly_dir: '{{ home_dir }}/git/immfly'
+immfly_ai_context_repo: 'git@git.immfly.com:immfly/shared/wifec-platform-ai-context.git'
+immfly_ai_context_dir: '{{ immfly_dir }}/wifec-platform-ai-context'
+immfly_tier_dirs:
+  air: airside
+  ground: groundside
+  shared: shared
+  off-platform: off-platform
+immfly_repositories: []
