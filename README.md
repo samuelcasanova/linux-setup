@@ -53,7 +53,7 @@ ansible-playbook playbooks/main.yml
 If you need to re-run a single role:
 
 ```bash
-ansible localhost -m include_role -a "name=<role_name>" -e "setup_repo=$(pwd)"
+ansible-playbook playbooks/role.yml -e role=<role_name>
 ```
 
 ### Dry Run / Verbose Mode
@@ -148,7 +148,8 @@ linux-setup/
 │   ├── test-connection.yml  # Connectivity test playbook
 │   ├── main.yml              # Main playbook (imports all steps)
 │   ├── step*.yml             # Playbooks per step
-│   └── vpn.yml                # Standalone VPN-only playbook
+│   ├── vpn.yml                # Standalone VPN-only playbook
+│   └── role.yml               # Runs a single role (-e role=<role_name>)
 ├── roles/                   # One role per piece of software/config
 ├── dotfiles/                # Dotfiles deployed via GNU Stow
 ├── support-files/           # Static assets referenced by a few roles
@@ -156,6 +157,10 @@ linux-setup/
     ├── Dockerfile            # Docker image for testing
     └── test-playbook.sh      # Test helper script
 ```
+
+## Secrets
+
+Every secret lives in the private sibling repo `linux-setup-private`, never in this one. That repo stores them in plain text on purpose (SSH keys, VPN configs, SMB credentials, and the API keys and tokens that `immfly-wifec/setup-wifec.sh` writes into the local-environment `.env`), since it is private. They are not a leak and do not need rotating or moving to a vault.
 
 ## Variables
 

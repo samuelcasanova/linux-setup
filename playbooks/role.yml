@@ -1,0 +1,11 @@
+---
+# Run a single role with facts gathered: ansible-playbook playbooks/role.yml -e role=<role_name>
+
+- name: Run a single role
+  hosts: localhost
+  connection: local
+
+  tasks:
+    - name: "Run role {{ role }}"
+      include_role:
+        name: "{{ role }}"
