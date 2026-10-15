@@ -1,0 +1,13 @@
+{
+    "KPlugin": {
+        "Id": "safeeyes-focus-restore",
+        "Name": "Safe Eyes focus restore",
+        "Description": "Gives focus back to the window that was active before a Safe Eyes break screen appeared",
+        "Version": "1.0",
+        "License": "MIT",
+        "EnabledByDefault": false
+    },
+    "X-Plasma-API": "javascript",
+    "X-Plasma-MainScript": "code/main.js",
+    "KPackageStructure": "KWin/Script"
+}

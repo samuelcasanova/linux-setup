@@ -132,10 +132,6 @@ ForegroundNormal=252,252,252
 ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
-[DirSelect Dialog]
-DirSelectDialog Size=850,598
-History Items[$e]=file:$HOME/Music/Back in Time,file:///mnt/smb/Documents/02. Work PARA/01. Projects/20260918 DPO data deletion policies in WIFEC,file:$HOME/overrides,file:///tmp/overrides,file:///tmp,file:$HOME/git/secondbrain,file:$HOME/git/secondbrain,file:$HOME/git/secondbrain,file:$HOME/git/secondbrain,file:$HOME/git/secondbrain,file:$HOME/onedrive/obsidian/migrate,file:$HOME,file:$HOME/onedrive/obsidian,file:$HOME/obsidian,file:$HOME
-
 [General]
 BrowserApplication=brave-browser.desktop
 ColorSchemeHash=2c3f86428c11011a7c64ee1e7f47c274d498ff10

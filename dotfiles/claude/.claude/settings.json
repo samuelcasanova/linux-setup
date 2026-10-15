@@ -60,6 +60,8 @@
       "Bash(rtk git log *)",
       "Bash(git show *)",
       "Bash(rtk git show *)",
+      "Bash(git fetch *)",
+      "Bash(rtk git fetch *)",
       "Bash(uv *)",
       "Bash(rtk uv *)"
     ]

@@ -116,4 +116,5 @@
   ],
   "claudeCode.hideOnboarding": true,
   "update.showReleaseNotes": false,
+  "diffEditor.renderSideBySide": false,
 }

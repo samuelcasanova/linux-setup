@@ -38,28 +38,99 @@
   become: yes
   when: not ansible_check_mode
 
-- name: Install wifecvpn systemd service
+- name: Remove the legacy wifecvpn oneshot unit
   become: yes
   when: not ansible_check_mode
   block:
-    - name: Deploy wifecvpn.service from template
-      template:
-        src: wifecvpn.service.j2
-        dest: /etc/systemd/system/wifecvpn.service
-        mode: '0644'
-      register: vpn_service_file
-
-    - name: Reload systemd
-      systemd:
-        daemon_reload: yes
-      when: vpn_service_file.changed
-
-    - name: Enable and start wifecvpn service
+    - name: Disable wifecvpn.service
       systemd:
         name: wifecvpn
+        enabled: no
+        state: stopped
+      failed_when: false
+
+    - name: Delete wifecvpn.service
+      file:
+        path: /etc/systemd/system/wifecvpn.service
+        state: absent
+      register: legacy_vpn_unit
+
+    - name: Reload systemd after removing wifecvpn.service
+      systemd:
+        daemon_reload: yes
+      when: legacy_vpn_unit.changed
+
+- name: Check for the wifec VPN profile in the private repo
+  stat:
+    path: "{{ setup_repo_private }}/immfly-wifec/vpn/wifec-open-vpn-config.ovpn"
+  register: wifec_ovpn
+
+# openvpn3-session@.service tracks the session itself, so systemd sees a dropped tunnel instead of
+# reporting "active (exited)" forever like the old oneshot unit did. It only starts persistent
+# profiles imported by name, and auth-user-pass gets inlined at import, so any change to the
+# profile or credentials files needs a re-import.
+- name: Run the wifec VPN as an openvpn3 systemd session
+  become: yes
+  when: wifec_ovpn.stat.exists and not ansible_check_mode
+  vars:
+    wifec_vpn_profile: wifec
+    wifec_vpn_profile_dir: /etc/openvpn3/wifec
+  block:
+    - name: Stage the wifec profile and its credential files
+      copy:
+        src: "{{ setup_repo_private }}/immfly-wifec/vpn/"
+        dest: "{{ wifec_vpn_profile_dir }}/"
+        owner: root
+        group: root
+        mode: '0600'
+        directory_mode: '0700'
+      register: wifec_profile_files
+
+    - name: List imported openvpn3 profiles
+      command: openvpn3 configs-list
+      register: openvpn3_configs
+      changed_when: false
+
+    - name: Check whether the wifec profile is already imported
+      set_fact:
+        wifec_profile_imported: "{{ openvpn3_configs.stdout_lines | select('match', wifec_vpn_profile ~ '\\s') | list | length > 0 }}"
+
+    - name: Remove the outdated wifec profile
+      command: openvpn3 config-remove --config {{ wifec_vpn_profile }} --force
+      when: wifec_profile_imported and wifec_profile_files.changed
+
+    - name: Import the wifec profile as persistent
+      command: openvpn3 config-import --persistent --name {{ wifec_vpn_profile }} --config {{ wifec_vpn_profile_dir }}/wifec-open-vpn-config.ovpn
+      when: not wifec_profile_imported or wifec_profile_files.changed
+      register: wifec_profile_import
+
+    - name: Ensure the wifec session drop-in directory exists
+      file:
+        path: /etc/systemd/system/openvpn3-session@{{ wifec_vpn_profile }}.service.d
+        state: directory
+        mode: '0755'
+
+    # openvpn3-systemd exits 0 when the session ends, so Restart=on-failure would never fire.
+    - name: Restart the wifec session whenever it ends
+      copy:
+        content: |
+          [Service]
+          Restart=always
+          RestartSec=15
+        dest: /etc/systemd/system/openvpn3-session@{{ wifec_vpn_profile }}.service.d/restart.conf
+        mode: '0644'
+      register: wifec_session_dropin
+
+    - name: Reload systemd after the drop-in changes
+      systemd:
+        daemon_reload: yes
+      when: wifec_session_dropin.changed
+
+    - name: Enable and start the wifec session
+      systemd:
+        name: openvpn3-session@{{ wifec_vpn_profile }}
         enabled: yes
-        state: started
-      failed_when: false # Might fail if the .ovpn file in the private repo doesn't exist yet
+        state: "{{ 'restarted' if wifec_profile_import.changed or wifec_session_dropin.changed else 'started' }}"
 
 # This VPN (openvpn3-linux) claims itself as the resolver for *every* domain
 # (systemd-resolved's "~." routing domain) once connected. An IP route can't

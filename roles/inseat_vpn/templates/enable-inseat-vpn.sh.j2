@@ -2,7 +2,7 @@
 set -e
 
 echo "Stopping wifec VPN..."
-sudo systemctl stop wifecvpn
+sudo systemctl stop openvpn3-session@wifec
 
 echo "Connecting to inseat VPN..."
 openvpn3 session-start -c {{ setup_repo_private }}/immfly-inseat/vpn/inseat-open-vpn-config.ovpn

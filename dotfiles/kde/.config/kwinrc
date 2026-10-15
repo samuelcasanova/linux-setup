@@ -6,6 +6,12 @@ Id_1=010940a8-1d57-4f00-b71c-e485d16a2cdb
 Number=1
 Rows=1
 
+[Effect-overview]
+BorderActivate=9
+
+[Plugins]
+safeeyes-focus-restoreEnabled=true
+
 [TabBox]
 LayoutName=coverswitch
 

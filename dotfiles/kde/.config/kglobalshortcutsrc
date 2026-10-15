@@ -283,6 +283,8 @@ toggle do not disturb=none,,Toggle do not disturb
 _launch=
 
 [services][org.kde.spectacle.desktop]
+CurrentMonitorScreenShot=
+OpenWithoutScreenshot=
 RecordWindow=
 
 [services][{9394335c-2175-467b-b6a6-074ee029cee5}.desktop]

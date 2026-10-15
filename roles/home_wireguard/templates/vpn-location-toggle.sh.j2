@@ -2,7 +2,7 @@
 # Deployed by roles/home_wireguard — DO NOT EDIT ON THE SERVER, edit the .j2 template instead.
 #
 # Location model: 2 states only. Corporate OpenVPN (wifec) is intentionally NEVER toggled by
-# this script — it stays always-on via its own systemd unit (roles/wifec_vpn, wifecvpn.service),
+# this script — it stays always-on via its own systemd unit (roles/wifec_vpn, openvpn3-session@wifec),
 # home or away, full stop. An earlier version of this script also stopped it while on office
 # WiFi (on the theory that office WiFi already provides full corporate access, making the
 # tunnel redundant there) — that assumption was wrong and has been removed; don't reintroduce
