@@ -1,0 +1,10 @@
+---
+# Role: picard
+# Description: MusicBrainz Picard music tagger installation
+
+- name: Install MusicBrainz Picard
+  apt:
+    name: picard
+    state: present
+    update_cache: yes
+  become: yes
