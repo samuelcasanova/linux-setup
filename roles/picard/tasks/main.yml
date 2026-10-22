@@ -1,6 +1,6 @@
 ---
 # Role: picard
-# Description: MusicBrainz Picard music tagger installation
+# Description: MusicBrainz Picard music tagger installation and dotfiles
 
 - name: Install MusicBrainz Picard
   apt:
@@ -8,3 +8,21 @@
     state: present
     update_cache: yes
   become: yes
+
+- name: Check if the Picard configuration file is a real file
+  stat:
+    path: "{{ home_dir }}/.config/MusicBrainz/Picard.ini"
+  register: picard_ini_stat
+
+- name: Backup existing Picard configuration
+  command: mv {{ home_dir }}/.config/MusicBrainz/Picard.ini /tmp/
+  args:
+    removes: "{{ home_dir }}/.config/MusicBrainz/Picard.ini"
+  when: picard_ini_stat.stat.exists and not picard_ini_stat.stat.islnk
+  failed_when: false
+
+# --no-folding keeps ~/.config/MusicBrainz a real directory, so Picard's plugins and sync lock stay out of the repo
+- name: Deploy Picard dotfiles
+  command: stow -v --no-folding -d {{ setup_repo }}/dotfiles/ -t {{ home_dir }} picard
+  register: stow_picard
+  changed_when: "'LINK' in (stow_picard.stderr | default(''))"
