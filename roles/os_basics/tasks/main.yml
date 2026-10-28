@@ -30,7 +30,28 @@
   command: mv -f /etc/grub.d/30_os-prober /etc/grub.d/09_os-prober
   become: yes
   when: os_prober_default.stat.exists
-  notify: Update GRUB
+
+- name: Check if os-prober is in place to boot Windows first
+  stat:
+    path: /etc/grub.d/09_os-prober
+  register: os_prober_first
+
+# The rename alone does not rewrite grub.cfg, so the generated config has to be what decides
+# whether to regenerate. Notifying off the rename instead leaves grub.cfg stale forever once
+# 09_os-prober is already in place, which is how this drifted in the first place.
+- name: Read the generated GRUB config
+  slurp:
+    src: /boot/grub/grub.cfg
+  register: grub_cfg
+  become: yes
+  when: os_prober_first.stat.exists
+
+- name: Regenerate GRUB so Windows is the first menu entry
+  command: grub-mkconfig -o /boot/grub/grub.cfg
+  become: yes
+  when:
+    - os_prober_first.stat.exists
+    - "'/etc/grub.d/09_os-prober' not in (grub_cfg.content | b64decode)"
 
 - name: Install basic system packages
   apt:
