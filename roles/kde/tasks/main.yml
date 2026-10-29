@@ -20,7 +20,6 @@
   stat:
     path: "{{ home_dir }}/.config/{{ item }}"
   loop:
-    - discoverrc
     - dolphinrc
     - kdeglobals
     - kglobalshortcutsrc
@@ -47,7 +46,6 @@
   stat:
     path: "{{ item }}"
   loop:
-    - "{{ home_dir }}/.config/xsettingsd"
     - "{{ home_dir }}/.local/share/konsole"
   register: kde_dir_stats
 
@@ -59,6 +57,11 @@
   when: item.stat.exists and not item.stat.islnk
   failed_when: false
 
+- name: Remove links to KDE dotfiles dropped from the repo
+  command: find {{ home_dir }}/.config {{ home_dir }}/.local/share -maxdepth 1 -xtype l -lname '*/dotfiles/kde/*' -print -delete
+  register: kde_stale_links
+  changed_when: kde_stale_links.stdout != ''
+
 - name: Deploy KDE dotfiles
   command: stow -v -d {{ setup_repo }}/dotfiles/ -t {{ home_dir }} kde
   args:
@@ -66,13 +69,19 @@
   register: stow_kde
   changed_when: "'LINK' in (stow_kde.stderr | default(''))"
 
-- name: Check if the desktop wallpaper is already set
-  command: grep -q desktop-background.jpg {{ home_dir }}/.config/plasma-org.kde.plasma.desktop-appletsrc
-  register: kde_wallpaper_check
-  changed_when: false
+- name: Read the Plasma desktop layout
+  slurp:
+    src: "{{ home_dir }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
+  register: kde_appletsrc
   failed_when: false
 
-- name: Set the desktop wallpaper
+# Each screen has its own desktop containment, and plasma-apply-wallpaperimage only reaches the ones
+# that exist when it runs, so a monitor plugged in later keeps the default wallpaper until the next run
+- name: Set the desktop wallpaper on every screen
   command: plasma-apply-wallpaperimage {{ home_dir }}/desktop-background.jpg
-  when: kde_wallpaper_check.rc != 0
-  failed_when: false # Needs a running Plasma session, so it fails in Docker tests
+  vars:
+    appletsrc: "{{ kde_appletsrc.content | default('') | b64decode }}"
+    desktop_count: "{{ appletsrc | regex_findall('(?m)^plugin=org\\.kde\\.(?:plasma\\.folder|desktop)$') | length }}"
+    wallpaper_count: "{{ appletsrc | regex_findall('(?m)^Image=file://.*/desktop-background\\.jpg$') | length }}"
+  when: desktop_count | int == 0 or wallpaper_count | int < desktop_count | int
+  ignore_errors: yes # Needs a running Plasma session, so it fails in Docker tests

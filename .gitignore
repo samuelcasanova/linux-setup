@@ -24,5 +24,9 @@ Thumbs.db
 .vault_pass
 vault_pass.txt
 
+# Backup and cache files Konsole writes next to its bookmarks
+dotfiles/kde/.local/share/konsole/*.bak
+dotfiles/kde/.local/share/konsole/*.tbcache
+
 # Claude Code secrets — only CLAUDE.md, RTK.md and settings.json belong in the claude dotfiles
 dotfiles/claude/.claude/.credentials.json
