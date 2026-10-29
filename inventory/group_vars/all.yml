@@ -53,6 +53,7 @@ home_wireguard_proxied_subdomains:
   - "~webdav.casanovacatalan.duckdns.org"
   - "~music.casanovacatalan.duckdns.org"
   - "~notes.casanovacatalan.duckdns.org"
+  - "~info.casanovacatalan.duckdns.org"
 home_wireguard_conn_name: "HomeWireGuard"
 home_wireguard_client_config_path: "{{ setup_repo_private }}/home-wireguard/laptop.conf"
 
